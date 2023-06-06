@@ -1,0 +1,833 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>superduperdb.datalayer.mongodb.client API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>superduperdb.datalayer.mongodb.client</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import click
+from pymongo.mongo_client import MongoClient
+
+import superduperdb.datalayer.mongodb.database
+from superduperdb.misc.logger import logging
+
+
+class SuperDuperClient(MongoClient):
+    &#34;&#34;&#34;
+    Client building on top of :code:`pymongo.MongoClient`.
+
+    Databases and collections in the client are SuperDuperDB objects.
+    &#34;&#34;&#34;
+
+    def __init__(self, *args, user=None, **kwargs):
+        if user is not None:
+            kwargs.setdefault(&#39;username&#39;, user)
+        super().__init__(*args, **kwargs)
+        self.args = args
+        self.kwargs = kwargs
+
+    def __getitem__(self, name: str):
+        return superduperdb.datalayer.mongodb.database.Database(self, name)
+
+    def get_database_from_name(self, name):
+        return self[name]
+
+    def list_database_names(self, **kwargs):
+        names = super().list_database_names(**kwargs)
+        names = [
+            x
+            for x in names
+            if (not x.endswith(&#39;:files&#39;) and x not in {&#39;admin&#39;, &#39;local&#39;, &#39;config&#39;})
+        ]
+        return names
+
+    def drop_database(
+        self,
+        name,
+        force=False,
+        **kwargs,
+    ):
+        if force or click.confirm(
+            &#39;Are you sure you want to delete this database and all its models?&#39;,
+            default=False,
+        ):
+            super().drop_database(f&#39;_{name}:files&#39;)
+            super().drop_database(name)
+        else:
+            logging.warning(&#39;aborting...&#39;)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="superduperdb.datalayer.mongodb.client.SuperDuperClient"><code class="flex name class">
+<span>class <span class="ident">SuperDuperClient</span></span>
+<span>(</span><span>*args, user=None, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Client building on top of :code:<code>pymongo.MongoClient</code>.</p>
+<p>Databases and collections in the client are SuperDuperDB objects.</p>
+<p>Client for a MongoDB instance, a replica set, or a set of mongoses.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning:&ensp;Starting in PyMongo 4.0, <code>directConnection</code> now has a default value of</p>
+<p>False instead of None.
+For more details, see the relevant section of the PyMongo 4.x migration guide:
+:ref:<code>pymongo4-migration-direct-connection</code>.</p>
+</div>
+<p>The client object is thread-safe and has connection-pooling built in.
+If an operation fails because of a network error,
+:class:<code>~pymongo.errors.ConnectionFailure</code> is raised and the client
+reconnects in the background. Application code should handle this
+exception (recognizing that the operation failed) and then continue to
+execute.</p>
+<p>The <code>host</code> parameter can be a full <code>mongodb URI
+&lt;http://dochub.mongodb.org/core/connections&gt;</code>_, in addition to
+a simple hostname. It can also be a list of hostnames but no more
+than one URI. Any port specified in the host string(s) will override
+the <code>port</code> parameter. For username and
+passwords reserved characters like ':', '/', '+' and '@' must be
+percent encoded following RFC 2396::</p>
+<pre><code>from urllib.parse import quote_plus
+
+uri = "mongodb://%s:%s@%s" % (
+    quote_plus(user), quote_plus(password), host)
+client = MongoClient(uri)
+</code></pre>
+<p>Unix domain sockets are also supported. The socket path must be percent
+encoded in the URI::</p>
+<pre><code>uri = "mongodb://%s:%s@%s" % (
+    quote_plus(user), quote_plus(password), quote_plus(socket_path))
+client = MongoClient(uri)
+</code></pre>
+<p>But not when passed as a simple hostname::</p>
+<pre><code>client = MongoClient('/tmp/mongodb-27017.sock')
+</code></pre>
+<p>Starting with version 3.6, PyMongo supports mongodb+srv:// URIs. The
+URI must include one, and only one, hostname. The hostname will be
+resolved to one or more DNS <code>SRV records
+&lt;https://en.wikipedia.org/wiki/SRV_record&gt;</code><em> which will be used
+as the seed list for connecting to the MongoDB deployment. When using
+SRV URIs, the <code>authSource</code> and <code>replicaSet</code> configuration options can
+be specified using <code>TXT records
+&lt;https://en.wikipedia.org/wiki/TXT_record&gt;</code></em>. See the
+<code>Initial DNS Seedlist Discovery spec
+&lt;https://github.com/mongodb/specifications/blob/master/source/
+initial-dns-seedlist-discovery/initial-dns-seedlist-discovery.rst&gt;</code>_
+for more details. Note that the use of SRV URIs implicitly enables
+TLS support. Pass tls=false in the URI to override.</p>
+<div class="admonition note">
+<p class="admonition-title">Note:&ensp;MongoClient creation will block waiting for answers from</p>
+<p>DNS when mongodb+srv:// URIs are used.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note:&ensp;Starting with version 3.0 the :class:<code>MongoClient</code></p>
+<p>constructor no longer blocks while connecting to the server or
+servers, and it no longer raises
+:class:<code>~pymongo.errors.ConnectionFailure</code> if they are
+unavailable, nor :class:<code>~pymongo.errors.ConfigurationError</code>
+if the user's credentials are wrong. Instead, the constructor
+returns immediately and launches the connection process on
+background threads. You can check if the server is available
+like this::</p>
+<p>from pymongo.errors import ConnectionFailure
+client = MongoClient()
+try:
+# The ping command is cheap and does not require auth.
+client.admin.command('ping')
+except ConnectionFailure:
+print("Server not available")</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning:&ensp;When using PyMongo in a multiprocessing context, please</p>
+<p>read :ref:<code>multiprocessing</code> first.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note:&ensp;Many of the following options can be passed using a MongoDB</p>
+<p>URI or keyword parameters. If the same option is passed in a URI and
+as a keyword parameter the keyword parameter takes precedence.</p>
+</div>
+<p>:Parameters:
+- <code>host</code> (optional): hostname or IP address or Unix domain socket
+path of a single mongod or mongos instance to connect to, or a
+mongodb URI, or a list of hostnames (but no more than one mongodb
+URI). If <code>host</code> is an IPv6 literal it must be enclosed in '['
+and ']' characters
+following the RFC2732 URL syntax (e.g. '[::1]' for localhost).
+Multihomed and round robin DNS addresses are <strong>not</strong> supported.
+- <code>port</code> (optional): port number on which to connect
+- <code>document_class</code> (optional): default class to use for
+documents returned from queries on this client
+- <code>tz_aware</code> (optional): if <code>True</code>,
+:class:<code>~datetime.datetime</code> instances returned as values
+in a document by this :class:<code>MongoClient</code> will be timezone
+aware (otherwise they will be naive)
+- <code>connect</code> (optional): if <code>True</code> (the default), immediately
+begin connecting to MongoDB in the background. Otherwise connect
+on the first operation.
+- <code>type_registry</code> (optional): instance of
+:class:<code>~bson.codec_options.TypeRegistry</code> to enable encoding
+and decoding of custom types.
+- <code>datetime_conversion</code>: Specifies how UTC datetimes should be decoded
+within BSON. Valid options include 'datetime_ms' to return as a
+DatetimeMS, 'datetime' to return as a datetime.datetime and
+raising a ValueError for out-of-range values, 'datetime_auto' to
+return DatetimeMS objects when the underlying datetime is
+out-of-range and 'datetime_clamp' to clamp to the minimum and
+maximum possible datetimes. Defaults to 'datetime'. See
+:ref:<code>handling-out-of-range-datetimes</code> for details.</p>
+<p>| <strong>Other optional parameters can be passed as keyword arguments:</strong></p>
+<ul>
+<li><code>directConnection</code> (optional): if <code>True</code>, forces this client to
+connect directly to the specified MongoDB host as a standalone.
+If <code>false</code>, the client connects to the entire replica set of
+which the given MongoDB host(s) is a part. If this is <code>True</code>
+and a mongodb+srv:// URI or a URI containing multiple seeds is
+provided, an exception will be raised.</li>
+<li><code>maxPoolSize</code> (optional): The maximum allowable number of
+concurrent connections to each connected server. Requests to a
+server will block if there are <code>maxPoolSize</code> outstanding
+connections to the requested server. Defaults to 100. Can be
+either 0 or None, in which case there is no limit on the number
+of concurrent connections.</li>
+<li><code>minPoolSize</code> (optional): The minimum required number of concurrent
+connections that the pool will maintain to each connected server.
+Default is 0.</li>
+<li><code>maxIdleTimeMS</code> (optional): The maximum number of milliseconds that
+a connection can remain idle in the pool before being removed and
+replaced. Defaults to <code>None</code> (no limit).</li>
+<li><code>maxConnecting</code> (optional): The maximum number of connections that
+each pool can establish concurrently. Defaults to <code>2</code>.</li>
+<li><code>timeoutMS</code>: (integer or None) Controls how long (in
+milliseconds) the driver will wait when executing an operation
+(including retry attempts) before raising a timeout error.
+<code>0</code> or <code>None</code> means no timeout.</li>
+<li><code>socketTimeoutMS</code>: (integer or None) Controls how long (in
+milliseconds) the driver will wait for a response after sending an
+ordinary (non-monitoring) database operation before concluding that
+a network error has occurred. <code>0</code> or <code>None</code> means no timeout.
+Defaults to <code>None</code> (no timeout).</li>
+<li><code>connectTimeoutMS</code>: (integer or None) Controls how long (in
+milliseconds) the driver will wait during server monitoring when
+connecting a new socket to a server before concluding the server
+is unavailable. <code>0</code> or <code>None</code> means no timeout.
+Defaults to <code>20000</code> (20 seconds).</li>
+<li><code>server_selector</code>: (callable or None) Optional, user-provided
+function that augments server selection rules. The function should
+accept as an argument a list of
+:class:<code>~pymongo.server_description.ServerDescription</code> objects and
+return a list of server descriptions that should be considered
+suitable for the desired operation.</li>
+<li><code>serverSelectionTimeoutMS</code>: (integer) Controls how long (in
+milliseconds) the driver will wait to find an available,
+appropriate server to carry out a database operation; while it is
+waiting, multiple server monitoring operations may be carried out,
+each controlled by <code>connectTimeoutMS</code>. Defaults to <code>30000</code> (30
+seconds).</li>
+<li><code>waitQueueTimeoutMS</code>: (integer or None) How long (in milliseconds)
+a thread will wait for a socket from the pool if the pool has no
+free sockets. Defaults to <code>None</code> (no timeout).</li>
+<li><code>heartbeatFrequencyMS</code>: (optional) The number of milliseconds
+between periodic server checks, or None to accept the default
+frequency of 10 seconds.</li>
+<li><code>appname</code>: (string or None) The name of the application that
+created this MongoClient instance. The server will log this value
+upon establishing each connection. It is also recorded in the slow
+query log and profile collections.</li>
+<li><code>driver</code>: (pair or None) A driver implemented on top of PyMongo can
+pass a :class:<code>~pymongo.driver_info.DriverInfo</code> to add its name,
+version, and platform to the message printed in the server log when
+establishing a connection.</li>
+<li><code>event_listeners</code>: a list or tuple of event listeners. See
+:mod:<code>~pymongo.monitoring</code> for details.</li>
+<li>
+<p><code>retryWrites</code>: (boolean) Whether supported write operations
+executed within this MongoClient will be retried once after a
+network error. Defaults to <code>True</code>.
+The supported write operations are:</p>
+<ul>
+<li>:meth:<code>~pymongo.collection.Collection.bulk_write</code>, as long as
+:class:<code>~pymongo.operations.UpdateMany</code> or
+:class:<code>~pymongo.operations.DeleteMany</code> are not included.</li>
+<li>:meth:<code>~pymongo.collection.Collection.delete_one</code></li>
+<li>:meth:<code>~pymongo.collection.Collection.insert_one</code></li>
+<li>:meth:<code>~pymongo.collection.Collection.insert_many</code></li>
+<li>:meth:<code>~pymongo.collection.Collection.replace_one</code></li>
+<li>:meth:<code>~pymongo.collection.Collection.update_one</code></li>
+<li>:meth:<code>~pymongo.collection.Collection.find_one_and_delete</code></li>
+<li>:meth:<code>~pymongo.collection.Collection.find_one_and_replace</code></li>
+<li>:meth:<code>~pymongo.collection.Collection.find_one_and_update</code></li>
+</ul>
+<p>Unsupported write operations include, but are not limited to,
+:meth:<code>~pymongo.collection.Collection.aggregate</code> using the <code>$out</code>
+pipeline operator and any operation with an unacknowledged write
+concern (e.g. {w: 0})). See
+<a href="https://github.com/mongodb/specifications/blob/master/source/retryable-writes/retryable-writes.rst">https://github.com/mongodb/specifications/blob/master/source/retryable-writes/retryable-writes.rst</a>
+- <code>retryReads</code>: (boolean) Whether supported read operations
+executed within this MongoClient will be retried once after a
+network error. Defaults to <code>True</code>.
+The supported read operations are:
+:meth:<code>~pymongo.collection.Collection.find</code>,
+:meth:<code>~pymongo.collection.Collection.find_one</code>,
+:meth:<code>~pymongo.collection.Collection.aggregate</code> without <code>$out</code>,
+:meth:<code>~pymongo.collection.Collection.distinct</code>,
+:meth:<code>~pymongo.collection.Collection.count</code>,
+:meth:<code>~pymongo.collection.Collection.estimated_document_count</code>,
+:meth:<code>~pymongo.collection.Collection.count_documents</code>,
+:meth:<code>pymongo.collection.Collection.watch</code>,
+:meth:<code>~pymongo.collection.Collection.list_indexes</code>,
+:meth:<code>pymongo.database.Database.watch</code>,
+:meth:<code>~pymongo.database.Database.list_collections</code>,
+:meth:<code>pymongo.mongo_client.MongoClient.watch</code>,
+and :meth:<code>~pymongo.mongo_client.MongoClient.list_databases</code>.</p>
+<p>Unsupported read operations include, but are not limited to
+:meth:<code>~pymongo.database.Database.command</code> and any getMore
+operation on a cursor.</p>
+<p>Enabling retryable reads makes applications more resilient to
+transient errors such as network failures, database upgrades, and
+replica set failovers. For an exact definition of which errors
+trigger a retry, see the <code>retryable reads specification
+&lt;https://github.com/mongodb/specifications/blob/master/source/retryable-reads/retryable-reads.rst&gt;</code>_.</p>
+</li>
+<li>
+<p><code>compressors</code>: Comma separated list of compressors for wire
+protocol compression. The list is used to negotiate a compressor
+with the server. Currently supported options are "snappy", "zlib"
+and "zstd". Support for snappy requires the
+<code>python-snappy &lt;https://pypi.org/project/python-snappy/&gt;</code><em> package.
+zlib support requires the Python standard library zlib module. zstd
+requires the <code>zstandard &lt;https://pypi.org/project/zstandard/&gt;</code></em>
+package. By default no compression is used. Compression support
+must also be enabled on the server. MongoDB 3.6+ supports snappy
+and zlib compression. MongoDB 4.2+ adds support for zstd.</p>
+</li>
+<li><code>zlibCompressionLevel</code>: (int) The zlib compression level to use
+when zlib is used as the wire protocol compressor. Supported values
+are -1 through 9. -1 tells the zlib library to use its default
+compression level (usually 6). 0 means no compression. 1 is best
+speed. 9 is best compression. Defaults to -1.</li>
+<li><code>uuidRepresentation</code>: The BSON representation to use when encoding
+from and decoding to instances of :class:<code>~uuid.UUID</code>. Valid
+values are the strings: "standard", "pythonLegacy", "javaLegacy",
+"csharpLegacy", and "unspecified" (the default). New applications
+should consider setting this to "standard" for cross language
+compatibility. See :ref:<code>handling-uuid-data-example</code> for details.</li>
+<li><code>unicode_decode_error_handler</code>: The error handler to apply when
+a Unicode-related error occurs during BSON decoding that would
+otherwise raise :exc:<code>UnicodeDecodeError</code>. Valid options include
+'strict', 'replace', 'backslashreplace', 'surrogateescape', and
+'ignore'. Defaults to 'strict'.</li>
+<li><code>srvServiceName</code>: (string) The SRV service name to use for
+"mongodb+srv://" URIs. Defaults to "mongodb". Use it like so::<pre><code>MongoClient("mongodb+srv://example.com/?srvServiceName=customname")
+</code></pre>
+</li>
+</ul>
+<p>| <strong>Write Concern options:</strong>
+| (Only set if passed. No default values.)</p>
+<ul>
+<li><code>w</code>: (integer or string) If this is a replica set, write operations
+will block until they have been replicated to the specified number
+or tagged set of servers. <code>w=&lt;int&gt;</code> always includes the replica set
+primary (e.g. w=3 means write to the primary and wait until
+replicated to <strong>two</strong> secondaries). Passing w=0 <strong>disables write
+acknowledgement</strong> and all other write concern options.</li>
+<li><code>wTimeoutMS</code>: (integer) Used in conjunction with <code>w</code>. Specify a value
+in milliseconds to control how long to wait for write propagation
+to complete. If replication does not complete in the given
+timeframe, a timeout exception is raised. Passing wTimeoutMS=0
+will cause <strong>write operations to wait indefinitely</strong>.</li>
+<li><code>journal</code>: If <code>True</code> block until write operations have been
+committed to the journal. Cannot be used in combination with
+<code>fsync</code>. Write operations will fail with an exception if this
+option is used when the server is running without journaling.</li>
+<li><code>fsync</code>: If <code>True</code> and the server is running without journaling,
+blocks until the server has synced all data files to disk. If the
+server is running with journaling, this acts the same as the <code>j</code>
+option, blocking until write operations have been committed to the
+journal. Cannot be used in combination with <code>j</code>.</li>
+</ul>
+<p>| <strong>Replica set keyword arguments for connecting with a replica set
+- either directly or via a mongos:</strong></p>
+<ul>
+<li><code>replicaSet</code>: (string or None) The name of the replica set to
+connect to. The driver will verify that all servers it connects to
+match this name. Implies that the hosts specified are a seed list
+and the driver should attempt to find all members of the set.
+Defaults to <code>None</code>.</li>
+</ul>
+<p>| <strong>Read Preference:</strong></p>
+<ul>
+<li><code>readPreference</code>: The replica set read preference for this client.
+One of <code>primary</code>, <code>primaryPreferred</code>, <code>secondary</code>,
+<code>secondaryPreferred</code>, or <code>nearest</code>. Defaults to <code>primary</code>.</li>
+<li><code>readPreferenceTags</code>: Specifies a tag set as a comma-separated list
+of colon-separated key-value pairs. For example <code>dc:ny,rack:1</code>.
+Defaults to <code>None</code>.</li>
+<li><code>maxStalenessSeconds</code>: (integer) The maximum estimated
+length of time a replica set secondary can fall behind the primary
+in replication before it will no longer be selected for operations.
+Defaults to <code>-1</code>, meaning no maximum. If maxStalenessSeconds
+is set, it must be a positive integer greater than or equal to
+90 seconds.</li>
+</ul>
+<p>!!! seealso "Seealso:&ensp;:doc:<code>/examples/server_selection</code>"</p>
+<p>| <strong>Authentication:</strong></p>
+<ul>
+<li><code>username</code>: A string.</li>
+<li>
+<p><code>password</code>: A string.</p>
+<p>Although username and password must be percent-escaped in a MongoDB
+URI, they must not be percent-escaped when passed as parameters. In
+this example, both the space and slash special characters are passed
+as-is::</p>
+<p>MongoClient(username="user name", password="pass/word")</p>
+</li>
+<li>
+<p><code>authSource</code>: The database to authenticate on. Defaults to the
+database specified in the URI, if provided, or to "admin".</p>
+</li>
+<li><code>authMechanism</code>: See :data:<code>~pymongo.auth.MECHANISMS</code> for options.
+If no mechanism is specified, PyMongo automatically SCRAM-SHA-1
+when connected to MongoDB 3.6 and negotiates the mechanism to use
+(SCRAM-SHA-1 or SCRAM-SHA-256) when connected to MongoDB 4.0+.</li>
+<li><code>authMechanismProperties</code>: Used to specify authentication mechanism
+specific options. To specify the service name for GSSAPI
+authentication pass authMechanismProperties='SERVICE_NAME:<service
+name>'.
+To specify the session token for MONGODB-AWS authentication pass
+<code>authMechanismProperties='AWS_SESSION_TOKEN:&lt;session token&gt;'</code>.</li>
+</ul>
+<p>!!! seealso "Seealso:&ensp;:doc:<code>/examples/authentication</code>"</p>
+<p>| <strong>TLS/SSL configuration:</strong></p>
+<ul>
+<li><code>tls</code>: (boolean) If <code>True</code>, create the connection to the server
+using transport layer security. Defaults to <code>False</code>.</li>
+<li><code>tlsInsecure</code>: (boolean) Specify whether TLS constraints should be
+relaxed as much as possible. Setting <code>tlsInsecure=True</code> implies
+<code>tlsAllowInvalidCertificates=True</code> and
+<code>tlsAllowInvalidHostnames=True</code>. Defaults to <code>False</code>. Think
+very carefully before setting this to <code>True</code> as it dramatically
+reduces the security of TLS.</li>
+<li><code>tlsAllowInvalidCertificates</code>: (boolean) If <code>True</code>, continues
+the TLS handshake regardless of the outcome of the certificate
+verification process. If this is <code>False</code>, and a value is not
+provided for <code>tlsCAFile</code>, PyMongo will attempt to load system
+provided CA certificates. If the python version in use does not
+support loading system CA certificates then the <code>tlsCAFile</code>
+parameter must point to a file of CA certificates.
+<code>tlsAllowInvalidCertificates=False</code> implies <code>tls=True</code>.
+Defaults to <code>False</code>. Think very carefully before setting this
+to <code>True</code> as that could make your application vulnerable to
+on-path attackers.</li>
+<li><code>tlsAllowInvalidHostnames</code>: (boolean) If <code>True</code>, disables TLS
+hostname verification. <code>tlsAllowInvalidHostnames=False</code> implies
+<code>tls=True</code>. Defaults to <code>False</code>. Think very carefully before
+setting this to <code>True</code> as that could make your application
+vulnerable to on-path attackers.</li>
+<li><code>tlsCAFile</code>: A file containing a single or a bundle of
+"certification authority" certificates, which are used to validate
+certificates passed from the other end of the connection.
+Implies <code>tls=True</code>. Defaults to <code>None</code>.</li>
+<li><code>tlsCertificateKeyFile</code>: A file containing the client certificate
+and private key. Implies <code>tls=True</code>. Defaults to <code>None</code>.</li>
+<li><code>tlsCRLFile</code>: A file containing a PEM or DER formatted
+certificate revocation list. Only supported by python 2.7.9+
+(pypy 2.5.1+). Implies <code>tls=True</code>. Defaults to <code>None</code>.</li>
+<li><code>tlsCertificateKeyFilePassword</code>: The password or passphrase for
+decrypting the private key in <code>tlsCertificateKeyFile</code>. Only
+necessary if the private key is encrypted. Only supported by
+python 2.7.9+ (pypy 2.5.1+) and 3.3+. Defaults to <code>None</code>.</li>
+<li><code>tlsDisableOCSPEndpointCheck</code>: (boolean) If <code>True</code>, disables
+certificate revocation status checking via the OCSP responder
+specified on the server certificate.
+<code>tlsDisableOCSPEndpointCheck=False</code> implies <code>tls=True</code>.
+Defaults to <code>False</code>.</li>
+<li><code>ssl</code>: (boolean) Alias for <code>tls</code>.</li>
+</ul>
+<p>| <strong>Read Concern options:</strong>
+| (If not set explicitly, this will use the server default)</p>
+<ul>
+<li><code>readConcernLevel</code>: (string) The read concern level specifies the
+level of isolation for read operations.
+For example, a read
+operation using a read concern level of <code>majority</code> will only
+return data that has been written to a majority of nodes. If the
+level is left unspecified, the server default will be used.</li>
+</ul>
+<p>| <strong>Client side encryption options:</strong>
+| (If not set explicitly, client side encryption will not be enabled.)</p>
+<ul>
+<li>
+<p><code>auto_encryption_opts</code>: A
+:class:<code>~pymongo.encryption_options.AutoEncryptionOpts</code> which
+configures this client to automatically encrypt collection commands
+and automatically decrypt results. See
+:ref:<code>automatic-client-side-encryption</code> for an example.
+If a :class:<code>MongoClient</code> is configured with
+<code>auto_encryption_opts</code> and a non-None <code>maxPoolSize</code>, a
+separate internal <code>MongoClient</code> is created if any of the
+following are true:</p>
+<ul>
+<li>A <code>key_vault_client</code> is not passed to
+:class:<code>~pymongo.encryption_options.AutoEncryptionOpts</code></li>
+<li><code>bypass_auto_encrpytion=False</code> is passed to
+:class:<code>~pymongo.encryption_options.AutoEncryptionOpts</code></li>
+</ul>
+</li>
+</ul>
+<p>| <strong>Stable API options:</strong>
+| (If not set explicitly, Stable API will not be enabled.)</p>
+<ul>
+<li><code>server_api</code>: A
+:class:<code>~pymongo.server_api.ServerApi</code> which configures this
+client to use Stable API. See :ref:<code>versioned-api-ref</code> for
+details.</li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">Seealso:&ensp;The MongoDB documentation on <code>connections &lt;https://dochub.mongodb.org/core/connections&gt;</code>_.</p>
+</div>
+<div class="admonition versionchanged">
+<p class="admonition-title">Changed in version:&ensp;4.2</p>
+<p>Added the <code>timeoutMS</code> keyword argument.</p>
+</div>
+<div class="admonition versionchanged">
+<p class="admonition-title">Changed in version:&ensp;4.0</p>
+<ul>
+<li>Removed the fsync, unlock, is_locked, database_names, and
+close_cursor methods.
+See the :ref:<code>pymongo4-migration-guide</code>.</li>
+<li>Removed the <code>waitQueueMultiple</code> and <code>socketKeepAlive</code>
+keyword arguments.</li>
+<li>The default for <code>uuidRepresentation</code> was changed from
+<code>pythonLegacy</code> to <code>unspecified</code>.</li>
+<li>Added the <code>srvServiceName</code> and <code>maxConnecting</code> URI and
+keyword argument.</li>
+</ul>
+</div>
+<div class="admonition versionchanged">
+<p class="admonition-title">Changed in version:&ensp;3.12</p>
+<p>Added the <code>server_api</code> keyword argument.
+The following keyword arguments were deprecated:</p>
+<ul>
+<li><code>ssl_certfile</code> and <code>ssl_keyfile</code> were deprecated in favor
+of <code>tlsCertificateKeyFile</code>.</li>
+</ul>
+</div>
+<div class="admonition versionchanged">
+<p class="admonition-title">Changed in version:&ensp;3.11</p>
+<p>Added the following keyword arguments and URI options:</p>
+<ul>
+<li><code>tlsDisableOCSPEndpointCheck</code></li>
+<li><code>directConnection</code></li>
+</ul>
+</div>
+<div class="admonition versionchanged">
+<p class="admonition-title">Changed in version:&ensp;3.9</p>
+<p>Added the <code>retryReads</code> keyword argument and URI option.
+Added the <code>tlsInsecure</code> keyword argument and URI option.
+The following keyword arguments and URI options were deprecated:</p>
+<ul>
+<li><code>wTimeout</code> was deprecated in favor of <code>wTimeoutMS</code>.</li>
+<li><code>j</code> was deprecated in favor of <code>journal</code>.</li>
+<li><code>ssl_cert_reqs</code> was deprecated in favor of
+<code>tlsAllowInvalidCertificates</code>.</li>
+<li><code>ssl_match_hostname</code> was deprecated in favor of
+<code>tlsAllowInvalidHostnames</code>.</li>
+<li><code>ssl_ca_certs</code> was deprecated in favor of <code>tlsCAFile</code>.</li>
+<li><code>ssl_certfile</code> was deprecated in favor of
+<code>tlsCertificateKeyFile</code>.</li>
+<li><code>ssl_crlfile</code> was deprecated in favor of <code>tlsCRLFile</code>.</li>
+<li><code>ssl_pem_passphrase</code> was deprecated in favor of
+<code>tlsCertificateKeyFilePassword</code>.</li>
+</ul>
+</div>
+<div class="admonition versionchanged">
+<p class="admonition-title">Changed in version:&ensp;3.9</p>
+<p><code>retryWrites</code> now defaults to <code>True</code>.</p>
+</div>
+<div class="admonition versionchanged">
+<p class="admonition-title">Changed in version:&ensp;3.8</p>
+<p>Added the <code>server_selector</code> keyword argument.
+Added the <code>type_registry</code> keyword argument.</p>
+</div>
+<div class="admonition versionchanged">
+<p class="admonition-title">Changed in version:&ensp;3.7</p>
+<p>Added the <code>driver</code> keyword argument.</p>
+</div>
+<div class="admonition versionchanged">
+<p class="admonition-title">Changed in version:&ensp;3.6</p>
+<p>Added support for mongodb+srv:// URIs.
+Added the <code>retryWrites</code> keyword argument and URI option.</p>
+</div>
+<div class="admonition versionchanged">
+<p class="admonition-title">Changed in version:&ensp;3.5</p>
+<p>Add <code>username</code> and <code>password</code> options. Document the
+<code>authSource</code>, <code>authMechanism</code>, and <code>authMechanismProperties</code>
+options.
+Deprecated the <code>socketKeepAlive</code> keyword argument and URI option.
+<code>socketKeepAlive</code> now defaults to <code>True</code>.</p>
+</div>
+<div class="admonition versionchanged">
+<p class="admonition-title">Changed in version:&ensp;3.0</p>
+<p>:class:<code>~pymongo.mongo_client.MongoClient</code> is now the one and only
+client class for a standalone server, mongos, or replica set.
+It includes the functionality that had been split into
+:class:<code>~pymongo.mongo_client.MongoReplicaSetClient</code>: it can connect
+to a replica set, discover all its members, and monitor the set for
+stepdowns, elections, and reconfigs.</p>
+<p>The :class:<code>~pymongo.mongo_client.MongoClient</code> constructor no
+longer blocks while connecting to the server or servers, and it no
+longer raises :class:<code>~pymongo.errors.ConnectionFailure</code> if they
+are unavailable, nor :class:<code>~pymongo.errors.ConfigurationError</code>
+if the user's credentials are wrong. Instead, the constructor
+returns immediately and launches the connection process on
+background threads.</p>
+<p>Therefore the <code>alive</code> method is removed since it no longer
+provides meaningful information; even if the client is disconnected,
+it may discover a server in time to fulfill the next operation.</p>
+<p>In PyMongo 2.x, :class:<code>~pymongo.MongoClient</code> accepted a list of
+standalone MongoDB servers and used the first it could connect to::</p>
+<pre><code>MongoClient(['host1.com:27017', 'host2.com:27017'])
+</code></pre>
+<p>A list of multiple standalones is no longer supported; if multiple
+servers are listed they must be members of the same replica set, or
+mongoses in the same sharded cluster.</p>
+<p>The behavior for a list of mongoses is changed from "high
+availability" to "load balancing". Before, the client connected to
+the lowest-latency mongos in the list, and used it until a network
+error prompted it to re-evaluate all mongoses' latencies and
+reconnect to one of them. In PyMongo 3, the client monitors its
+network latency to all the mongoses continuously, and distributes
+operations evenly among those with the lowest latency. See
+:ref:<code>mongos-load-balancing</code> for more information.</p>
+<p>The <code>connect</code> option is added.</p>
+<p>The <code>start_request</code>, <code>in_request</code>, and <code>end_request</code> methods
+are removed, as well as the <code>auto_start_request</code> option.</p>
+<p>The <code>copy_database</code> method is removed, see the
+:doc:<code>copy_database examples &lt;/examples/copydb&gt;</code> for alternatives.</p>
+<p>The :meth:<code>MongoClient.disconnect</code> method is removed; it was a
+synonym for :meth:<code>~pymongo.MongoClient.close</code>.</p>
+<p>:class:<code>~pymongo.mongo_client.MongoClient</code> no longer returns an
+instance of :class:<code>~pymongo.database.Database</code> for attribute names
+with leading underscores. You must use dict-style lookups instead::</p>
+<pre><code>client['__my_database__']
+</code></pre>
+<p>Not::</p>
+<pre><code>client.__my_database__
+</code></pre>
+</div></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class SuperDuperClient(MongoClient):
+    &#34;&#34;&#34;
+    Client building on top of :code:`pymongo.MongoClient`.
+
+    Databases and collections in the client are SuperDuperDB objects.
+    &#34;&#34;&#34;
+
+    def __init__(self, *args, user=None, **kwargs):
+        if user is not None:
+            kwargs.setdefault(&#39;username&#39;, user)
+        super().__init__(*args, **kwargs)
+        self.args = args
+        self.kwargs = kwargs
+
+    def __getitem__(self, name: str):
+        return superduperdb.datalayer.mongodb.database.Database(self, name)
+
+    def get_database_from_name(self, name):
+        return self[name]
+
+    def list_database_names(self, **kwargs):
+        names = super().list_database_names(**kwargs)
+        names = [
+            x
+            for x in names
+            if (not x.endswith(&#39;:files&#39;) and x not in {&#39;admin&#39;, &#39;local&#39;, &#39;config&#39;})
+        ]
+        return names
+
+    def drop_database(
+        self,
+        name,
+        force=False,
+        **kwargs,
+    ):
+        if force or click.confirm(
+            &#39;Are you sure you want to delete this database and all its models?&#39;,
+            default=False,
+        ):
+            super().drop_database(f&#39;_{name}:files&#39;)
+            super().drop_database(name)
+        else:
+            logging.warning(&#39;aborting...&#39;)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>pymongo.mongo_client.MongoClient</li>
+<li>pymongo.common.BaseObject</li>
+<li>typing.Generic</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="superduperdb.datalayer.mongodb.client.SuperDuperClient.drop_database"><code class="name flex">
+<span>def <span class="ident">drop_database</span></span>(<span>self, name, force=False, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Drop a database.</p>
+<p>Raises :class:<code>TypeError</code> if <code>name_or_database</code> is not an instance of
+:class:<code>basestring</code> (:class:<code>str</code> in python 3) or
+:class:<code>~pymongo.database.Database</code>.</p>
+<p>:Parameters:
+- <code>name_or_database</code>: the name of a database to drop, or a
+:class:<code>~pymongo.database.Database</code> instance representing the
+database to drop
+- <code>session</code> (optional): a
+:class:<code>~pymongo.client_session.ClientSession</code>.
+- <code>comment</code> (optional): A user-provided comment to attach to this
+command.</p>
+<div class="admonition versionchanged">
+<p class="admonition-title">Changed in version:&ensp;4.1</p>
+<p>Added <code>comment</code> parameter.</p>
+</div>
+<div class="admonition versionchanged">
+<p class="admonition-title">Changed in version:&ensp;3.6</p>
+<p>Added <code>session</code> parameter.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note:&ensp;The :attr:<code>~pymongo.mongo_client.MongoClient.write_concern</code> of</p>
+<p>this client is automatically applied to this operation.</p>
+</div>
+<div class="admonition versionchanged">
+<p class="admonition-title">Changed in version:&ensp;3.4</p>
+<p>Apply this client's write concern automatically to this operation
+when connected to MongoDB &gt;= 3.4.</p>
+</div></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def drop_database(
+    self,
+    name,
+    force=False,
+    **kwargs,
+):
+    if force or click.confirm(
+        &#39;Are you sure you want to delete this database and all its models?&#39;,
+        default=False,
+    ):
+        super().drop_database(f&#39;_{name}:files&#39;)
+        super().drop_database(name)
+    else:
+        logging.warning(&#39;aborting...&#39;)</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.mongodb.client.SuperDuperClient.get_database_from_name"><code class="name flex">
+<span>def <span class="ident">get_database_from_name</span></span>(<span>self, name)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_database_from_name(self, name):
+    return self[name]</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.mongodb.client.SuperDuperClient.list_database_names"><code class="name flex">
+<span>def <span class="ident">list_database_names</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get a list of the names of all databases on the connected server.</p>
+<p>:Parameters:
+- <code>session</code> (optional): a
+:class:<code>~pymongo.client_session.ClientSession</code>.
+- <code>comment</code> (optional): A user-provided comment to attach to this
+command.</p>
+<div class="admonition versionchanged">
+<p class="admonition-title">Changed in version:&ensp;4.1</p>
+<p>Added <code>comment</code> parameter.</p>
+</div>
+<div class="admonition versionadded">
+<p class="admonition-title">Added in version:&ensp;3.6</p>
+</div></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def list_database_names(self, **kwargs):
+    names = super().list_database_names(**kwargs)
+    names = [
+        x
+        for x in names
+        if (not x.endswith(&#39;:files&#39;) and x not in {&#39;admin&#39;, &#39;local&#39;, &#39;config&#39;})
+    ]
+    return names</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="superduperdb.datalayer.mongodb" href="index.html">superduperdb.datalayer.mongodb</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="superduperdb.datalayer.mongodb.client.SuperDuperClient" href="#superduperdb.datalayer.mongodb.client.SuperDuperClient">SuperDuperClient</a></code></h4>
+<ul class="">
+<li><code><a title="superduperdb.datalayer.mongodb.client.SuperDuperClient.drop_database" href="#superduperdb.datalayer.mongodb.client.SuperDuperClient.drop_database">drop_database</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.client.SuperDuperClient.get_database_from_name" href="#superduperdb.datalayer.mongodb.client.SuperDuperClient.get_database_from_name">get_database_from_name</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.client.SuperDuperClient.list_database_names" href="#superduperdb.datalayer.mongodb.client.SuperDuperClient.list_database_names">list_database_names</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

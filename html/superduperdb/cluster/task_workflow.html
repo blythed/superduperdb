@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>superduperdb.cluster.task_workflow API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>superduperdb.cluster.task_workflow</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import datetime
+import networkx
+import uuid
+
+from superduperdb.cluster.annotations import encode_args, encode_kwargs
+from superduperdb.cluster.function_job import function_job
+from superduperdb.cluster.job_submission import dask_client
+
+
+class TaskWorkflow:
+    def __init__(self, database):
+        self.G = networkx.DiGraph()
+        self._path_lengths = None
+        self.database = database
+
+    def add_edge(self, node1, node2):
+        self.G.add_edge(node1, node2)
+
+    def add_node(self, node, data=None):
+        data = data or {}
+        self.G.add_node(node)
+        for k, v in data.items():
+            self.G.nodes[node][k] = v
+
+    def __mul__(self, other):
+        for node in other.nodes:
+            self.G.add_node(node)
+        for edge in other.edges:
+            self.G.add_edge(*edge)
+        return self
+
+    def __add__(self, other):
+        for node in other.nodes:
+            self.G.add_node(node)
+        for edge in other.edges:
+            self.G.add_edge(*edge)
+        roots_other = []
+        for node in other:
+            if not networkx.ancestors(node):
+                roots_other.append(node)
+        leafs_this = []
+        for node in self.G:
+            if not networkx.descendants(node):
+                leafs_this.append(node)
+        for node1 in leafs_this:
+            for node2 in roots_other:
+                self.add_edge(node1, node2)
+        return self
+
+    @property
+    def path_lengths(self):
+        if self._path_lengths is None:
+            self._path_lengths = {}
+            for node in networkx.topological_sort(self.G):
+                if not self._path_lengths:
+                    self._path_lengths[node] = 0
+                else:
+                    self._path_lengths[node] = (
+                        min([self._path_lengths[n] for n in self.G.predecessors(node)])
+                        + 1
+                    )
+        return self._path_lengths
+
+    def __call__(self, remote=None):
+        if remote is None:
+            remote = self.database.remote
+        if remote:
+            _dask_client = dask_client()
+        current_group = [n for n in self.G.nodes if not networkx.ancestors(self.G, n)]
+        done = []
+        while current_group:
+            job_id = str(uuid.uuid4())
+            for node in current_group:
+                node_object = self.G.nodes[node]
+                if remote:
+                    self.database._create_job_record(
+                        {
+                            &#39;identifier&#39;: job_id,
+                            &#39;time&#39;: datetime.datetime.now(),
+                            &#39;status&#39;: &#39;pending&#39;,
+                            &#39;method&#39;: node_object[&#39;task&#39;].__name__,
+                            &#39;args&#39;: node_object[&#39;args&#39;],
+                            &#39;kwargs&#39;: node_object[&#39;kwargs&#39;],
+                            &#39;stdout&#39;: [],
+                            &#39;stderr&#39;: [],
+                        }
+                    )
+                    self.G.nodes[node][&#39;job_id&#39;] = job_id
+                    args = encode_args(
+                        self.database,
+                        node_object[&#39;task&#39;].signature,
+                        node_object[&#39;args&#39;],
+                    )
+                    kwargs = encode_kwargs(
+                        self.database,
+                        node_object[&#39;task&#39;].signature,
+                        node_object[&#39;kwargs&#39;],
+                    )
+
+                    dependencies = [
+                        self.G.nodes[a][&#39;future&#39;] for a in self.G.predecessors(node)
+                    ]
+
+                    node_object[&#39;future&#39;] = _dask_client.submit(
+                        function_job,
+                        self.database._database_type,
+                        self.database.name,
+                        node_object[&#39;task&#39;].__name__,
+                        args,
+                        {**kwargs, &#39;remote&#39;: False, &#39;dependencies&#39;: dependencies},
+                        job_id,
+                        key=job_id,
+                    )
+                    node_object[&#39;job_id&#39;] = job_id
+                else:
+                    args = node_object[&#39;args&#39;]
+                    kwargs = node_object[&#39;kwargs&#39;]
+                    node_object[&#39;task&#39;](*args, **{**kwargs, &#39;remote&#39;: False})
+                done.append(node)
+            current_group = [
+                n
+                for n in self.G.nodes
+                if set(self.G.predecessors(n)).issubset(set(done))
+                and n not in set(done)
+            ]
+        return self.G</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="superduperdb.cluster.task_workflow.TaskWorkflow"><code class="flex name class">
+<span>class <span class="ident">TaskWorkflow</span></span>
+<span>(</span><span>database)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class TaskWorkflow:
+    def __init__(self, database):
+        self.G = networkx.DiGraph()
+        self._path_lengths = None
+        self.database = database
+
+    def add_edge(self, node1, node2):
+        self.G.add_edge(node1, node2)
+
+    def add_node(self, node, data=None):
+        data = data or {}
+        self.G.add_node(node)
+        for k, v in data.items():
+            self.G.nodes[node][k] = v
+
+    def __mul__(self, other):
+        for node in other.nodes:
+            self.G.add_node(node)
+        for edge in other.edges:
+            self.G.add_edge(*edge)
+        return self
+
+    def __add__(self, other):
+        for node in other.nodes:
+            self.G.add_node(node)
+        for edge in other.edges:
+            self.G.add_edge(*edge)
+        roots_other = []
+        for node in other:
+            if not networkx.ancestors(node):
+                roots_other.append(node)
+        leafs_this = []
+        for node in self.G:
+            if not networkx.descendants(node):
+                leafs_this.append(node)
+        for node1 in leafs_this:
+            for node2 in roots_other:
+                self.add_edge(node1, node2)
+        return self
+
+    @property
+    def path_lengths(self):
+        if self._path_lengths is None:
+            self._path_lengths = {}
+            for node in networkx.topological_sort(self.G):
+                if not self._path_lengths:
+                    self._path_lengths[node] = 0
+                else:
+                    self._path_lengths[node] = (
+                        min([self._path_lengths[n] for n in self.G.predecessors(node)])
+                        + 1
+                    )
+        return self._path_lengths
+
+    def __call__(self, remote=None):
+        if remote is None:
+            remote = self.database.remote
+        if remote:
+            _dask_client = dask_client()
+        current_group = [n for n in self.G.nodes if not networkx.ancestors(self.G, n)]
+        done = []
+        while current_group:
+            job_id = str(uuid.uuid4())
+            for node in current_group:
+                node_object = self.G.nodes[node]
+                if remote:
+                    self.database._create_job_record(
+                        {
+                            &#39;identifier&#39;: job_id,
+                            &#39;time&#39;: datetime.datetime.now(),
+                            &#39;status&#39;: &#39;pending&#39;,
+                            &#39;method&#39;: node_object[&#39;task&#39;].__name__,
+                            &#39;args&#39;: node_object[&#39;args&#39;],
+                            &#39;kwargs&#39;: node_object[&#39;kwargs&#39;],
+                            &#39;stdout&#39;: [],
+                            &#39;stderr&#39;: [],
+                        }
+                    )
+                    self.G.nodes[node][&#39;job_id&#39;] = job_id
+                    args = encode_args(
+                        self.database,
+                        node_object[&#39;task&#39;].signature,
+                        node_object[&#39;args&#39;],
+                    )
+                    kwargs = encode_kwargs(
+                        self.database,
+                        node_object[&#39;task&#39;].signature,
+                        node_object[&#39;kwargs&#39;],
+                    )
+
+                    dependencies = [
+                        self.G.nodes[a][&#39;future&#39;] for a in self.G.predecessors(node)
+                    ]
+
+                    node_object[&#39;future&#39;] = _dask_client.submit(
+                        function_job,
+                        self.database._database_type,
+                        self.database.name,
+                        node_object[&#39;task&#39;].__name__,
+                        args,
+                        {**kwargs, &#39;remote&#39;: False, &#39;dependencies&#39;: dependencies},
+                        job_id,
+                        key=job_id,
+                    )
+                    node_object[&#39;job_id&#39;] = job_id
+                else:
+                    args = node_object[&#39;args&#39;]
+                    kwargs = node_object[&#39;kwargs&#39;]
+                    node_object[&#39;task&#39;](*args, **{**kwargs, &#39;remote&#39;: False})
+                done.append(node)
+            current_group = [
+                n
+                for n in self.G.nodes
+                if set(self.G.predecessors(n)).issubset(set(done))
+                and n not in set(done)
+            ]
+        return self.G</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="superduperdb.cluster.task_workflow.TaskWorkflow.path_lengths"><code class="name">var <span class="ident">path_lengths</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def path_lengths(self):
+    if self._path_lengths is None:
+        self._path_lengths = {}
+        for node in networkx.topological_sort(self.G):
+            if not self._path_lengths:
+                self._path_lengths[node] = 0
+            else:
+                self._path_lengths[node] = (
+                    min([self._path_lengths[n] for n in self.G.predecessors(node)])
+                    + 1
+                )
+    return self._path_lengths</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="superduperdb.cluster.task_workflow.TaskWorkflow.add_edge"><code class="name flex">
+<span>def <span class="ident">add_edge</span></span>(<span>self, node1, node2)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_edge(self, node1, node2):
+    self.G.add_edge(node1, node2)</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.cluster.task_workflow.TaskWorkflow.add_node"><code class="name flex">
+<span>def <span class="ident">add_node</span></span>(<span>self, node, data=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_node(self, node, data=None):
+    data = data or {}
+    self.G.add_node(node)
+    for k, v in data.items():
+        self.G.nodes[node][k] = v</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="superduperdb.cluster" href="index.html">superduperdb.cluster</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="superduperdb.cluster.task_workflow.TaskWorkflow" href="#superduperdb.cluster.task_workflow.TaskWorkflow">TaskWorkflow</a></code></h4>
+<ul class="">
+<li><code><a title="superduperdb.cluster.task_workflow.TaskWorkflow.add_edge" href="#superduperdb.cluster.task_workflow.TaskWorkflow.add_edge">add_edge</a></code></li>
+<li><code><a title="superduperdb.cluster.task_workflow.TaskWorkflow.add_node" href="#superduperdb.cluster.task_workflow.TaskWorkflow.add_node">add_node</a></code></li>
+<li><code><a title="superduperdb.cluster.task_workflow.TaskWorkflow.path_lengths" href="#superduperdb.cluster.task_workflow.TaskWorkflow.path_lengths">path_lengths</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

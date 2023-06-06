@@ -1,0 +1,783 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>superduperdb.misc.config API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>superduperdb.misc.config</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from enum import Enum
+from pydantic import BaseModel, Field, root_validator
+from typing import Dict, List
+
+# The classes in this file define the configuration variables for SuperDuperDB.
+#
+# There is a file in the root directory named `default-config.json`
+# which has the default values for every configuration variable, serialized into JSON.
+#
+# If you change a class below, you must regenerate `default-config.json with:
+#
+#    $ python -m tests.unittests.misc.test_config
+
+_BAD_KEY = &#39;...bad.key...&#39;
+
+
+def _Factory(factory):
+    return Field(default_factory=factory)
+
+
+class _Model(BaseModel):
+    class Config:
+        extra = &#39;forbid&#39;
+
+
+class HasPort(_Model):
+    port = 0
+    password = &#39;&#39;
+    user = &#39;&#39;
+
+
+class HostPort(HasPort):
+    host = &#39;localhost&#39;
+
+
+class IpPort(HasPort):
+    ip = &#39;localhost&#39;
+
+
+class Api(_Model):
+    api_key: str = Field(default=_BAD_KEY, repr=False)
+
+
+class Apis(_Model):
+    n_retries = 2
+    providers: Dict[str, Api] = _Factory(dict)
+
+
+class Dask(IpPort):
+    port = 8786
+
+    serializers: List[str] = _Factory(list)
+    deserializers: List[str] = _Factory(list)
+
+
+class Deployment(_Model):
+    database = &#39;&#39;
+    model = &#39;&#39;
+
+
+class LogLevel(str, Enum):
+    DEBUG = &#39;DEBUG&#39;
+    INFO = &#39;INFO&#39;
+    WARN = &#39;WARN&#39;
+
+
+class LogType(str, Enum):
+    STDERR = &#39;STDERR&#39;
+    LOGGING = &#39;LOGGING&#39;
+
+
+class Logging(_Model):
+    level = LogLevel.INFO
+    type = LogType.STDERR
+    kwargs: dict = _Factory(dict)
+
+
+class ModelServer(HostPort):
+    host = &#39;127.0.0.1&#39;
+    port = 5001
+
+
+class MongoDB(HostPort):
+    port = 27017
+
+
+class Notebook(_Model):
+    ip = &#39;0.0.0.0&#39;
+    port = 8888
+    password = &#39;&#39;
+    token = &#39;&#39;
+
+    @root_validator
+    def check_one_or_none(cls, v):
+        assert not all(v.values()), &#39;At most one of password and token may be set&#39;
+        return v
+
+
+class Ray(HostPort):
+    host = &#39;127.0.0.1&#39;
+
+    deployments: List[Deployment] = _Factory(list)
+
+
+class VectorSearch(HostPort):
+    port = 5001
+
+
+class Config(_Model):
+    apis: Apis = _Factory(Apis)
+    dask: Dask = _Factory(Dask)
+    logging: Logging = _Factory(Logging)
+    model_server: ModelServer = _Factory(ModelServer)
+    mongodb: MongoDB = _Factory(MongoDB)
+    notebook: Notebook = _Factory(Notebook)
+    ray: Ray = _Factory(Ray)
+    remote: bool = False
+    vector_search: VectorSearch = _Factory(VectorSearch)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="superduperdb.misc.config.Api"><code class="flex name class">
+<span>class <span class="ident">Api</span></span>
+<span>(</span><span>**data: Any)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a new model by parsing and validating input data from keyword arguments.</p>
+<p>Raises ValidationError if the input data cannot be parsed to form a valid model.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Api(_Model):
+    api_key: str = Field(default=_BAD_KEY, repr=False)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>superduperdb.misc.config._Model</li>
+<li>pydantic.main.BaseModel</li>
+<li>pydantic.utils.Representation</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="superduperdb.misc.config.Api.api_key"><code class="name">var <span class="ident">api_key</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="superduperdb.misc.config.Apis"><code class="flex name class">
+<span>class <span class="ident">Apis</span></span>
+<span>(</span><span>**data: Any)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a new model by parsing and validating input data from keyword arguments.</p>
+<p>Raises ValidationError if the input data cannot be parsed to form a valid model.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Apis(_Model):
+    n_retries = 2
+    providers: Dict[str, Api] = _Factory(dict)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>superduperdb.misc.config._Model</li>
+<li>pydantic.main.BaseModel</li>
+<li>pydantic.utils.Representation</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="superduperdb.misc.config.Apis.providers"><code class="name">var <span class="ident">providers</span> : Dict[str, <a title="superduperdb.misc.config.Api" href="#superduperdb.misc.config.Api">Api</a>]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="superduperdb.misc.config.Config"><code class="flex name class">
+<span>class <span class="ident">Config</span></span>
+<span>(</span><span>**data: Any)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a new model by parsing and validating input data from keyword arguments.</p>
+<p>Raises ValidationError if the input data cannot be parsed to form a valid model.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Config(_Model):
+    apis: Apis = _Factory(Apis)
+    dask: Dask = _Factory(Dask)
+    logging: Logging = _Factory(Logging)
+    model_server: ModelServer = _Factory(ModelServer)
+    mongodb: MongoDB = _Factory(MongoDB)
+    notebook: Notebook = _Factory(Notebook)
+    ray: Ray = _Factory(Ray)
+    remote: bool = False
+    vector_search: VectorSearch = _Factory(VectorSearch)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>superduperdb.misc.config._Model</li>
+<li>pydantic.main.BaseModel</li>
+<li>pydantic.utils.Representation</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="superduperdb.misc.config.Config.apis"><code class="name">var <span class="ident">apis</span> : <a title="superduperdb.misc.config.Apis" href="#superduperdb.misc.config.Apis">Apis</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="superduperdb.misc.config.Config.dask"><code class="name">var <span class="ident">dask</span> : <a title="superduperdb.misc.config.Dask" href="#superduperdb.misc.config.Dask">Dask</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="superduperdb.misc.config.Config.logging"><code class="name">var <span class="ident">logging</span> : <a title="superduperdb.misc.config.Logging" href="#superduperdb.misc.config.Logging">Logging</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="superduperdb.misc.config.Config.model_server"><code class="name">var <span class="ident">model_server</span> : <a title="superduperdb.misc.config.ModelServer" href="#superduperdb.misc.config.ModelServer">ModelServer</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="superduperdb.misc.config.Config.mongodb"><code class="name">var <span class="ident">mongodb</span> : <a title="superduperdb.misc.config.MongoDB" href="#superduperdb.misc.config.MongoDB">MongoDB</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="superduperdb.misc.config.Config.notebook"><code class="name">var <span class="ident">notebook</span> : <a title="superduperdb.misc.config.Notebook" href="#superduperdb.misc.config.Notebook">Notebook</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="superduperdb.misc.config.Config.ray"><code class="name">var <span class="ident">ray</span> : <a title="superduperdb.misc.config.Ray" href="#superduperdb.misc.config.Ray">Ray</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="superduperdb.misc.config.Config.remote"><code class="name">var <span class="ident">remote</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="superduperdb.misc.config.Config.vector_search"><code class="name">var <span class="ident">vector_search</span> : <a title="superduperdb.misc.config.VectorSearch" href="#superduperdb.misc.config.VectorSearch">VectorSearch</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="superduperdb.misc.config.Dask"><code class="flex name class">
+<span>class <span class="ident">Dask</span></span>
+<span>(</span><span>**data: Any)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a new model by parsing and validating input data from keyword arguments.</p>
+<p>Raises ValidationError if the input data cannot be parsed to form a valid model.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Dask(IpPort):
+    port = 8786
+
+    serializers: List[str] = _Factory(list)
+    deserializers: List[str] = _Factory(list)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="superduperdb.misc.config.IpPort" href="#superduperdb.misc.config.IpPort">IpPort</a></li>
+<li><a title="superduperdb.misc.config.HasPort" href="#superduperdb.misc.config.HasPort">HasPort</a></li>
+<li>superduperdb.misc.config._Model</li>
+<li>pydantic.main.BaseModel</li>
+<li>pydantic.utils.Representation</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="superduperdb.misc.config.Dask.deserializers"><code class="name">var <span class="ident">deserializers</span> : List[str]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="superduperdb.misc.config.Dask.serializers"><code class="name">var <span class="ident">serializers</span> : List[str]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="superduperdb.misc.config.Deployment"><code class="flex name class">
+<span>class <span class="ident">Deployment</span></span>
+<span>(</span><span>**data: Any)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a new model by parsing and validating input data from keyword arguments.</p>
+<p>Raises ValidationError if the input data cannot be parsed to form a valid model.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Deployment(_Model):
+    database = &#39;&#39;
+    model = &#39;&#39;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>superduperdb.misc.config._Model</li>
+<li>pydantic.main.BaseModel</li>
+<li>pydantic.utils.Representation</li>
+</ul>
+</dd>
+<dt id="superduperdb.misc.config.HasPort"><code class="flex name class">
+<span>class <span class="ident">HasPort</span></span>
+<span>(</span><span>**data: Any)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a new model by parsing and validating input data from keyword arguments.</p>
+<p>Raises ValidationError if the input data cannot be parsed to form a valid model.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class HasPort(_Model):
+    port = 0
+    password = &#39;&#39;
+    user = &#39;&#39;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>superduperdb.misc.config._Model</li>
+<li>pydantic.main.BaseModel</li>
+<li>pydantic.utils.Representation</li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="superduperdb.misc.config.HostPort" href="#superduperdb.misc.config.HostPort">HostPort</a></li>
+<li><a title="superduperdb.misc.config.IpPort" href="#superduperdb.misc.config.IpPort">IpPort</a></li>
+</ul>
+</dd>
+<dt id="superduperdb.misc.config.HostPort"><code class="flex name class">
+<span>class <span class="ident">HostPort</span></span>
+<span>(</span><span>**data: Any)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a new model by parsing and validating input data from keyword arguments.</p>
+<p>Raises ValidationError if the input data cannot be parsed to form a valid model.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class HostPort(HasPort):
+    host = &#39;localhost&#39;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="superduperdb.misc.config.HasPort" href="#superduperdb.misc.config.HasPort">HasPort</a></li>
+<li>superduperdb.misc.config._Model</li>
+<li>pydantic.main.BaseModel</li>
+<li>pydantic.utils.Representation</li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="superduperdb.misc.config.ModelServer" href="#superduperdb.misc.config.ModelServer">ModelServer</a></li>
+<li><a title="superduperdb.misc.config.MongoDB" href="#superduperdb.misc.config.MongoDB">MongoDB</a></li>
+<li><a title="superduperdb.misc.config.Ray" href="#superduperdb.misc.config.Ray">Ray</a></li>
+<li><a title="superduperdb.misc.config.VectorSearch" href="#superduperdb.misc.config.VectorSearch">VectorSearch</a></li>
+</ul>
+</dd>
+<dt id="superduperdb.misc.config.IpPort"><code class="flex name class">
+<span>class <span class="ident">IpPort</span></span>
+<span>(</span><span>**data: Any)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a new model by parsing and validating input data from keyword arguments.</p>
+<p>Raises ValidationError if the input data cannot be parsed to form a valid model.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class IpPort(HasPort):
+    ip = &#39;localhost&#39;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="superduperdb.misc.config.HasPort" href="#superduperdb.misc.config.HasPort">HasPort</a></li>
+<li>superduperdb.misc.config._Model</li>
+<li>pydantic.main.BaseModel</li>
+<li>pydantic.utils.Representation</li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="superduperdb.misc.config.Dask" href="#superduperdb.misc.config.Dask">Dask</a></li>
+</ul>
+</dd>
+<dt id="superduperdb.misc.config.LogLevel"><code class="flex name class">
+<span>class <span class="ident">LogLevel</span></span>
+<span>(</span><span>value, names=None, *, module=None, qualname=None, type=None, start=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>An enumeration.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class LogLevel(str, Enum):
+    DEBUG = &#39;DEBUG&#39;
+    INFO = &#39;INFO&#39;
+    WARN = &#39;WARN&#39;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.str</li>
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="superduperdb.misc.config.LogLevel.DEBUG"><code class="name">var <span class="ident">DEBUG</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="superduperdb.misc.config.LogLevel.INFO"><code class="name">var <span class="ident">INFO</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="superduperdb.misc.config.LogLevel.WARN"><code class="name">var <span class="ident">WARN</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="superduperdb.misc.config.LogType"><code class="flex name class">
+<span>class <span class="ident">LogType</span></span>
+<span>(</span><span>value, names=None, *, module=None, qualname=None, type=None, start=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>An enumeration.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class LogType(str, Enum):
+    STDERR = &#39;STDERR&#39;
+    LOGGING = &#39;LOGGING&#39;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.str</li>
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="superduperdb.misc.config.LogType.LOGGING"><code class="name">var <span class="ident">LOGGING</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="superduperdb.misc.config.LogType.STDERR"><code class="name">var <span class="ident">STDERR</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="superduperdb.misc.config.Logging"><code class="flex name class">
+<span>class <span class="ident">Logging</span></span>
+<span>(</span><span>**data: Any)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a new model by parsing and validating input data from keyword arguments.</p>
+<p>Raises ValidationError if the input data cannot be parsed to form a valid model.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Logging(_Model):
+    level = LogLevel.INFO
+    type = LogType.STDERR
+    kwargs: dict = _Factory(dict)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>superduperdb.misc.config._Model</li>
+<li>pydantic.main.BaseModel</li>
+<li>pydantic.utils.Representation</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="superduperdb.misc.config.Logging.kwargs"><code class="name">var <span class="ident">kwargs</span> : dict</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="superduperdb.misc.config.ModelServer"><code class="flex name class">
+<span>class <span class="ident">ModelServer</span></span>
+<span>(</span><span>**data: Any)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a new model by parsing and validating input data from keyword arguments.</p>
+<p>Raises ValidationError if the input data cannot be parsed to form a valid model.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ModelServer(HostPort):
+    host = &#39;127.0.0.1&#39;
+    port = 5001</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="superduperdb.misc.config.HostPort" href="#superduperdb.misc.config.HostPort">HostPort</a></li>
+<li><a title="superduperdb.misc.config.HasPort" href="#superduperdb.misc.config.HasPort">HasPort</a></li>
+<li>superduperdb.misc.config._Model</li>
+<li>pydantic.main.BaseModel</li>
+<li>pydantic.utils.Representation</li>
+</ul>
+</dd>
+<dt id="superduperdb.misc.config.MongoDB"><code class="flex name class">
+<span>class <span class="ident">MongoDB</span></span>
+<span>(</span><span>**data: Any)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a new model by parsing and validating input data from keyword arguments.</p>
+<p>Raises ValidationError if the input data cannot be parsed to form a valid model.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class MongoDB(HostPort):
+    port = 27017</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="superduperdb.misc.config.HostPort" href="#superduperdb.misc.config.HostPort">HostPort</a></li>
+<li><a title="superduperdb.misc.config.HasPort" href="#superduperdb.misc.config.HasPort">HasPort</a></li>
+<li>superduperdb.misc.config._Model</li>
+<li>pydantic.main.BaseModel</li>
+<li>pydantic.utils.Representation</li>
+</ul>
+</dd>
+<dt id="superduperdb.misc.config.Notebook"><code class="flex name class">
+<span>class <span class="ident">Notebook</span></span>
+<span>(</span><span>**data: Any)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a new model by parsing and validating input data from keyword arguments.</p>
+<p>Raises ValidationError if the input data cannot be parsed to form a valid model.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Notebook(_Model):
+    ip = &#39;0.0.0.0&#39;
+    port = 8888
+    password = &#39;&#39;
+    token = &#39;&#39;
+
+    @root_validator
+    def check_one_or_none(cls, v):
+        assert not all(v.values()), &#39;At most one of password and token may be set&#39;
+        return v</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>superduperdb.misc.config._Model</li>
+<li>pydantic.main.BaseModel</li>
+<li>pydantic.utils.Representation</li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="superduperdb.misc.config.Notebook.check_one_or_none"><code class="name flex">
+<span>def <span class="ident">check_one_or_none</span></span>(<span>v)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@root_validator
+def check_one_or_none(cls, v):
+    assert not all(v.values()), &#39;At most one of password and token may be set&#39;
+    return v</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="superduperdb.misc.config.Ray"><code class="flex name class">
+<span>class <span class="ident">Ray</span></span>
+<span>(</span><span>**data: Any)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a new model by parsing and validating input data from keyword arguments.</p>
+<p>Raises ValidationError if the input data cannot be parsed to form a valid model.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Ray(HostPort):
+    host = &#39;127.0.0.1&#39;
+
+    deployments: List[Deployment] = _Factory(list)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="superduperdb.misc.config.HostPort" href="#superduperdb.misc.config.HostPort">HostPort</a></li>
+<li><a title="superduperdb.misc.config.HasPort" href="#superduperdb.misc.config.HasPort">HasPort</a></li>
+<li>superduperdb.misc.config._Model</li>
+<li>pydantic.main.BaseModel</li>
+<li>pydantic.utils.Representation</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="superduperdb.misc.config.Ray.deployments"><code class="name">var <span class="ident">deployments</span> : List[<a title="superduperdb.misc.config.Deployment" href="#superduperdb.misc.config.Deployment">Deployment</a>]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="superduperdb.misc.config.VectorSearch"><code class="flex name class">
+<span>class <span class="ident">VectorSearch</span></span>
+<span>(</span><span>**data: Any)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a new model by parsing and validating input data from keyword arguments.</p>
+<p>Raises ValidationError if the input data cannot be parsed to form a valid model.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class VectorSearch(HostPort):
+    port = 5001</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="superduperdb.misc.config.HostPort" href="#superduperdb.misc.config.HostPort">HostPort</a></li>
+<li><a title="superduperdb.misc.config.HasPort" href="#superduperdb.misc.config.HasPort">HasPort</a></li>
+<li>superduperdb.misc.config._Model</li>
+<li>pydantic.main.BaseModel</li>
+<li>pydantic.utils.Representation</li>
+</ul>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="superduperdb.misc" href="index.html">superduperdb.misc</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="superduperdb.misc.config.Api" href="#superduperdb.misc.config.Api">Api</a></code></h4>
+<ul class="">
+<li><code><a title="superduperdb.misc.config.Api.api_key" href="#superduperdb.misc.config.Api.api_key">api_key</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="superduperdb.misc.config.Apis" href="#superduperdb.misc.config.Apis">Apis</a></code></h4>
+<ul class="">
+<li><code><a title="superduperdb.misc.config.Apis.providers" href="#superduperdb.misc.config.Apis.providers">providers</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="superduperdb.misc.config.Config" href="#superduperdb.misc.config.Config">Config</a></code></h4>
+<ul class="two-column">
+<li><code><a title="superduperdb.misc.config.Config.apis" href="#superduperdb.misc.config.Config.apis">apis</a></code></li>
+<li><code><a title="superduperdb.misc.config.Config.dask" href="#superduperdb.misc.config.Config.dask">dask</a></code></li>
+<li><code><a title="superduperdb.misc.config.Config.logging" href="#superduperdb.misc.config.Config.logging">logging</a></code></li>
+<li><code><a title="superduperdb.misc.config.Config.model_server" href="#superduperdb.misc.config.Config.model_server">model_server</a></code></li>
+<li><code><a title="superduperdb.misc.config.Config.mongodb" href="#superduperdb.misc.config.Config.mongodb">mongodb</a></code></li>
+<li><code><a title="superduperdb.misc.config.Config.notebook" href="#superduperdb.misc.config.Config.notebook">notebook</a></code></li>
+<li><code><a title="superduperdb.misc.config.Config.ray" href="#superduperdb.misc.config.Config.ray">ray</a></code></li>
+<li><code><a title="superduperdb.misc.config.Config.remote" href="#superduperdb.misc.config.Config.remote">remote</a></code></li>
+<li><code><a title="superduperdb.misc.config.Config.vector_search" href="#superduperdb.misc.config.Config.vector_search">vector_search</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="superduperdb.misc.config.Dask" href="#superduperdb.misc.config.Dask">Dask</a></code></h4>
+<ul class="">
+<li><code><a title="superduperdb.misc.config.Dask.deserializers" href="#superduperdb.misc.config.Dask.deserializers">deserializers</a></code></li>
+<li><code><a title="superduperdb.misc.config.Dask.serializers" href="#superduperdb.misc.config.Dask.serializers">serializers</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="superduperdb.misc.config.Deployment" href="#superduperdb.misc.config.Deployment">Deployment</a></code></h4>
+</li>
+<li>
+<h4><code><a title="superduperdb.misc.config.HasPort" href="#superduperdb.misc.config.HasPort">HasPort</a></code></h4>
+</li>
+<li>
+<h4><code><a title="superduperdb.misc.config.HostPort" href="#superduperdb.misc.config.HostPort">HostPort</a></code></h4>
+</li>
+<li>
+<h4><code><a title="superduperdb.misc.config.IpPort" href="#superduperdb.misc.config.IpPort">IpPort</a></code></h4>
+</li>
+<li>
+<h4><code><a title="superduperdb.misc.config.LogLevel" href="#superduperdb.misc.config.LogLevel">LogLevel</a></code></h4>
+<ul class="">
+<li><code><a title="superduperdb.misc.config.LogLevel.DEBUG" href="#superduperdb.misc.config.LogLevel.DEBUG">DEBUG</a></code></li>
+<li><code><a title="superduperdb.misc.config.LogLevel.INFO" href="#superduperdb.misc.config.LogLevel.INFO">INFO</a></code></li>
+<li><code><a title="superduperdb.misc.config.LogLevel.WARN" href="#superduperdb.misc.config.LogLevel.WARN">WARN</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="superduperdb.misc.config.LogType" href="#superduperdb.misc.config.LogType">LogType</a></code></h4>
+<ul class="">
+<li><code><a title="superduperdb.misc.config.LogType.LOGGING" href="#superduperdb.misc.config.LogType.LOGGING">LOGGING</a></code></li>
+<li><code><a title="superduperdb.misc.config.LogType.STDERR" href="#superduperdb.misc.config.LogType.STDERR">STDERR</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="superduperdb.misc.config.Logging" href="#superduperdb.misc.config.Logging">Logging</a></code></h4>
+<ul class="">
+<li><code><a title="superduperdb.misc.config.Logging.kwargs" href="#superduperdb.misc.config.Logging.kwargs">kwargs</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="superduperdb.misc.config.ModelServer" href="#superduperdb.misc.config.ModelServer">ModelServer</a></code></h4>
+</li>
+<li>
+<h4><code><a title="superduperdb.misc.config.MongoDB" href="#superduperdb.misc.config.MongoDB">MongoDB</a></code></h4>
+</li>
+<li>
+<h4><code><a title="superduperdb.misc.config.Notebook" href="#superduperdb.misc.config.Notebook">Notebook</a></code></h4>
+<ul class="">
+<li><code><a title="superduperdb.misc.config.Notebook.check_one_or_none" href="#superduperdb.misc.config.Notebook.check_one_or_none">check_one_or_none</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="superduperdb.misc.config.Ray" href="#superduperdb.misc.config.Ray">Ray</a></code></h4>
+<ul class="">
+<li><code><a title="superduperdb.misc.config.Ray.deployments" href="#superduperdb.misc.config.Ray.deployments">deployments</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="superduperdb.misc.config.VectorSearch" href="#superduperdb.misc.config.VectorSearch">VectorSearch</a></code></h4>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

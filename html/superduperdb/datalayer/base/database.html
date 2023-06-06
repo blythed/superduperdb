@@ -1,0 +1,2773 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>superduperdb.datalayer.base.database API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>superduperdb.datalayer.base.database</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from collections import defaultdict
+import io
+import math
+import pickle
+import random
+import time
+from typing import Any, Union
+
+import click
+import networkx
+from bson import ObjectId
+
+from superduperdb import CFG, misc
+from superduperdb.cluster.client_decorators import model_server, vector_search
+from superduperdb.cluster.annotations import Convertible, Tuple, List
+from superduperdb.cluster.job_submission import work
+from superduperdb.cluster.task_workflow import TaskWorkflow
+from superduperdb.core.learning_task import LearningTask
+from superduperdb.datalayer.base.query import Insert, Select, Delete, Update
+from superduperdb.fetchers.downloads import gather_uris
+from superduperdb.misc.special_dicts import ArgumentDefaultDict, MongoStyleDict
+from superduperdb.fetchers.downloads import Downloader
+from superduperdb.misc import progress
+from superduperdb.misc.logger import logging
+
+
+class BaseDatabase:
+    &#34;&#34;&#34;
+    Base database connector for SuperDuperDB - all database types should subclass this
+    type.
+    &#34;&#34;&#34;
+
+    select_cls = Select
+    variety_to_cache_mapping = {&#39;model&#39;: &#39;models&#39;, &#39;metric&#39;: &#39;metrics&#39;, &#39;type&#39;: &#39;types&#39;}
+
+    def __init__(self):
+        self.metrics = ArgumentDefaultDict(lambda x: self.load_component(x, &#39;metric&#39;))
+        self.models = ArgumentDefaultDict(lambda x: self.load_component(x, &#39;model&#39;))
+        self.types = ArgumentDefaultDict(lambda x: self.load_component(x, &#39;type&#39;))
+
+        self.remote = CFG.remote
+        self._type_lookup = None
+
+        self._all_hash_sets = {}
+
+    def _reload_type_lookup(self):
+        self._type_lookup = {}
+        for t in self.list_components(&#39;type&#39;):
+            try:
+                for s in self.types[t].types:
+                    self._type_lookup[s] = t
+            except AttributeError:
+                continue
+
+    @property
+    def filesystem(self):
+        raise NotImplementedError
+
+    @property
+    def type_lookup(self):
+        if self._type_lookup is None:
+            self._reload_type_lookup()
+        return self._type_lookup
+
+    def _add_split_to_row(self, r, other):
+        raise NotImplementedError
+
+    def _base_insert(self, insert: Insert):
+        raise NotImplementedError
+
+    @model_server
+    def predict_one(self, model, input_: Convertible(), **kwargs) -&gt; Convertible():
+        if isinstance(model, str):
+            model = self.models[model]
+        return model.predict_one(
+            input_, **{k: v for k, v in kwargs.items() if k != &#39;remote&#39;}
+        )
+
+    @model_server
+    def predict(self, model, input_: Convertible(), **kwargs) -&gt; Convertible():
+        &#34;&#34;&#34;
+        Apply model to input.
+
+        :param model: model or ``str`` referring to an uploaded model
+        :param input_: input_ to be passed to the model.
+                       Must be possible to encode with registered types
+        :param kwargs: key-values (see ``superduperdb.models.utils.predict``)
+        &#34;&#34;&#34;
+        if isinstance(model, str):
+            model = self.models[model]
+        return model.predict(input_, **kwargs)
+
+    def _build_task_workflow(
+        self, select: Select, ids=None, dependencies=(), verbose=True
+    ):
+        job_ids = defaultdict(lambda: [])
+        job_ids.update(dependencies)
+        G = TaskWorkflow(self)
+        if ids is None:
+            ids = self._get_ids_from_select(select.select_only_id)
+
+        G.add_node(
+            f&#39;{self.download_content.__name__}()&#39;,
+            data={
+                &#39;task&#39;: self.download_content,
+                &#39;args&#39;: [
+                    select,
+                ],
+                &#39;kwargs&#39;: {
+                    &#39;ids&#39;: ids,
+                },
+            },
+        )
+        if not self.list_components(&#39;watcher&#39;):
+            return G
+
+        for identifier in self.list_components(&#39;watcher&#39;):
+            G.add_node(
+                f&#39;{self.apply_watcher.__name__}({identifier})&#39;,
+                data={
+                    &#39;task&#39;: self.apply_watcher,
+                    &#39;args&#39;: [identifier],
+                    &#39;kwargs&#39;: {
+                        &#39;ids&#39;: ids,
+                        &#39;verbose&#39;: verbose,
+                    },
+                },
+            )
+
+        for identifier in self.list_components(&#39;watcher&#39;):
+            G.add_edge(
+                f&#39;{self.download_content.__name__}()&#39;,
+                f&#39;{self.apply_watcher.__name__}({identifier})&#39;,
+            )
+            deps = self._get_dependencies_for_watcher(identifier)
+            for dep in deps:
+                G.add_edge(
+                    f&#39;{self.apply_watcher.__name__}({dep})&#39;,
+                    f&#39;{self.apply_watcher.__name__}({identifier})&#39;,
+                )
+                G.add_edge(
+                    f&#39;{self.download_content.__name__}()&#39;,
+                    f&#39;{self.apply_watcher.__name__}({identifier})&#39;,
+                )
+
+        return G
+
+    def cancel_job(self, job_id):
+        raise NotImplementedError
+
+    def _compute_model_outputs(
+        self,
+        model_info,
+        _ids,
+        select: Select,
+        key=&#39;_base&#39;,
+        features=None,
+        model=None,
+        predict_kwargs=None,
+    ):
+        logging.info(&#39;finding documents under filter&#39;)
+        features = features or {}
+        model_identifier = model_info[&#39;identifier&#39;]
+        if features is None:
+            features = {}  # pragma: no cover
+        documents = list(self.select(select.select_using_ids(_ids), features=features))
+        logging.info(&#39;done.&#39;)
+        if key != &#39;_base&#39; or &#39;_base&#39; in features:
+            passed_docs = [r[key] for r in documents]
+        else:  # pragma: no cover
+            passed_docs = documents
+        if model is None:
+            model = self.models[model_identifier]
+        return model.predict(passed_docs, **(predict_kwargs or {}))
+
+    def convert_from_bytes_to_types(self, r):
+        &#34;&#34;&#34;
+        Convert the bson byte objects in a nested dictionary into python objects.
+
+        :param r: dictionary potentially containing non-Bsonable content
+        &#34;&#34;&#34;
+        return misc.serialization.convert_from_bytes_to_types(r, self.types)
+
+    def convert_from_types_to_bytes(self, r):
+        &#34;&#34;&#34;
+        Convert the non-Bsonable python objects in a nested dictionary into ``bytes``
+
+        :param r: dictionary potentially containing non-Bsonable content
+        &#34;&#34;&#34;
+        return misc.serialization.convert_from_types_to_bytes(
+            r, self.types, self.type_lookup
+        )
+
+    def _create_job_record(self, *args, **kwargs):
+        raise NotImplementedError
+
+    def _create_component_entry(self, info):
+        raise NotImplementedError
+
+    def create_component(self, object, serializer=&#39;pickle&#39;, serializer_kwargs=None):
+        serializer_kwargs = serializer_kwargs or {}
+        assert object.identifier not in self.list_components(object.variety)
+        file_id = self._create_serialized_file(
+            object, serializer=serializer, serializer_kwargs=serializer_kwargs
+        )
+        self._create_component_entry(
+            {**object.asdict(), &#39;object&#39;: file_id, &#39;variety&#39;: object.variety}
+        )
+        return object.schedule_jobs(self)
+
+    def _create_plan(self):
+        G = networkx.DiGraph()
+        for identifier in self.list_components(&#39;watcher&#39;):
+            G.add_node((&#39;watcher&#39;, identifier))
+        for identifier in self.list_components(&#39;watcher&#39;):
+            deps = self._get_dependencies_for_watcher(identifier)
+            for dep in deps:
+                G.add_edge((&#39;watcher&#39;, dep), (&#39;watcher&#39;, identifier))
+        assert networkx.is_directed_acyclic_graph(G)
+        return G
+
+    def _create_serialized_file(
+        self, object, serializer=&#39;pickle&#39;, serializer_kwargs=None
+    ):
+        serializer_kwargs = serializer_kwargs or {}
+        if serializer == &#39;pickle&#39;:
+            with io.BytesIO() as f:
+                pickle.dump(object, f, **serializer_kwargs)
+                bytes_ = f.getvalue()
+        elif serializer == &#39;dill&#39;:
+            import dill
+
+            if not serializer_kwargs:
+                serializer_kwargs[&#39;recurse&#39;] = True
+            with io.BytesIO() as f:
+                dill.dump(object, f, **serializer_kwargs)
+                bytes_ = f.getvalue()
+        else:
+            raise NotImplementedError
+        return self._save_blob_of_bytes(bytes_)
+
+    def create_validation_set(self, identifier, select: Select, chunk_size=1000):
+        if identifier in self.list_validation_sets():
+            raise Exception(f&#39;validation set {identifier} already exists!&#39;)
+
+        data = self.select(select)
+        it = 0
+        tmp = []
+        for r in progress.progressbar(data):
+            tmp.append(r)
+            it += 1
+            if it % chunk_size == 0:
+                self._insert_validation_data(tmp, identifier)
+                tmp = []
+        if tmp:
+            self._insert_validation_data(tmp, identifier)
+
+    def delete(self, delete: Delete):
+        return self._base_delete(delete)
+
+    def delete_component(self, identifier, variety, force=False):
+        info = self.get_object_info(identifier, variety)
+        if not info:
+            if not force:
+                raise Exception(f&#39;&#34;{identifier}&#34;: {variety} does not exist...&#39;)
+            return
+        if force or click.confirm(
+            f&#39;You are about to delete {variety}: {identifier}, are you sure?&#39;,
+            default=False,
+        ):
+            if variety in self.variety_to_cache_mapping:
+                try:
+                    del getattr(self, self.variety_to_cache_mapping[variety])[
+                        identifier
+                    ]
+                except KeyError:
+                    pass
+            self.filesystem.delete(info[&#39;object&#39;])
+            self._delete_component_info(identifier, variety)
+
+    def _delete_component_info(self, identifier, variety):
+        raise NotImplementedError
+
+    @work
+    def download_content(
+        self,
+        query: Union[Select, Insert],
+        ids=None,
+        documents=None,
+        timeout=None,
+        raises=True,
+        n_download_workers=None,
+        headers=None,
+        **kwargs,
+    ):
+        logging.debug(query)
+        logging.debug(ids)
+        update_db = False
+
+        if documents is not None:
+            pass
+        elif isinstance(query, Select):
+            update_db = True
+            if ids is None:
+                documents = list(self.select(query))
+            else:
+                documents = list(self.select(query.select_using_ids(ids), raw=True))
+        else:
+            documents = query.documents
+
+        uris, keys, place_ids = gather_uris(documents)
+        logging.info(f&#39;found {len(uris)} uris&#39;)
+        if not uris:
+            return
+
+        if n_download_workers is None:
+            try:
+                n_download_workers = self.get_meta_data(key=&#39;n_download_workers&#39;)
+            except TypeError:
+                n_download_workers = 0
+
+        if headers is None:
+            try:
+                headers = self.get_meta_data(key=&#39;headers&#39;)
+            except TypeError:
+                headers = 0
+
+        if timeout is None:
+            try:
+                timeout = self.get_meta_data(key=&#39;download_timeout&#39;)
+            except TypeError:
+                timeout = None
+
+        def update_one(id, key, bytes):
+            return self.update(self._download_update(query.table, id, key, bytes))
+
+        downloader = Downloader(
+            uris=uris,
+            ids=place_ids,
+            keys=keys,
+            update_one=update_one,
+            n_workers=n_download_workers,
+            timeout=timeout,
+            headers=headers,
+            raises=raises,
+        )
+        downloader.go()
+        if update_db:
+            return
+        for id_, key in zip(place_ids, keys):
+            documents[id_] = self._set_content_bytes(
+                documents[id_], key, downloader.results[id_]
+            )
+        return documents
+
+    def _download_update(self, table, id, key, bytes):
+        raise NotImplementedError
+
+    def _get_content_for_filter(self, filter):
+        if &#39;_id&#39; not in filter:
+            filter[&#39;_id&#39;] = 0
+        uris = gather_uris([filter])[0]
+        if uris:
+            filter = self.download_content(
+                self.name, documents=[filter], timeout=None, raises=True
+            )[0]
+            filter = self.convert_from_bytes_to_types(filter)
+        return filter
+
+    def _get_cursor(self, select: Select, features=None, scores=None):
+        raise NotImplementedError
+
+    def _get_dependencies_for_watcher(self, identifier):
+        info = self.get_object_info(identifier, &#39;watcher&#39;)
+        if info is None:
+            return []
+        watcher_features = info.get(&#39;features&#39;, {})
+        dependencies = []
+        if watcher_features:
+            for key, model in watcher_features.items():
+                dependencies.append(f&#39;{model}/{key}&#39;)
+        return dependencies
+
+    def _get_file_content(self, r):
+        for k in r:
+            if isinstance(r[k], dict):
+                if &#39;_file_id&#39; in r[k]:
+                    r[k] = self._load_serialized_file(r[k][&#39;_file_id&#39;])
+                else:
+                    r[k] = self._get_file_content(r[k])
+        return r
+
+    def _get_output_from_document(self, r, key, model):
+        raise NotImplementedError
+
+    def _get_job_info(self, identifier):
+        raise NotImplementedError
+
+    def _get_ids_from_select(self, select: Select):
+        raise NotImplementedError
+
+    def _get_raw_cursor(self, select: Select):
+        raise NotImplementedError
+
+    def get_meta_data(self, **kwargs):
+        raise NotImplementedError
+
+    def _get_object_info(self, identifier, variety, **kwargs):
+        raise NotImplementedError
+
+    def _get_object_info_where(self, variety, **kwargs):
+        raise NotImplementedError
+
+    def get_object_info(self, identifier, variety, decode=True, **kwargs):
+        r = self._get_object_info(identifier, variety, **kwargs)
+        if r is None:
+            raise FileNotFoundError(&#39;Object doesn\&#39;t exist&#39;)
+        if decode:
+            r = self.convert_from_bytes_to_types(r)
+            r = self._get_file_content(r)
+        return r
+
+    def get_object_info_where(self, variety, **kwargs):
+        return self._get_object_info_where(variety, **kwargs)
+
+    def get_query_for_validation_set(self, validation_set):
+        raise NotImplementedError
+
+    def _get_watcher_for_learning_task(self, learning_task):
+        info = self.get_object_info(learning_task, &#39;learning_task&#39;)
+        key_to_watch = info[&#39;keys_to_watch&#39;][0]
+        model_identifier = next(
+            m for i, m in enumerate(info[&#39;models&#39;]) if info[&#39;keys&#39;][i] == key_to_watch
+        )
+        return f&#39;[{learning_task}]:{model_identifier}/{key_to_watch}&#39;
+
+    def insert(self, insert: Insert, refresh=True, verbose=True):
+        for item in insert.documents:
+            r = random.random()
+            try:
+                valid_probability = self.get_meta_data(key=&#39;valid_probability&#39;)
+            except TypeError:
+                valid_probability = 0.05
+            if &#39;_fold&#39; not in item:
+                item[&#39;_fold&#39;] = &#39;valid&#39; if r &lt; valid_probability else &#39;train&#39;
+
+        output = self._base_insert(insert.to_raw(self.types, self.type_lookup))
+        if not refresh:  # pragma: no cover
+            return output, None
+        task_graph = self._build_task_workflow(
+            insert.select_table, ids=output.inserted_ids, verbose=verbose
+        )
+        task_graph()
+        return output, task_graph
+
+    def _insert_validation_data(self, tmp, identifier):
+        raise NotImplementedError
+
+    def list_jobs(self):
+        &#34;&#34;&#34;
+        List jobs
+        &#34;&#34;&#34;
+        raise NotImplementedError
+
+    def list_components(self, variety, **kwargs):
+        raise NotImplementedError
+
+    def list_validation_sets(self):
+        &#34;&#34;&#34;
+        List validation sets.
+        &#34;&#34;&#34;
+        raise NotImplementedError
+
+    def _load_blob_of_bytes(self, file_id):
+        raise NotImplementedError
+
+    def _load_hashes(self, identifier):
+        vector_index = self.load_component(identifier, &#39;vector_index&#39;)
+        c = self.select(vector_index.watcher.select)
+        watcher_info = self.get_object_info(vector_index.watcher.identifier, &#39;watcher&#39;)
+        loaded = []
+        ids = []
+        docs = progress.progressbar(c)
+        logging.info(f&#39;loading hashes: &#34;{vector_index.identifier}&#39;)
+        for r in docs:
+            h = self._get_output_from_document(
+                r, watcher_info[&#39;key&#39;], watcher_info[&#39;model&#39;]
+            )
+            loaded.append(h)
+            ids.append(r[&#39;_id&#39;])
+        h = vector_index.hash_set_cls(
+            loaded,
+            ids,
+            measure=vector_index.measure,
+        )
+        self._all_hash_sets[identifier] = h
+
+    def load_component(self, identifier, variety):
+        info = self.get_object_info(identifier, variety)
+        if info is None:
+            raise Exception(
+                f&#39;No such object of type &#34;{variety}&#34;, &#39;
+                f&#39;&#34;{identifier}&#34; has been registered.&#39;
+            )
+        if &#39;serializer&#39; not in info:
+            info[&#39;serializer&#39;] = &#39;pickle&#39;
+        if &#39;serializer_kwargs&#39; not in info:
+            info[&#39;serializer_kwargs&#39;] = {}
+        m = self._load_serialized_file(info[&#39;object&#39;], serializer=info[&#39;serializer&#39;])
+        m.repopulate(self)
+        if cm := self.variety_to_cache_mapping.get(variety):
+            getattr(self, cm)[m.identifier] = m
+        return m
+
+    def _load_serialized_file(self, file_id, serializer=&#39;pickle&#39;):
+        bytes_ = self._load_blob_of_bytes(file_id)
+        f = io.BytesIO(bytes_)
+        if serializer == &#39;pickle&#39;:
+            return pickle.load(f)
+        elif serializer == &#39;dill&#39;:
+            import dill
+
+            return dill.load(f)
+        raise NotImplementedError
+
+    @work
+    def apply_watcher(  # noqa: F811
+        self,
+        identifier,
+        ids: List(ObjectId) = None,
+        verbose=False,
+        max_chunk_size=5000,
+        model=None,
+        recompute=False,
+        watcher_info=None,
+        **kwargs,
+    ):
+        if watcher_info is None:
+            watcher_info = self.get_object_info(identifier, &#39;watcher&#39;)
+        select = self.select_cls(**watcher_info[&#39;select&#39;])
+        if ids is None:
+            ids = self._get_ids_from_select(select.select_only_id)
+        if max_chunk_size is not None:
+            for it, i in enumerate(range(0, len(ids), max_chunk_size)):
+                logging.info(
+                    &#39;computing chunk &#39;
+                    f&#39;({it + 1}/{math.ceil(len(ids) / max_chunk_size)})&#39;
+                )
+                self.apply_watcher(
+                    identifier,
+                    ids=ids[i : i + max_chunk_size],
+                    verbose=verbose,
+                    max_chunk_size=None,
+                    model=model,
+                    recompute=recompute,
+                    watcher_info=watcher_info,
+                    remote=False,
+                    **kwargs,
+                )
+            return
+
+        model_info = self.get_object_info(watcher_info[&#39;model&#39;], &#39;model&#39;)
+        outputs = self._compute_model_outputs(
+            model_info,
+            ids,
+            select,
+            key=watcher_info[&#39;key&#39;],
+            features=watcher_info.get(&#39;features&#39;, {}),
+            model=model,
+            predict_kwargs=watcher_info.get(&#39;predict_kwargs&#39;, {}),
+        )
+        type_ = model_info.get(&#39;type&#39;)
+        if type_ is not None:
+            type_ = self.types[type_]
+            outputs = [
+                {&#39;_content&#39;: {&#39;bytes&#39;: type_.encode(x), &#39;type&#39;: model_info[&#39;type&#39;]}}
+                for x in outputs
+            ]
+
+        self._write_watcher_outputs(watcher_info, outputs, ids)
+        return outputs
+
+    def _replace_model(self, identifier, object):
+        info = self.get_object_info(identifier, &#39;model&#39;)
+        if &#39;serializer&#39; not in info:
+            info[&#39;serializer&#39;] = &#39;pickle&#39;
+        if &#39;serializer_kwargs&#39; not in info:
+            info[&#39;serializer_kwargs&#39;] = {}
+        assert identifier in self.list_components(
+            &#39;model&#39;
+        ), f&#39;model &#34;{identifier}&#34; doesn\&#39;t exist to replace&#39;
+        file_id = self._create_serialized_file(
+            object,
+            serializer=info[&#39;serializer&#39;],
+            serializer_kwargs=info[&#39;serializer_kwargs&#39;],
+        )
+        self._replace_object(info[&#39;object&#39;], file_id, &#39;model&#39;, identifier)
+
+    def _replace_object(self, file_id, new_file_id, variety, identifier):
+        raise NotImplementedError
+
+    def _save_blob_of_bytes(self, bytes_):
+        raise NotImplementedError
+
+    def select(
+        self,
+        select: Select,
+        like=None,
+        download=False,
+        vector_index=None,
+        similar_first=False,
+        features=None,
+        raw=False,
+        n=100,
+    ):
+        if download and like is not None:
+            like = self._get_content_for_filter(like)  # pragma: no cover
+        if like is not None:
+            if similar_first:
+                return self._select_similar_then_matches(
+                    like,
+                    select,
+                    raw=raw,
+                    features=features,
+                    vector_index=vector_index,
+                    n=n,
+                )
+            else:
+                return self._select_matches_then_similar(
+                    like,
+                    vector_index,
+                    select,
+                    raw=raw,
+                    n=n,
+                    features=features,
+                )
+        else:
+            if raw:
+                return self._get_raw_cursor(select)
+            else:
+                return self._get_cursor(select, features=features)
+
+    def _select_matches_then_similar(
+        self,
+        like,
+        vector_index,
+        select: Select,
+        raw=False,
+        n=100,
+        features=None,
+    ):
+        if not select.is_trivial:
+            id_cursor = self._get_raw_cursor(select.select_only_id)
+            ids = [x[&#39;_id&#39;] for x in id_cursor]
+            similar_ids, scores = self.select_nearest(
+                like,
+                ids=ids,
+                n=n,
+                vector_index=vector_index,
+            )
+        else:
+            similar_ids, scores = self.select_nearest(
+                like, n=n, vector_index=vector_index
+            )
+
+        if raw:
+            return self._get_raw_cursor(select.select_using_ids(similar_ids))
+        else:
+            return self._get_cursor(
+                select.select_using_ids(similar_ids),
+                features=features,
+                scores=dict(zip(similar_ids, scores)),
+            )
+
+    def _select_similar_then_matches(
+        self,
+        like,
+        select: Select,
+        raw=False,
+        n=100,
+        features=None,
+        vector_index=None,
+    ):
+        similar_ids, scores = self.select_nearest(like, n=n, vector_index=vector_index)
+
+        if raw:
+            return self._get_raw_cursor(select.select_using_ids(similar_ids))
+        else:
+            return self._get_cursor(
+                select.select_using_ids(similar_ids),
+                features=features,
+                scores=dict(zip(similar_ids, scores)),
+            )
+
+    @vector_search
+    def select_nearest(
+        self,
+        like: Convertible(),
+        vector_index: str,
+        ids=None,
+        n=10,
+    ) -&gt; Tuple([List(Convertible()), Any]):
+        info = self.get_object_info(vector_index, variety=&#39;vector_index&#39;)
+        models = info[&#39;models&#39;]
+        keys = info[&#39;keys&#39;]
+        self._load_hashes(vector_index)
+        hash_set = self._all_hash_sets[vector_index]
+        if ids is not None:
+            hash_set = hash_set[ids]
+
+        if &#39;_id&#39; in like:
+            return hash_set.find_nearest_from_id(like[&#39;_id&#39;], n=n)
+
+        available_keys = list(like.keys()) + [&#39;_base&#39;]
+        model, key = next((m, k) for m, k in zip(models, keys) if k in available_keys)
+        document = MongoStyleDict(like)
+        if &#39;_outputs&#39; not in document:
+            document[&#39;_outputs&#39;] = {}
+        features = info.get(&#39;features&#39;, {}) or {}
+
+        for subkey in features:
+            if subkey not in document:
+                continue
+            if subkey not in document[&#39;_outputs&#39;]:
+                document[&#39;_outputs&#39;][subkey] = {}
+            if features[subkey] not in document[&#39;_outputs&#39;][subkey]:
+                document[&#39;_outputs&#39;][subkey][features[subkey]] = self.models[
+                    features[subkey]
+                ].predict_one(document[subkey])
+            document[subkey] = document[&#39;_outputs&#39;][subkey][features[subkey]]
+        model_input = document[key] if key != &#39;_base&#39; else document
+
+        model = self.models[model]
+        h = model.predict_one(model_input)
+        return hash_set.find_nearest_from_hash(h, n=n)
+
+    def separate_query_part_from_validation_record(self, r):
+        &#34;&#34;&#34;
+        Separate the info in the record after splitting.
+
+        :param r: record
+        &#34;&#34;&#34;
+        raise NotImplementedError
+
+    def _set_content_bytes(self, r, key, bytes_):
+        raise NotImplementedError
+
+    def set_job_flag(self, identifier, kw):
+        &#34;&#34;&#34;
+        Set key-value pair in job record
+
+        :param identifier: id of job
+        :param kw: tuple of key-value pair
+        &#34;&#34;&#34;
+        return
+
+    @work
+    def fit(self, identifier):
+        &#34;&#34;&#34;
+        Execute the learning task.
+
+        :param identifier: Identifier of a learning task.
+        &#34;&#34;&#34;
+
+        learning_task: LearningTask = self.load_component(identifier, &#39;learning_task&#39;)
+
+        trainer = learning_task.training_configuration(
+            identifier=identifier,
+            keys=learning_task.keys,
+            model_names=learning_task.models.aslist(),
+            models=learning_task.models,
+            database_type=self._database_type,
+            database_name=self.name,
+            select=learning_task.select,
+            validation_sets=learning_task.validation_sets,
+            metrics={m.identifier: m for m in learning_task.metrics},
+            features=learning_task.features,
+        )
+
+        try:
+            trainer()
+        except Exception as e:
+            self.delete_component(identifier, &#39;learning_task&#39;, force=True)
+            raise e
+
+    def unset_hash_set(self, identifier):
+        &#34;&#34;&#34;
+        Remove hash-set from memory
+
+        :param identifier: identifier of corresponding semantic-index
+        &#34;&#34;&#34;
+        try:
+            del self._all_hash_sets[identifier]
+        except KeyError:
+            pass
+
+    def update(self, update: Update, refresh=True, verbose=True):
+        if refresh and self.list_components(&#39;model&#39;):
+            ids = self._get_ids_from_select(update.select_ids)
+        result = self._base_update(update.to_raw(self.types, self.type_lookup))
+        if refresh and self.list_components(&#39;model&#39;):
+            task_graph = self._build_task_workflow(
+                update.select, ids=ids, verbose=verbose
+            )
+            task_graph()
+            return result, task_graph
+        return result
+
+    def _update_job_info(self, identifier, key, value):
+        raise NotImplementedError
+
+    def _update_object_info(self, identifier, variety, key, value):
+        raise NotImplementedError
+
+    @work
+    def validate_component(
+        self,
+        identifier: str,
+        variety: str,
+        validation_sets: List(str),
+        metrics: List(str),
+    ):
+        &#34;&#34;&#34;
+        Evaluate quality of component, using `Component.validate`, if implemented.
+
+        :param identifier: identifier of semantic index
+        :param variety: variety of component
+        :param validation_sets: validation-sets on which to validate
+        :param metrics: metric functions to compute
+        &#34;&#34;&#34;
+        component = self.load_component(identifier, variety)
+        metrics = [self.load_component(m, &#39;metric&#39;) for m in metrics]
+        validation_selects = [
+            self.get_query_for_validation_set(vs) for vs in validation_sets
+        ]
+        results = component.validate(self, validation_selects, metrics)
+        for vs, res in zip(validation_sets, results):
+            for m in res:
+                self._update_object_info(
+                    identifier,
+                    variety,
+                    f&#39;final_metrics.{vs}.{m}&#39;,
+                    res[m],
+                )
+
+    def watch_job(self, identifier):
+        &#34;&#34;&#34;
+        Watch stdout/stderr of worker job.
+
+        :param identifier: job-id
+        &#34;&#34;&#34;
+        try:
+            status = &#39;pending&#39;
+            n_lines = 0
+            n_lines_stderr = 0
+            while status in {&#39;pending&#39;, &#39;running&#39;}:
+                r = self._get_job_info(identifier)
+                status = r[&#39;status&#39;]
+                if status == &#39;running&#39;:
+                    if len(r[&#39;stdout&#39;]) &gt; n_lines:
+                        print(&#39;&#39;.join(r[&#39;stdout&#39;][n_lines:]), end=&#39;&#39;)
+                        n_lines = len(r[&#39;stdout&#39;])
+                    if len(r[&#39;stderr&#39;]) &gt; n_lines_stderr:
+                        print(&#39;&#39;.join(r[&#39;stderr&#39;][n_lines_stderr:]), end=&#39;&#39;)
+                        n_lines_stderr = len(r[&#39;stderr&#39;])
+                    time.sleep(0.2)
+                else:
+                    time.sleep(0.2)
+            r = self._get_job_info(identifier)
+            if status == &#39;success&#39;:
+                if len(r[&#39;stdout&#39;]) &gt; n_lines:
+                    print(&#39;&#39;.join(r[&#39;stdout&#39;][n_lines:]), end=&#39;&#39;)
+                if len(r[&#39;stderr&#39;]) &gt; n_lines_stderr:
+                    print(&#39;&#39;.join(r[&#39;stderr&#39;][n_lines_stderr:]), end=&#39;&#39;)
+            elif status == &#39;failed&#39;:  # pragma: no cover
+                print(r[&#39;msg&#39;])
+        except KeyboardInterrupt:  # pragma: no cover
+            return
+
+    def write_output_to_job(self, identifier, msg, stream):
+        &#34;&#34;&#34;
+        Write stdout/ stderr to database
+
+        :param identifier: job identifier
+        :param msg: msg to write
+        :param stream: {&#39;stdout&#39;, &#39;stderr&#39;}
+        &#34;&#34;&#34;
+        raise NotImplementedError
+
+    def _write_watcher_outputs(self, info, outputs, _ids):
+        raise NotImplementedError
+
+    def _base_update(self, update: Update):
+        raise NotImplementedError
+
+    def _base_delete(self, delete: Delete):
+        raise NotImplementedError
+
+    def _unset_watcher_outputs(self, info):
+        raise NotImplementedError</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase"><code class="flex name class">
+<span>class <span class="ident">BaseDatabase</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Base database connector for SuperDuperDB - all database types should subclass this
+type.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class BaseDatabase:
+    &#34;&#34;&#34;
+    Base database connector for SuperDuperDB - all database types should subclass this
+    type.
+    &#34;&#34;&#34;
+
+    select_cls = Select
+    variety_to_cache_mapping = {&#39;model&#39;: &#39;models&#39;, &#39;metric&#39;: &#39;metrics&#39;, &#39;type&#39;: &#39;types&#39;}
+
+    def __init__(self):
+        self.metrics = ArgumentDefaultDict(lambda x: self.load_component(x, &#39;metric&#39;))
+        self.models = ArgumentDefaultDict(lambda x: self.load_component(x, &#39;model&#39;))
+        self.types = ArgumentDefaultDict(lambda x: self.load_component(x, &#39;type&#39;))
+
+        self.remote = CFG.remote
+        self._type_lookup = None
+
+        self._all_hash_sets = {}
+
+    def _reload_type_lookup(self):
+        self._type_lookup = {}
+        for t in self.list_components(&#39;type&#39;):
+            try:
+                for s in self.types[t].types:
+                    self._type_lookup[s] = t
+            except AttributeError:
+                continue
+
+    @property
+    def filesystem(self):
+        raise NotImplementedError
+
+    @property
+    def type_lookup(self):
+        if self._type_lookup is None:
+            self._reload_type_lookup()
+        return self._type_lookup
+
+    def _add_split_to_row(self, r, other):
+        raise NotImplementedError
+
+    def _base_insert(self, insert: Insert):
+        raise NotImplementedError
+
+    @model_server
+    def predict_one(self, model, input_: Convertible(), **kwargs) -&gt; Convertible():
+        if isinstance(model, str):
+            model = self.models[model]
+        return model.predict_one(
+            input_, **{k: v for k, v in kwargs.items() if k != &#39;remote&#39;}
+        )
+
+    @model_server
+    def predict(self, model, input_: Convertible(), **kwargs) -&gt; Convertible():
+        &#34;&#34;&#34;
+        Apply model to input.
+
+        :param model: model or ``str`` referring to an uploaded model
+        :param input_: input_ to be passed to the model.
+                       Must be possible to encode with registered types
+        :param kwargs: key-values (see ``superduperdb.models.utils.predict``)
+        &#34;&#34;&#34;
+        if isinstance(model, str):
+            model = self.models[model]
+        return model.predict(input_, **kwargs)
+
+    def _build_task_workflow(
+        self, select: Select, ids=None, dependencies=(), verbose=True
+    ):
+        job_ids = defaultdict(lambda: [])
+        job_ids.update(dependencies)
+        G = TaskWorkflow(self)
+        if ids is None:
+            ids = self._get_ids_from_select(select.select_only_id)
+
+        G.add_node(
+            f&#39;{self.download_content.__name__}()&#39;,
+            data={
+                &#39;task&#39;: self.download_content,
+                &#39;args&#39;: [
+                    select,
+                ],
+                &#39;kwargs&#39;: {
+                    &#39;ids&#39;: ids,
+                },
+            },
+        )
+        if not self.list_components(&#39;watcher&#39;):
+            return G
+
+        for identifier in self.list_components(&#39;watcher&#39;):
+            G.add_node(
+                f&#39;{self.apply_watcher.__name__}({identifier})&#39;,
+                data={
+                    &#39;task&#39;: self.apply_watcher,
+                    &#39;args&#39;: [identifier],
+                    &#39;kwargs&#39;: {
+                        &#39;ids&#39;: ids,
+                        &#39;verbose&#39;: verbose,
+                    },
+                },
+            )
+
+        for identifier in self.list_components(&#39;watcher&#39;):
+            G.add_edge(
+                f&#39;{self.download_content.__name__}()&#39;,
+                f&#39;{self.apply_watcher.__name__}({identifier})&#39;,
+            )
+            deps = self._get_dependencies_for_watcher(identifier)
+            for dep in deps:
+                G.add_edge(
+                    f&#39;{self.apply_watcher.__name__}({dep})&#39;,
+                    f&#39;{self.apply_watcher.__name__}({identifier})&#39;,
+                )
+                G.add_edge(
+                    f&#39;{self.download_content.__name__}()&#39;,
+                    f&#39;{self.apply_watcher.__name__}({identifier})&#39;,
+                )
+
+        return G
+
+    def cancel_job(self, job_id):
+        raise NotImplementedError
+
+    def _compute_model_outputs(
+        self,
+        model_info,
+        _ids,
+        select: Select,
+        key=&#39;_base&#39;,
+        features=None,
+        model=None,
+        predict_kwargs=None,
+    ):
+        logging.info(&#39;finding documents under filter&#39;)
+        features = features or {}
+        model_identifier = model_info[&#39;identifier&#39;]
+        if features is None:
+            features = {}  # pragma: no cover
+        documents = list(self.select(select.select_using_ids(_ids), features=features))
+        logging.info(&#39;done.&#39;)
+        if key != &#39;_base&#39; or &#39;_base&#39; in features:
+            passed_docs = [r[key] for r in documents]
+        else:  # pragma: no cover
+            passed_docs = documents
+        if model is None:
+            model = self.models[model_identifier]
+        return model.predict(passed_docs, **(predict_kwargs or {}))
+
+    def convert_from_bytes_to_types(self, r):
+        &#34;&#34;&#34;
+        Convert the bson byte objects in a nested dictionary into python objects.
+
+        :param r: dictionary potentially containing non-Bsonable content
+        &#34;&#34;&#34;
+        return misc.serialization.convert_from_bytes_to_types(r, self.types)
+
+    def convert_from_types_to_bytes(self, r):
+        &#34;&#34;&#34;
+        Convert the non-Bsonable python objects in a nested dictionary into ``bytes``
+
+        :param r: dictionary potentially containing non-Bsonable content
+        &#34;&#34;&#34;
+        return misc.serialization.convert_from_types_to_bytes(
+            r, self.types, self.type_lookup
+        )
+
+    def _create_job_record(self, *args, **kwargs):
+        raise NotImplementedError
+
+    def _create_component_entry(self, info):
+        raise NotImplementedError
+
+    def create_component(self, object, serializer=&#39;pickle&#39;, serializer_kwargs=None):
+        serializer_kwargs = serializer_kwargs or {}
+        assert object.identifier not in self.list_components(object.variety)
+        file_id = self._create_serialized_file(
+            object, serializer=serializer, serializer_kwargs=serializer_kwargs
+        )
+        self._create_component_entry(
+            {**object.asdict(), &#39;object&#39;: file_id, &#39;variety&#39;: object.variety}
+        )
+        return object.schedule_jobs(self)
+
+    def _create_plan(self):
+        G = networkx.DiGraph()
+        for identifier in self.list_components(&#39;watcher&#39;):
+            G.add_node((&#39;watcher&#39;, identifier))
+        for identifier in self.list_components(&#39;watcher&#39;):
+            deps = self._get_dependencies_for_watcher(identifier)
+            for dep in deps:
+                G.add_edge((&#39;watcher&#39;, dep), (&#39;watcher&#39;, identifier))
+        assert networkx.is_directed_acyclic_graph(G)
+        return G
+
+    def _create_serialized_file(
+        self, object, serializer=&#39;pickle&#39;, serializer_kwargs=None
+    ):
+        serializer_kwargs = serializer_kwargs or {}
+        if serializer == &#39;pickle&#39;:
+            with io.BytesIO() as f:
+                pickle.dump(object, f, **serializer_kwargs)
+                bytes_ = f.getvalue()
+        elif serializer == &#39;dill&#39;:
+            import dill
+
+            if not serializer_kwargs:
+                serializer_kwargs[&#39;recurse&#39;] = True
+            with io.BytesIO() as f:
+                dill.dump(object, f, **serializer_kwargs)
+                bytes_ = f.getvalue()
+        else:
+            raise NotImplementedError
+        return self._save_blob_of_bytes(bytes_)
+
+    def create_validation_set(self, identifier, select: Select, chunk_size=1000):
+        if identifier in self.list_validation_sets():
+            raise Exception(f&#39;validation set {identifier} already exists!&#39;)
+
+        data = self.select(select)
+        it = 0
+        tmp = []
+        for r in progress.progressbar(data):
+            tmp.append(r)
+            it += 1
+            if it % chunk_size == 0:
+                self._insert_validation_data(tmp, identifier)
+                tmp = []
+        if tmp:
+            self._insert_validation_data(tmp, identifier)
+
+    def delete(self, delete: Delete):
+        return self._base_delete(delete)
+
+    def delete_component(self, identifier, variety, force=False):
+        info = self.get_object_info(identifier, variety)
+        if not info:
+            if not force:
+                raise Exception(f&#39;&#34;{identifier}&#34;: {variety} does not exist...&#39;)
+            return
+        if force or click.confirm(
+            f&#39;You are about to delete {variety}: {identifier}, are you sure?&#39;,
+            default=False,
+        ):
+            if variety in self.variety_to_cache_mapping:
+                try:
+                    del getattr(self, self.variety_to_cache_mapping[variety])[
+                        identifier
+                    ]
+                except KeyError:
+                    pass
+            self.filesystem.delete(info[&#39;object&#39;])
+            self._delete_component_info(identifier, variety)
+
+    def _delete_component_info(self, identifier, variety):
+        raise NotImplementedError
+
+    @work
+    def download_content(
+        self,
+        query: Union[Select, Insert],
+        ids=None,
+        documents=None,
+        timeout=None,
+        raises=True,
+        n_download_workers=None,
+        headers=None,
+        **kwargs,
+    ):
+        logging.debug(query)
+        logging.debug(ids)
+        update_db = False
+
+        if documents is not None:
+            pass
+        elif isinstance(query, Select):
+            update_db = True
+            if ids is None:
+                documents = list(self.select(query))
+            else:
+                documents = list(self.select(query.select_using_ids(ids), raw=True))
+        else:
+            documents = query.documents
+
+        uris, keys, place_ids = gather_uris(documents)
+        logging.info(f&#39;found {len(uris)} uris&#39;)
+        if not uris:
+            return
+
+        if n_download_workers is None:
+            try:
+                n_download_workers = self.get_meta_data(key=&#39;n_download_workers&#39;)
+            except TypeError:
+                n_download_workers = 0
+
+        if headers is None:
+            try:
+                headers = self.get_meta_data(key=&#39;headers&#39;)
+            except TypeError:
+                headers = 0
+
+        if timeout is None:
+            try:
+                timeout = self.get_meta_data(key=&#39;download_timeout&#39;)
+            except TypeError:
+                timeout = None
+
+        def update_one(id, key, bytes):
+            return self.update(self._download_update(query.table, id, key, bytes))
+
+        downloader = Downloader(
+            uris=uris,
+            ids=place_ids,
+            keys=keys,
+            update_one=update_one,
+            n_workers=n_download_workers,
+            timeout=timeout,
+            headers=headers,
+            raises=raises,
+        )
+        downloader.go()
+        if update_db:
+            return
+        for id_, key in zip(place_ids, keys):
+            documents[id_] = self._set_content_bytes(
+                documents[id_], key, downloader.results[id_]
+            )
+        return documents
+
+    def _download_update(self, table, id, key, bytes):
+        raise NotImplementedError
+
+    def _get_content_for_filter(self, filter):
+        if &#39;_id&#39; not in filter:
+            filter[&#39;_id&#39;] = 0
+        uris = gather_uris([filter])[0]
+        if uris:
+            filter = self.download_content(
+                self.name, documents=[filter], timeout=None, raises=True
+            )[0]
+            filter = self.convert_from_bytes_to_types(filter)
+        return filter
+
+    def _get_cursor(self, select: Select, features=None, scores=None):
+        raise NotImplementedError
+
+    def _get_dependencies_for_watcher(self, identifier):
+        info = self.get_object_info(identifier, &#39;watcher&#39;)
+        if info is None:
+            return []
+        watcher_features = info.get(&#39;features&#39;, {})
+        dependencies = []
+        if watcher_features:
+            for key, model in watcher_features.items():
+                dependencies.append(f&#39;{model}/{key}&#39;)
+        return dependencies
+
+    def _get_file_content(self, r):
+        for k in r:
+            if isinstance(r[k], dict):
+                if &#39;_file_id&#39; in r[k]:
+                    r[k] = self._load_serialized_file(r[k][&#39;_file_id&#39;])
+                else:
+                    r[k] = self._get_file_content(r[k])
+        return r
+
+    def _get_output_from_document(self, r, key, model):
+        raise NotImplementedError
+
+    def _get_job_info(self, identifier):
+        raise NotImplementedError
+
+    def _get_ids_from_select(self, select: Select):
+        raise NotImplementedError
+
+    def _get_raw_cursor(self, select: Select):
+        raise NotImplementedError
+
+    def get_meta_data(self, **kwargs):
+        raise NotImplementedError
+
+    def _get_object_info(self, identifier, variety, **kwargs):
+        raise NotImplementedError
+
+    def _get_object_info_where(self, variety, **kwargs):
+        raise NotImplementedError
+
+    def get_object_info(self, identifier, variety, decode=True, **kwargs):
+        r = self._get_object_info(identifier, variety, **kwargs)
+        if r is None:
+            raise FileNotFoundError(&#39;Object doesn\&#39;t exist&#39;)
+        if decode:
+            r = self.convert_from_bytes_to_types(r)
+            r = self._get_file_content(r)
+        return r
+
+    def get_object_info_where(self, variety, **kwargs):
+        return self._get_object_info_where(variety, **kwargs)
+
+    def get_query_for_validation_set(self, validation_set):
+        raise NotImplementedError
+
+    def _get_watcher_for_learning_task(self, learning_task):
+        info = self.get_object_info(learning_task, &#39;learning_task&#39;)
+        key_to_watch = info[&#39;keys_to_watch&#39;][0]
+        model_identifier = next(
+            m for i, m in enumerate(info[&#39;models&#39;]) if info[&#39;keys&#39;][i] == key_to_watch
+        )
+        return f&#39;[{learning_task}]:{model_identifier}/{key_to_watch}&#39;
+
+    def insert(self, insert: Insert, refresh=True, verbose=True):
+        for item in insert.documents:
+            r = random.random()
+            try:
+                valid_probability = self.get_meta_data(key=&#39;valid_probability&#39;)
+            except TypeError:
+                valid_probability = 0.05
+            if &#39;_fold&#39; not in item:
+                item[&#39;_fold&#39;] = &#39;valid&#39; if r &lt; valid_probability else &#39;train&#39;
+
+        output = self._base_insert(insert.to_raw(self.types, self.type_lookup))
+        if not refresh:  # pragma: no cover
+            return output, None
+        task_graph = self._build_task_workflow(
+            insert.select_table, ids=output.inserted_ids, verbose=verbose
+        )
+        task_graph()
+        return output, task_graph
+
+    def _insert_validation_data(self, tmp, identifier):
+        raise NotImplementedError
+
+    def list_jobs(self):
+        &#34;&#34;&#34;
+        List jobs
+        &#34;&#34;&#34;
+        raise NotImplementedError
+
+    def list_components(self, variety, **kwargs):
+        raise NotImplementedError
+
+    def list_validation_sets(self):
+        &#34;&#34;&#34;
+        List validation sets.
+        &#34;&#34;&#34;
+        raise NotImplementedError
+
+    def _load_blob_of_bytes(self, file_id):
+        raise NotImplementedError
+
+    def _load_hashes(self, identifier):
+        vector_index = self.load_component(identifier, &#39;vector_index&#39;)
+        c = self.select(vector_index.watcher.select)
+        watcher_info = self.get_object_info(vector_index.watcher.identifier, &#39;watcher&#39;)
+        loaded = []
+        ids = []
+        docs = progress.progressbar(c)
+        logging.info(f&#39;loading hashes: &#34;{vector_index.identifier}&#39;)
+        for r in docs:
+            h = self._get_output_from_document(
+                r, watcher_info[&#39;key&#39;], watcher_info[&#39;model&#39;]
+            )
+            loaded.append(h)
+            ids.append(r[&#39;_id&#39;])
+        h = vector_index.hash_set_cls(
+            loaded,
+            ids,
+            measure=vector_index.measure,
+        )
+        self._all_hash_sets[identifier] = h
+
+    def load_component(self, identifier, variety):
+        info = self.get_object_info(identifier, variety)
+        if info is None:
+            raise Exception(
+                f&#39;No such object of type &#34;{variety}&#34;, &#39;
+                f&#39;&#34;{identifier}&#34; has been registered.&#39;
+            )
+        if &#39;serializer&#39; not in info:
+            info[&#39;serializer&#39;] = &#39;pickle&#39;
+        if &#39;serializer_kwargs&#39; not in info:
+            info[&#39;serializer_kwargs&#39;] = {}
+        m = self._load_serialized_file(info[&#39;object&#39;], serializer=info[&#39;serializer&#39;])
+        m.repopulate(self)
+        if cm := self.variety_to_cache_mapping.get(variety):
+            getattr(self, cm)[m.identifier] = m
+        return m
+
+    def _load_serialized_file(self, file_id, serializer=&#39;pickle&#39;):
+        bytes_ = self._load_blob_of_bytes(file_id)
+        f = io.BytesIO(bytes_)
+        if serializer == &#39;pickle&#39;:
+            return pickle.load(f)
+        elif serializer == &#39;dill&#39;:
+            import dill
+
+            return dill.load(f)
+        raise NotImplementedError
+
+    @work
+    def apply_watcher(  # noqa: F811
+        self,
+        identifier,
+        ids: List(ObjectId) = None,
+        verbose=False,
+        max_chunk_size=5000,
+        model=None,
+        recompute=False,
+        watcher_info=None,
+        **kwargs,
+    ):
+        if watcher_info is None:
+            watcher_info = self.get_object_info(identifier, &#39;watcher&#39;)
+        select = self.select_cls(**watcher_info[&#39;select&#39;])
+        if ids is None:
+            ids = self._get_ids_from_select(select.select_only_id)
+        if max_chunk_size is not None:
+            for it, i in enumerate(range(0, len(ids), max_chunk_size)):
+                logging.info(
+                    &#39;computing chunk &#39;
+                    f&#39;({it + 1}/{math.ceil(len(ids) / max_chunk_size)})&#39;
+                )
+                self.apply_watcher(
+                    identifier,
+                    ids=ids[i : i + max_chunk_size],
+                    verbose=verbose,
+                    max_chunk_size=None,
+                    model=model,
+                    recompute=recompute,
+                    watcher_info=watcher_info,
+                    remote=False,
+                    **kwargs,
+                )
+            return
+
+        model_info = self.get_object_info(watcher_info[&#39;model&#39;], &#39;model&#39;)
+        outputs = self._compute_model_outputs(
+            model_info,
+            ids,
+            select,
+            key=watcher_info[&#39;key&#39;],
+            features=watcher_info.get(&#39;features&#39;, {}),
+            model=model,
+            predict_kwargs=watcher_info.get(&#39;predict_kwargs&#39;, {}),
+        )
+        type_ = model_info.get(&#39;type&#39;)
+        if type_ is not None:
+            type_ = self.types[type_]
+            outputs = [
+                {&#39;_content&#39;: {&#39;bytes&#39;: type_.encode(x), &#39;type&#39;: model_info[&#39;type&#39;]}}
+                for x in outputs
+            ]
+
+        self._write_watcher_outputs(watcher_info, outputs, ids)
+        return outputs
+
+    def _replace_model(self, identifier, object):
+        info = self.get_object_info(identifier, &#39;model&#39;)
+        if &#39;serializer&#39; not in info:
+            info[&#39;serializer&#39;] = &#39;pickle&#39;
+        if &#39;serializer_kwargs&#39; not in info:
+            info[&#39;serializer_kwargs&#39;] = {}
+        assert identifier in self.list_components(
+            &#39;model&#39;
+        ), f&#39;model &#34;{identifier}&#34; doesn\&#39;t exist to replace&#39;
+        file_id = self._create_serialized_file(
+            object,
+            serializer=info[&#39;serializer&#39;],
+            serializer_kwargs=info[&#39;serializer_kwargs&#39;],
+        )
+        self._replace_object(info[&#39;object&#39;], file_id, &#39;model&#39;, identifier)
+
+    def _replace_object(self, file_id, new_file_id, variety, identifier):
+        raise NotImplementedError
+
+    def _save_blob_of_bytes(self, bytes_):
+        raise NotImplementedError
+
+    def select(
+        self,
+        select: Select,
+        like=None,
+        download=False,
+        vector_index=None,
+        similar_first=False,
+        features=None,
+        raw=False,
+        n=100,
+    ):
+        if download and like is not None:
+            like = self._get_content_for_filter(like)  # pragma: no cover
+        if like is not None:
+            if similar_first:
+                return self._select_similar_then_matches(
+                    like,
+                    select,
+                    raw=raw,
+                    features=features,
+                    vector_index=vector_index,
+                    n=n,
+                )
+            else:
+                return self._select_matches_then_similar(
+                    like,
+                    vector_index,
+                    select,
+                    raw=raw,
+                    n=n,
+                    features=features,
+                )
+        else:
+            if raw:
+                return self._get_raw_cursor(select)
+            else:
+                return self._get_cursor(select, features=features)
+
+    def _select_matches_then_similar(
+        self,
+        like,
+        vector_index,
+        select: Select,
+        raw=False,
+        n=100,
+        features=None,
+    ):
+        if not select.is_trivial:
+            id_cursor = self._get_raw_cursor(select.select_only_id)
+            ids = [x[&#39;_id&#39;] for x in id_cursor]
+            similar_ids, scores = self.select_nearest(
+                like,
+                ids=ids,
+                n=n,
+                vector_index=vector_index,
+            )
+        else:
+            similar_ids, scores = self.select_nearest(
+                like, n=n, vector_index=vector_index
+            )
+
+        if raw:
+            return self._get_raw_cursor(select.select_using_ids(similar_ids))
+        else:
+            return self._get_cursor(
+                select.select_using_ids(similar_ids),
+                features=features,
+                scores=dict(zip(similar_ids, scores)),
+            )
+
+    def _select_similar_then_matches(
+        self,
+        like,
+        select: Select,
+        raw=False,
+        n=100,
+        features=None,
+        vector_index=None,
+    ):
+        similar_ids, scores = self.select_nearest(like, n=n, vector_index=vector_index)
+
+        if raw:
+            return self._get_raw_cursor(select.select_using_ids(similar_ids))
+        else:
+            return self._get_cursor(
+                select.select_using_ids(similar_ids),
+                features=features,
+                scores=dict(zip(similar_ids, scores)),
+            )
+
+    @vector_search
+    def select_nearest(
+        self,
+        like: Convertible(),
+        vector_index: str,
+        ids=None,
+        n=10,
+    ) -&gt; Tuple([List(Convertible()), Any]):
+        info = self.get_object_info(vector_index, variety=&#39;vector_index&#39;)
+        models = info[&#39;models&#39;]
+        keys = info[&#39;keys&#39;]
+        self._load_hashes(vector_index)
+        hash_set = self._all_hash_sets[vector_index]
+        if ids is not None:
+            hash_set = hash_set[ids]
+
+        if &#39;_id&#39; in like:
+            return hash_set.find_nearest_from_id(like[&#39;_id&#39;], n=n)
+
+        available_keys = list(like.keys()) + [&#39;_base&#39;]
+        model, key = next((m, k) for m, k in zip(models, keys) if k in available_keys)
+        document = MongoStyleDict(like)
+        if &#39;_outputs&#39; not in document:
+            document[&#39;_outputs&#39;] = {}
+        features = info.get(&#39;features&#39;, {}) or {}
+
+        for subkey in features:
+            if subkey not in document:
+                continue
+            if subkey not in document[&#39;_outputs&#39;]:
+                document[&#39;_outputs&#39;][subkey] = {}
+            if features[subkey] not in document[&#39;_outputs&#39;][subkey]:
+                document[&#39;_outputs&#39;][subkey][features[subkey]] = self.models[
+                    features[subkey]
+                ].predict_one(document[subkey])
+            document[subkey] = document[&#39;_outputs&#39;][subkey][features[subkey]]
+        model_input = document[key] if key != &#39;_base&#39; else document
+
+        model = self.models[model]
+        h = model.predict_one(model_input)
+        return hash_set.find_nearest_from_hash(h, n=n)
+
+    def separate_query_part_from_validation_record(self, r):
+        &#34;&#34;&#34;
+        Separate the info in the record after splitting.
+
+        :param r: record
+        &#34;&#34;&#34;
+        raise NotImplementedError
+
+    def _set_content_bytes(self, r, key, bytes_):
+        raise NotImplementedError
+
+    def set_job_flag(self, identifier, kw):
+        &#34;&#34;&#34;
+        Set key-value pair in job record
+
+        :param identifier: id of job
+        :param kw: tuple of key-value pair
+        &#34;&#34;&#34;
+        return
+
+    @work
+    def fit(self, identifier):
+        &#34;&#34;&#34;
+        Execute the learning task.
+
+        :param identifier: Identifier of a learning task.
+        &#34;&#34;&#34;
+
+        learning_task: LearningTask = self.load_component(identifier, &#39;learning_task&#39;)
+
+        trainer = learning_task.training_configuration(
+            identifier=identifier,
+            keys=learning_task.keys,
+            model_names=learning_task.models.aslist(),
+            models=learning_task.models,
+            database_type=self._database_type,
+            database_name=self.name,
+            select=learning_task.select,
+            validation_sets=learning_task.validation_sets,
+            metrics={m.identifier: m for m in learning_task.metrics},
+            features=learning_task.features,
+        )
+
+        try:
+            trainer()
+        except Exception as e:
+            self.delete_component(identifier, &#39;learning_task&#39;, force=True)
+            raise e
+
+    def unset_hash_set(self, identifier):
+        &#34;&#34;&#34;
+        Remove hash-set from memory
+
+        :param identifier: identifier of corresponding semantic-index
+        &#34;&#34;&#34;
+        try:
+            del self._all_hash_sets[identifier]
+        except KeyError:
+            pass
+
+    def update(self, update: Update, refresh=True, verbose=True):
+        if refresh and self.list_components(&#39;model&#39;):
+            ids = self._get_ids_from_select(update.select_ids)
+        result = self._base_update(update.to_raw(self.types, self.type_lookup))
+        if refresh and self.list_components(&#39;model&#39;):
+            task_graph = self._build_task_workflow(
+                update.select, ids=ids, verbose=verbose
+            )
+            task_graph()
+            return result, task_graph
+        return result
+
+    def _update_job_info(self, identifier, key, value):
+        raise NotImplementedError
+
+    def _update_object_info(self, identifier, variety, key, value):
+        raise NotImplementedError
+
+    @work
+    def validate_component(
+        self,
+        identifier: str,
+        variety: str,
+        validation_sets: List(str),
+        metrics: List(str),
+    ):
+        &#34;&#34;&#34;
+        Evaluate quality of component, using `Component.validate`, if implemented.
+
+        :param identifier: identifier of semantic index
+        :param variety: variety of component
+        :param validation_sets: validation-sets on which to validate
+        :param metrics: metric functions to compute
+        &#34;&#34;&#34;
+        component = self.load_component(identifier, variety)
+        metrics = [self.load_component(m, &#39;metric&#39;) for m in metrics]
+        validation_selects = [
+            self.get_query_for_validation_set(vs) for vs in validation_sets
+        ]
+        results = component.validate(self, validation_selects, metrics)
+        for vs, res in zip(validation_sets, results):
+            for m in res:
+                self._update_object_info(
+                    identifier,
+                    variety,
+                    f&#39;final_metrics.{vs}.{m}&#39;,
+                    res[m],
+                )
+
+    def watch_job(self, identifier):
+        &#34;&#34;&#34;
+        Watch stdout/stderr of worker job.
+
+        :param identifier: job-id
+        &#34;&#34;&#34;
+        try:
+            status = &#39;pending&#39;
+            n_lines = 0
+            n_lines_stderr = 0
+            while status in {&#39;pending&#39;, &#39;running&#39;}:
+                r = self._get_job_info(identifier)
+                status = r[&#39;status&#39;]
+                if status == &#39;running&#39;:
+                    if len(r[&#39;stdout&#39;]) &gt; n_lines:
+                        print(&#39;&#39;.join(r[&#39;stdout&#39;][n_lines:]), end=&#39;&#39;)
+                        n_lines = len(r[&#39;stdout&#39;])
+                    if len(r[&#39;stderr&#39;]) &gt; n_lines_stderr:
+                        print(&#39;&#39;.join(r[&#39;stderr&#39;][n_lines_stderr:]), end=&#39;&#39;)
+                        n_lines_stderr = len(r[&#39;stderr&#39;])
+                    time.sleep(0.2)
+                else:
+                    time.sleep(0.2)
+            r = self._get_job_info(identifier)
+            if status == &#39;success&#39;:
+                if len(r[&#39;stdout&#39;]) &gt; n_lines:
+                    print(&#39;&#39;.join(r[&#39;stdout&#39;][n_lines:]), end=&#39;&#39;)
+                if len(r[&#39;stderr&#39;]) &gt; n_lines_stderr:
+                    print(&#39;&#39;.join(r[&#39;stderr&#39;][n_lines_stderr:]), end=&#39;&#39;)
+            elif status == &#39;failed&#39;:  # pragma: no cover
+                print(r[&#39;msg&#39;])
+        except KeyboardInterrupt:  # pragma: no cover
+            return
+
+    def write_output_to_job(self, identifier, msg, stream):
+        &#34;&#34;&#34;
+        Write stdout/ stderr to database
+
+        :param identifier: job identifier
+        :param msg: msg to write
+        :param stream: {&#39;stdout&#39;, &#39;stderr&#39;}
+        &#34;&#34;&#34;
+        raise NotImplementedError
+
+    def _write_watcher_outputs(self, info, outputs, _ids):
+        raise NotImplementedError
+
+    def _base_update(self, update: Update):
+        raise NotImplementedError
+
+    def _base_delete(self, delete: Delete):
+        raise NotImplementedError
+
+    def _unset_watcher_outputs(self, info):
+        raise NotImplementedError</code></pre>
+</details>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="superduperdb.datalayer.mongodb.database.Database" href="../mongodb/database.html#superduperdb.datalayer.mongodb.database.Database">Database</a></li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.select_cls"><code class="name">var <span class="ident">select_cls</span></code></dt>
+<dd>
+<div class="desc"><p>Abstract base class, encapsulating Select database queries/ datalayer reads.
+This allows the concrete implementation of each datalayer to differ substantially on
+stored properties necessary for querying the DB.</p></div>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.variety_to_cache_mapping"><code class="name">var <span class="ident">variety_to_cache_mapping</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.filesystem"><code class="name">var <span class="ident">filesystem</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def filesystem(self):
+    raise NotImplementedError</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.type_lookup"><code class="name">var <span class="ident">type_lookup</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def type_lookup(self):
+    if self._type_lookup is None:
+        self._reload_type_lookup()
+    return self._type_lookup</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.apply_watcher"><code class="name flex">
+<span>def <span class="ident">apply_watcher</span></span>(<span>self, identifier, ids: <<a title="superduperdb.cluster.annotations.List" href="../../cluster/annotations.html#superduperdb.cluster.annotations.List">List</a> object at 0x1091d8c70> = None, verbose=False, max_chunk_size=5000, model=None, recompute=False, watcher_info=None, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@work
+def apply_watcher(  # noqa: F811
+    self,
+    identifier,
+    ids: List(ObjectId) = None,
+    verbose=False,
+    max_chunk_size=5000,
+    model=None,
+    recompute=False,
+    watcher_info=None,
+    **kwargs,
+):
+    if watcher_info is None:
+        watcher_info = self.get_object_info(identifier, &#39;watcher&#39;)
+    select = self.select_cls(**watcher_info[&#39;select&#39;])
+    if ids is None:
+        ids = self._get_ids_from_select(select.select_only_id)
+    if max_chunk_size is not None:
+        for it, i in enumerate(range(0, len(ids), max_chunk_size)):
+            logging.info(
+                &#39;computing chunk &#39;
+                f&#39;({it + 1}/{math.ceil(len(ids) / max_chunk_size)})&#39;
+            )
+            self.apply_watcher(
+                identifier,
+                ids=ids[i : i + max_chunk_size],
+                verbose=verbose,
+                max_chunk_size=None,
+                model=model,
+                recompute=recompute,
+                watcher_info=watcher_info,
+                remote=False,
+                **kwargs,
+            )
+        return
+
+    model_info = self.get_object_info(watcher_info[&#39;model&#39;], &#39;model&#39;)
+    outputs = self._compute_model_outputs(
+        model_info,
+        ids,
+        select,
+        key=watcher_info[&#39;key&#39;],
+        features=watcher_info.get(&#39;features&#39;, {}),
+        model=model,
+        predict_kwargs=watcher_info.get(&#39;predict_kwargs&#39;, {}),
+    )
+    type_ = model_info.get(&#39;type&#39;)
+    if type_ is not None:
+        type_ = self.types[type_]
+        outputs = [
+            {&#39;_content&#39;: {&#39;bytes&#39;: type_.encode(x), &#39;type&#39;: model_info[&#39;type&#39;]}}
+            for x in outputs
+        ]
+
+    self._write_watcher_outputs(watcher_info, outputs, ids)
+    return outputs</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.cancel_job"><code class="name flex">
+<span>def <span class="ident">cancel_job</span></span>(<span>self, job_id)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cancel_job(self, job_id):
+    raise NotImplementedError</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.convert_from_bytes_to_types"><code class="name flex">
+<span>def <span class="ident">convert_from_bytes_to_types</span></span>(<span>self, r)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Convert the bson byte objects in a nested dictionary into python objects.</p>
+<p>:param r: dictionary potentially containing non-Bsonable content</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def convert_from_bytes_to_types(self, r):
+    &#34;&#34;&#34;
+    Convert the bson byte objects in a nested dictionary into python objects.
+
+    :param r: dictionary potentially containing non-Bsonable content
+    &#34;&#34;&#34;
+    return misc.serialization.convert_from_bytes_to_types(r, self.types)</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.convert_from_types_to_bytes"><code class="name flex">
+<span>def <span class="ident">convert_from_types_to_bytes</span></span>(<span>self, r)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Convert the non-Bsonable python objects in a nested dictionary into <code>bytes</code></p>
+<p>:param r: dictionary potentially containing non-Bsonable content</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def convert_from_types_to_bytes(self, r):
+    &#34;&#34;&#34;
+    Convert the non-Bsonable python objects in a nested dictionary into ``bytes``
+
+    :param r: dictionary potentially containing non-Bsonable content
+    &#34;&#34;&#34;
+    return misc.serialization.convert_from_types_to_bytes(
+        r, self.types, self.type_lookup
+    )</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.create_component"><code class="name flex">
+<span>def <span class="ident">create_component</span></span>(<span>self, object, serializer='pickle', serializer_kwargs=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_component(self, object, serializer=&#39;pickle&#39;, serializer_kwargs=None):
+    serializer_kwargs = serializer_kwargs or {}
+    assert object.identifier not in self.list_components(object.variety)
+    file_id = self._create_serialized_file(
+        object, serializer=serializer, serializer_kwargs=serializer_kwargs
+    )
+    self._create_component_entry(
+        {**object.asdict(), &#39;object&#39;: file_id, &#39;variety&#39;: object.variety}
+    )
+    return object.schedule_jobs(self)</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.create_validation_set"><code class="name flex">
+<span>def <span class="ident">create_validation_set</span></span>(<span>self, identifier, select: <a title="superduperdb.datalayer.base.query.Select" href="query.html#superduperdb.datalayer.base.query.Select">Select</a>, chunk_size=1000)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_validation_set(self, identifier, select: Select, chunk_size=1000):
+    if identifier in self.list_validation_sets():
+        raise Exception(f&#39;validation set {identifier} already exists!&#39;)
+
+    data = self.select(select)
+    it = 0
+    tmp = []
+    for r in progress.progressbar(data):
+        tmp.append(r)
+        it += 1
+        if it % chunk_size == 0:
+            self._insert_validation_data(tmp, identifier)
+            tmp = []
+    if tmp:
+        self._insert_validation_data(tmp, identifier)</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.delete"><code class="name flex">
+<span>def <span class="ident">delete</span></span>(<span>self, delete: <a title="superduperdb.datalayer.base.query.Delete" href="query.html#superduperdb.datalayer.base.query.Delete">Delete</a>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def delete(self, delete: Delete):
+    return self._base_delete(delete)</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.delete_component"><code class="name flex">
+<span>def <span class="ident">delete_component</span></span>(<span>self, identifier, variety, force=False)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def delete_component(self, identifier, variety, force=False):
+    info = self.get_object_info(identifier, variety)
+    if not info:
+        if not force:
+            raise Exception(f&#39;&#34;{identifier}&#34;: {variety} does not exist...&#39;)
+        return
+    if force or click.confirm(
+        f&#39;You are about to delete {variety}: {identifier}, are you sure?&#39;,
+        default=False,
+    ):
+        if variety in self.variety_to_cache_mapping:
+            try:
+                del getattr(self, self.variety_to_cache_mapping[variety])[
+                    identifier
+                ]
+            except KeyError:
+                pass
+        self.filesystem.delete(info[&#39;object&#39;])
+        self._delete_component_info(identifier, variety)</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.download_content"><code class="name flex">
+<span>def <span class="ident">download_content</span></span>(<span>self, query: Union[<a title="superduperdb.datalayer.base.query.Select" href="query.html#superduperdb.datalayer.base.query.Select">Select</a>, <a title="superduperdb.datalayer.base.query.Insert" href="query.html#superduperdb.datalayer.base.query.Insert">Insert</a>], ids=None, documents=None, timeout=None, raises=True, n_download_workers=None, headers=None, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@work
+def download_content(
+    self,
+    query: Union[Select, Insert],
+    ids=None,
+    documents=None,
+    timeout=None,
+    raises=True,
+    n_download_workers=None,
+    headers=None,
+    **kwargs,
+):
+    logging.debug(query)
+    logging.debug(ids)
+    update_db = False
+
+    if documents is not None:
+        pass
+    elif isinstance(query, Select):
+        update_db = True
+        if ids is None:
+            documents = list(self.select(query))
+        else:
+            documents = list(self.select(query.select_using_ids(ids), raw=True))
+    else:
+        documents = query.documents
+
+    uris, keys, place_ids = gather_uris(documents)
+    logging.info(f&#39;found {len(uris)} uris&#39;)
+    if not uris:
+        return
+
+    if n_download_workers is None:
+        try:
+            n_download_workers = self.get_meta_data(key=&#39;n_download_workers&#39;)
+        except TypeError:
+            n_download_workers = 0
+
+    if headers is None:
+        try:
+            headers = self.get_meta_data(key=&#39;headers&#39;)
+        except TypeError:
+            headers = 0
+
+    if timeout is None:
+        try:
+            timeout = self.get_meta_data(key=&#39;download_timeout&#39;)
+        except TypeError:
+            timeout = None
+
+    def update_one(id, key, bytes):
+        return self.update(self._download_update(query.table, id, key, bytes))
+
+    downloader = Downloader(
+        uris=uris,
+        ids=place_ids,
+        keys=keys,
+        update_one=update_one,
+        n_workers=n_download_workers,
+        timeout=timeout,
+        headers=headers,
+        raises=raises,
+    )
+    downloader.go()
+    if update_db:
+        return
+    for id_, key in zip(place_ids, keys):
+        documents[id_] = self._set_content_bytes(
+            documents[id_], key, downloader.results[id_]
+        )
+    return documents</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.fit"><code class="name flex">
+<span>def <span class="ident">fit</span></span>(<span>self, identifier)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Execute the learning task.</p>
+<p>:param identifier: Identifier of a learning task.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@work
+def fit(self, identifier):
+    &#34;&#34;&#34;
+    Execute the learning task.
+
+    :param identifier: Identifier of a learning task.
+    &#34;&#34;&#34;
+
+    learning_task: LearningTask = self.load_component(identifier, &#39;learning_task&#39;)
+
+    trainer = learning_task.training_configuration(
+        identifier=identifier,
+        keys=learning_task.keys,
+        model_names=learning_task.models.aslist(),
+        models=learning_task.models,
+        database_type=self._database_type,
+        database_name=self.name,
+        select=learning_task.select,
+        validation_sets=learning_task.validation_sets,
+        metrics={m.identifier: m for m in learning_task.metrics},
+        features=learning_task.features,
+    )
+
+    try:
+        trainer()
+    except Exception as e:
+        self.delete_component(identifier, &#39;learning_task&#39;, force=True)
+        raise e</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.get_meta_data"><code class="name flex">
+<span>def <span class="ident">get_meta_data</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_meta_data(self, **kwargs):
+    raise NotImplementedError</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.get_object_info"><code class="name flex">
+<span>def <span class="ident">get_object_info</span></span>(<span>self, identifier, variety, decode=True, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_object_info(self, identifier, variety, decode=True, **kwargs):
+    r = self._get_object_info(identifier, variety, **kwargs)
+    if r is None:
+        raise FileNotFoundError(&#39;Object doesn\&#39;t exist&#39;)
+    if decode:
+        r = self.convert_from_bytes_to_types(r)
+        r = self._get_file_content(r)
+    return r</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.get_object_info_where"><code class="name flex">
+<span>def <span class="ident">get_object_info_where</span></span>(<span>self, variety, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_object_info_where(self, variety, **kwargs):
+    return self._get_object_info_where(variety, **kwargs)</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.get_query_for_validation_set"><code class="name flex">
+<span>def <span class="ident">get_query_for_validation_set</span></span>(<span>self, validation_set)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_query_for_validation_set(self, validation_set):
+    raise NotImplementedError</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.insert"><code class="name flex">
+<span>def <span class="ident">insert</span></span>(<span>self, insert: <a title="superduperdb.datalayer.base.query.Insert" href="query.html#superduperdb.datalayer.base.query.Insert">Insert</a>, refresh=True, verbose=True)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def insert(self, insert: Insert, refresh=True, verbose=True):
+    for item in insert.documents:
+        r = random.random()
+        try:
+            valid_probability = self.get_meta_data(key=&#39;valid_probability&#39;)
+        except TypeError:
+            valid_probability = 0.05
+        if &#39;_fold&#39; not in item:
+            item[&#39;_fold&#39;] = &#39;valid&#39; if r &lt; valid_probability else &#39;train&#39;
+
+    output = self._base_insert(insert.to_raw(self.types, self.type_lookup))
+    if not refresh:  # pragma: no cover
+        return output, None
+    task_graph = self._build_task_workflow(
+        insert.select_table, ids=output.inserted_ids, verbose=verbose
+    )
+    task_graph()
+    return output, task_graph</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.list_components"><code class="name flex">
+<span>def <span class="ident">list_components</span></span>(<span>self, variety, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def list_components(self, variety, **kwargs):
+    raise NotImplementedError</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.list_jobs"><code class="name flex">
+<span>def <span class="ident">list_jobs</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>List jobs</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def list_jobs(self):
+    &#34;&#34;&#34;
+    List jobs
+    &#34;&#34;&#34;
+    raise NotImplementedError</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.list_validation_sets"><code class="name flex">
+<span>def <span class="ident">list_validation_sets</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>List validation sets.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def list_validation_sets(self):
+    &#34;&#34;&#34;
+    List validation sets.
+    &#34;&#34;&#34;
+    raise NotImplementedError</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.load_component"><code class="name flex">
+<span>def <span class="ident">load_component</span></span>(<span>self, identifier, variety)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_component(self, identifier, variety):
+    info = self.get_object_info(identifier, variety)
+    if info is None:
+        raise Exception(
+            f&#39;No such object of type &#34;{variety}&#34;, &#39;
+            f&#39;&#34;{identifier}&#34; has been registered.&#39;
+        )
+    if &#39;serializer&#39; not in info:
+        info[&#39;serializer&#39;] = &#39;pickle&#39;
+    if &#39;serializer_kwargs&#39; not in info:
+        info[&#39;serializer_kwargs&#39;] = {}
+    m = self._load_serialized_file(info[&#39;object&#39;], serializer=info[&#39;serializer&#39;])
+    m.repopulate(self)
+    if cm := self.variety_to_cache_mapping.get(variety):
+        getattr(self, cm)[m.identifier] = m
+    return m</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.predict"><code class="name flex">
+<span>def <span class="ident">predict</span></span>(<span>self, model, input_: <<a title="superduperdb.cluster.annotations.Convertible" href="../../cluster/annotations.html#superduperdb.cluster.annotations.Convertible">Convertible</a> object at 0x1075ccb80>, **kwargs) ‑> <<a title="superduperdb.cluster.annotations.Convertible" href="../../cluster/annotations.html#superduperdb.cluster.annotations.Convertible">Convertible</a> object at 0x1091cd040></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Apply model to input.</p>
+<p>:param model: model or <code>str</code> referring to an uploaded model
+:param input_: input_ to be passed to the model.
+Must be possible to encode with registered types
+:param kwargs: key-values (see <code>superduperdb.models.utils.predict</code>)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@model_server
+def predict(self, model, input_: Convertible(), **kwargs) -&gt; Convertible():
+    &#34;&#34;&#34;
+    Apply model to input.
+
+    :param model: model or ``str`` referring to an uploaded model
+    :param input_: input_ to be passed to the model.
+                   Must be possible to encode with registered types
+    :param kwargs: key-values (see ``superduperdb.models.utils.predict``)
+    &#34;&#34;&#34;
+    if isinstance(model, str):
+        model = self.models[model]
+    return model.predict(input_, **kwargs)</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.predict_one"><code class="name flex">
+<span>def <span class="ident">predict_one</span></span>(<span>self, model, input_: <<a title="superduperdb.cluster.annotations.Convertible" href="../../cluster/annotations.html#superduperdb.cluster.annotations.Convertible">Convertible</a> object at 0x10716e580>, **kwargs) ‑> <<a title="superduperdb.cluster.annotations.Convertible" href="../../cluster/annotations.html#superduperdb.cluster.annotations.Convertible">Convertible</a> object at 0x10716e5b0></span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@model_server
+def predict_one(self, model, input_: Convertible(), **kwargs) -&gt; Convertible():
+    if isinstance(model, str):
+        model = self.models[model]
+    return model.predict_one(
+        input_, **{k: v for k, v in kwargs.items() if k != &#39;remote&#39;}
+    )</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.select"><code class="name flex">
+<span>def <span class="ident">select</span></span>(<span>self, select: <a title="superduperdb.datalayer.base.query.Select" href="query.html#superduperdb.datalayer.base.query.Select">Select</a>, like=None, download=False, vector_index=None, similar_first=False, features=None, raw=False, n=100)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def select(
+    self,
+    select: Select,
+    like=None,
+    download=False,
+    vector_index=None,
+    similar_first=False,
+    features=None,
+    raw=False,
+    n=100,
+):
+    if download and like is not None:
+        like = self._get_content_for_filter(like)  # pragma: no cover
+    if like is not None:
+        if similar_first:
+            return self._select_similar_then_matches(
+                like,
+                select,
+                raw=raw,
+                features=features,
+                vector_index=vector_index,
+                n=n,
+            )
+        else:
+            return self._select_matches_then_similar(
+                like,
+                vector_index,
+                select,
+                raw=raw,
+                n=n,
+                features=features,
+            )
+    else:
+        if raw:
+            return self._get_raw_cursor(select)
+        else:
+            return self._get_cursor(select, features=features)</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.select_nearest"><code class="name flex">
+<span>def <span class="ident">select_nearest</span></span>(<span>self, like: <<a title="superduperdb.cluster.annotations.Convertible" href="../../cluster/annotations.html#superduperdb.cluster.annotations.Convertible">Convertible</a> object at 0x1096105e0>, vector_index: str, ids=None, n=10) ‑> (<<a title="superduperdb.cluster.annotations.List" href="../../cluster/annotations.html#superduperdb.cluster.annotations.List">List</a> object at 0x10964f310>, typing.Any)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@vector_search
+def select_nearest(
+    self,
+    like: Convertible(),
+    vector_index: str,
+    ids=None,
+    n=10,
+) -&gt; Tuple([List(Convertible()), Any]):
+    info = self.get_object_info(vector_index, variety=&#39;vector_index&#39;)
+    models = info[&#39;models&#39;]
+    keys = info[&#39;keys&#39;]
+    self._load_hashes(vector_index)
+    hash_set = self._all_hash_sets[vector_index]
+    if ids is not None:
+        hash_set = hash_set[ids]
+
+    if &#39;_id&#39; in like:
+        return hash_set.find_nearest_from_id(like[&#39;_id&#39;], n=n)
+
+    available_keys = list(like.keys()) + [&#39;_base&#39;]
+    model, key = next((m, k) for m, k in zip(models, keys) if k in available_keys)
+    document = MongoStyleDict(like)
+    if &#39;_outputs&#39; not in document:
+        document[&#39;_outputs&#39;] = {}
+    features = info.get(&#39;features&#39;, {}) or {}
+
+    for subkey in features:
+        if subkey not in document:
+            continue
+        if subkey not in document[&#39;_outputs&#39;]:
+            document[&#39;_outputs&#39;][subkey] = {}
+        if features[subkey] not in document[&#39;_outputs&#39;][subkey]:
+            document[&#39;_outputs&#39;][subkey][features[subkey]] = self.models[
+                features[subkey]
+            ].predict_one(document[subkey])
+        document[subkey] = document[&#39;_outputs&#39;][subkey][features[subkey]]
+    model_input = document[key] if key != &#39;_base&#39; else document
+
+    model = self.models[model]
+    h = model.predict_one(model_input)
+    return hash_set.find_nearest_from_hash(h, n=n)</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.separate_query_part_from_validation_record"><code class="name flex">
+<span>def <span class="ident">separate_query_part_from_validation_record</span></span>(<span>self, r)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Separate the info in the record after splitting.</p>
+<p>:param r: record</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def separate_query_part_from_validation_record(self, r):
+    &#34;&#34;&#34;
+    Separate the info in the record after splitting.
+
+    :param r: record
+    &#34;&#34;&#34;
+    raise NotImplementedError</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.set_job_flag"><code class="name flex">
+<span>def <span class="ident">set_job_flag</span></span>(<span>self, identifier, kw)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Set key-value pair in job record</p>
+<p>:param identifier: id of job
+:param kw: tuple of key-value pair</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_job_flag(self, identifier, kw):
+    &#34;&#34;&#34;
+    Set key-value pair in job record
+
+    :param identifier: id of job
+    :param kw: tuple of key-value pair
+    &#34;&#34;&#34;
+    return</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.unset_hash_set"><code class="name flex">
+<span>def <span class="ident">unset_hash_set</span></span>(<span>self, identifier)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Remove hash-set from memory</p>
+<p>:param identifier: identifier of corresponding semantic-index</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def unset_hash_set(self, identifier):
+    &#34;&#34;&#34;
+    Remove hash-set from memory
+
+    :param identifier: identifier of corresponding semantic-index
+    &#34;&#34;&#34;
+    try:
+        del self._all_hash_sets[identifier]
+    except KeyError:
+        pass</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.update"><code class="name flex">
+<span>def <span class="ident">update</span></span>(<span>self, update: <a title="superduperdb.datalayer.base.query.Update" href="query.html#superduperdb.datalayer.base.query.Update">Update</a>, refresh=True, verbose=True)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update(self, update: Update, refresh=True, verbose=True):
+    if refresh and self.list_components(&#39;model&#39;):
+        ids = self._get_ids_from_select(update.select_ids)
+    result = self._base_update(update.to_raw(self.types, self.type_lookup))
+    if refresh and self.list_components(&#39;model&#39;):
+        task_graph = self._build_task_workflow(
+            update.select, ids=ids, verbose=verbose
+        )
+        task_graph()
+        return result, task_graph
+    return result</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.validate_component"><code class="name flex">
+<span>def <span class="ident">validate_component</span></span>(<span>self, identifier: str, variety: str, validation_sets: <<a title="superduperdb.cluster.annotations.List" href="../../cluster/annotations.html#superduperdb.cluster.annotations.List">List</a> object at 0x10964f520>, metrics: <<a title="superduperdb.cluster.annotations.List" href="../../cluster/annotations.html#superduperdb.cluster.annotations.List">List</a> object at 0x10964f5b0>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Evaluate quality of component, using <code>Component.validate</code>, if implemented.</p>
+<p>:param identifier: identifier of semantic index
+:param variety: variety of component
+:param validation_sets: validation-sets on which to validate
+:param metrics: metric functions to compute</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@work
+def validate_component(
+    self,
+    identifier: str,
+    variety: str,
+    validation_sets: List(str),
+    metrics: List(str),
+):
+    &#34;&#34;&#34;
+    Evaluate quality of component, using `Component.validate`, if implemented.
+
+    :param identifier: identifier of semantic index
+    :param variety: variety of component
+    :param validation_sets: validation-sets on which to validate
+    :param metrics: metric functions to compute
+    &#34;&#34;&#34;
+    component = self.load_component(identifier, variety)
+    metrics = [self.load_component(m, &#39;metric&#39;) for m in metrics]
+    validation_selects = [
+        self.get_query_for_validation_set(vs) for vs in validation_sets
+    ]
+    results = component.validate(self, validation_selects, metrics)
+    for vs, res in zip(validation_sets, results):
+        for m in res:
+            self._update_object_info(
+                identifier,
+                variety,
+                f&#39;final_metrics.{vs}.{m}&#39;,
+                res[m],
+            )</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.watch_job"><code class="name flex">
+<span>def <span class="ident">watch_job</span></span>(<span>self, identifier)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Watch stdout/stderr of worker job.</p>
+<p>:param identifier: job-id</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def watch_job(self, identifier):
+    &#34;&#34;&#34;
+    Watch stdout/stderr of worker job.
+
+    :param identifier: job-id
+    &#34;&#34;&#34;
+    try:
+        status = &#39;pending&#39;
+        n_lines = 0
+        n_lines_stderr = 0
+        while status in {&#39;pending&#39;, &#39;running&#39;}:
+            r = self._get_job_info(identifier)
+            status = r[&#39;status&#39;]
+            if status == &#39;running&#39;:
+                if len(r[&#39;stdout&#39;]) &gt; n_lines:
+                    print(&#39;&#39;.join(r[&#39;stdout&#39;][n_lines:]), end=&#39;&#39;)
+                    n_lines = len(r[&#39;stdout&#39;])
+                if len(r[&#39;stderr&#39;]) &gt; n_lines_stderr:
+                    print(&#39;&#39;.join(r[&#39;stderr&#39;][n_lines_stderr:]), end=&#39;&#39;)
+                    n_lines_stderr = len(r[&#39;stderr&#39;])
+                time.sleep(0.2)
+            else:
+                time.sleep(0.2)
+        r = self._get_job_info(identifier)
+        if status == &#39;success&#39;:
+            if len(r[&#39;stdout&#39;]) &gt; n_lines:
+                print(&#39;&#39;.join(r[&#39;stdout&#39;][n_lines:]), end=&#39;&#39;)
+            if len(r[&#39;stderr&#39;]) &gt; n_lines_stderr:
+                print(&#39;&#39;.join(r[&#39;stderr&#39;][n_lines_stderr:]), end=&#39;&#39;)
+        elif status == &#39;failed&#39;:  # pragma: no cover
+            print(r[&#39;msg&#39;])
+    except KeyboardInterrupt:  # pragma: no cover
+        return</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.base.database.BaseDatabase.write_output_to_job"><code class="name flex">
+<span>def <span class="ident">write_output_to_job</span></span>(<span>self, identifier, msg, stream)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Write stdout/ stderr to database</p>
+<p>:param identifier: job identifier
+:param msg: msg to write
+:param stream: {'stdout', 'stderr'}</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def write_output_to_job(self, identifier, msg, stream):
+    &#34;&#34;&#34;
+    Write stdout/ stderr to database
+
+    :param identifier: job identifier
+    :param msg: msg to write
+    :param stream: {&#39;stdout&#39;, &#39;stderr&#39;}
+    &#34;&#34;&#34;
+    raise NotImplementedError</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="superduperdb.datalayer.base" href="index.html">superduperdb.datalayer.base</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="superduperdb.datalayer.base.database.BaseDatabase" href="#superduperdb.datalayer.base.database.BaseDatabase">BaseDatabase</a></code></h4>
+<ul class="">
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.apply_watcher" href="#superduperdb.datalayer.base.database.BaseDatabase.apply_watcher">apply_watcher</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.cancel_job" href="#superduperdb.datalayer.base.database.BaseDatabase.cancel_job">cancel_job</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.convert_from_bytes_to_types" href="#superduperdb.datalayer.base.database.BaseDatabase.convert_from_bytes_to_types">convert_from_bytes_to_types</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.convert_from_types_to_bytes" href="#superduperdb.datalayer.base.database.BaseDatabase.convert_from_types_to_bytes">convert_from_types_to_bytes</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.create_component" href="#superduperdb.datalayer.base.database.BaseDatabase.create_component">create_component</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.create_validation_set" href="#superduperdb.datalayer.base.database.BaseDatabase.create_validation_set">create_validation_set</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.delete" href="#superduperdb.datalayer.base.database.BaseDatabase.delete">delete</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.delete_component" href="#superduperdb.datalayer.base.database.BaseDatabase.delete_component">delete_component</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.download_content" href="#superduperdb.datalayer.base.database.BaseDatabase.download_content">download_content</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.filesystem" href="#superduperdb.datalayer.base.database.BaseDatabase.filesystem">filesystem</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.fit" href="#superduperdb.datalayer.base.database.BaseDatabase.fit">fit</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.get_meta_data" href="#superduperdb.datalayer.base.database.BaseDatabase.get_meta_data">get_meta_data</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.get_object_info" href="#superduperdb.datalayer.base.database.BaseDatabase.get_object_info">get_object_info</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.get_object_info_where" href="#superduperdb.datalayer.base.database.BaseDatabase.get_object_info_where">get_object_info_where</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.get_query_for_validation_set" href="#superduperdb.datalayer.base.database.BaseDatabase.get_query_for_validation_set">get_query_for_validation_set</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.insert" href="#superduperdb.datalayer.base.database.BaseDatabase.insert">insert</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.list_components" href="#superduperdb.datalayer.base.database.BaseDatabase.list_components">list_components</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.list_jobs" href="#superduperdb.datalayer.base.database.BaseDatabase.list_jobs">list_jobs</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.list_validation_sets" href="#superduperdb.datalayer.base.database.BaseDatabase.list_validation_sets">list_validation_sets</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.load_component" href="#superduperdb.datalayer.base.database.BaseDatabase.load_component">load_component</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.predict" href="#superduperdb.datalayer.base.database.BaseDatabase.predict">predict</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.predict_one" href="#superduperdb.datalayer.base.database.BaseDatabase.predict_one">predict_one</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.select" href="#superduperdb.datalayer.base.database.BaseDatabase.select">select</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.select_cls" href="#superduperdb.datalayer.base.database.BaseDatabase.select_cls">select_cls</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.select_nearest" href="#superduperdb.datalayer.base.database.BaseDatabase.select_nearest">select_nearest</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.separate_query_part_from_validation_record" href="#superduperdb.datalayer.base.database.BaseDatabase.separate_query_part_from_validation_record">separate_query_part_from_validation_record</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.set_job_flag" href="#superduperdb.datalayer.base.database.BaseDatabase.set_job_flag">set_job_flag</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.type_lookup" href="#superduperdb.datalayer.base.database.BaseDatabase.type_lookup">type_lookup</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.unset_hash_set" href="#superduperdb.datalayer.base.database.BaseDatabase.unset_hash_set">unset_hash_set</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.update" href="#superduperdb.datalayer.base.database.BaseDatabase.update">update</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.validate_component" href="#superduperdb.datalayer.base.database.BaseDatabase.validate_component">validate_component</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.variety_to_cache_mapping" href="#superduperdb.datalayer.base.database.BaseDatabase.variety_to_cache_mapping">variety_to_cache_mapping</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.watch_job" href="#superduperdb.datalayer.base.database.BaseDatabase.watch_job">watch_job</a></code></li>
+<li><code><a title="superduperdb.datalayer.base.database.BaseDatabase.write_output_to_job" href="#superduperdb.datalayer.base.database.BaseDatabase.write_output_to_job">write_output_to_job</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

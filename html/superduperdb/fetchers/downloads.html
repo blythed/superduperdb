@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>superduperdb.fetchers.downloads API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>superduperdb.fetchers.downloads</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import re
+
+import boto3
+from io import BytesIO
+from contextlib import contextmanager
+from multiprocessing.pool import ThreadPool
+import requests
+import signal
+import sys
+import warnings
+
+from superduperdb.misc.progress import progressbar
+from superduperdb.misc.logger import logging
+
+
+class TimeoutException(Exception):
+    ...
+
+
+def timeout_handler(signum, frame):  # pragma: no cover
+    raise TimeoutException()
+
+
+@contextmanager
+def timeout(seconds):  # pragma: no cover
+    old_handler = signal.signal(signal.SIGALRM, timeout_handler)
+    signal.alarm(seconds)
+    try:
+        yield
+    finally:
+        signal.alarm(0)
+        signal.signal(signal.SIGALRM, old_handler)
+
+
+class Fetcher:
+    def __init__(self, headers=None, n_workers=0):
+        session = boto3.Session()
+        self.headers = headers
+        self.s3_client = session.client(&#34;s3&#34;)
+        self.request_session = requests.Session()
+        self.request_adapter = requests.adapters.HTTPAdapter(
+            max_retries=3,
+            pool_connections=n_workers if n_workers else 1,
+            pool_maxsize=n_workers * 10,
+        )
+        self.request_session.mount(&#34;http://&#34;, self.request_adapter)
+        self.request_session.mount(&#34;https://&#34;, self.request_adapter)
+
+    def _download_s3_object(self, uri):
+        f = BytesIO()
+        path = uri.split(&#39;s3://&#39;)[-1]
+        bucket_name = path.split(&#39;/&#39;)[0]
+        file = &#39;/&#39;.join(path.split(&#39;/&#39;)[1:])
+        self.s3_client.download_fileobj(bucket_name, file, f)
+        return f.getvalue()
+
+    def _download_file(self, path):
+        path = re.split(&#39;^file://&#39;, path)[-1]
+        with open(path, &#39;rb&#39;) as f:
+            return f.read()
+
+    def _download_from_uri(self, uri):
+        return self.request_session.get(uri, headers=self.headers).content
+
+    def __call__(self, uri):
+        if uri.startswith(&#39;file://&#39;):
+            return self._download_file(uri)
+        elif uri.startswith(&#39;s3://&#39;):
+            return self._download_s3_object(uri)
+        elif uri.startswith(&#39;http://&#39;) or uri.startswith(&#39;https://&#39;):
+            return self._download_from_uri(uri)
+        else:
+            raise NotImplementedError(f&#39;unknown type of URI &#34;{uri}&#34;&#39;)
+
+
+class BaseDownloader:
+    def __init__(self, uris, n_workers=0, timeout=None, headers=None, raises=True):
+        self.timeout = timeout
+        self.n_workers = n_workers
+        self.uris = uris
+        self.headers = headers or {}
+        self.raises = raises
+
+    def go(self):
+        &#34;&#34;&#34;
+        Download all files
+        Uses a :py:class:`multiprocessing.pool.ThreadPool` to parallelize
+                          connections.
+        :param test: If *True* perform a test run.
+        &#34;&#34;&#34;
+        logging.info(f&#39;number of workers {self.n_workers}&#39;)
+        prog = progressbar(total=len(self.uris))
+        prog.prefix = &#39;downloading from uris&#39;
+        self.failed = 0
+        prog.prefx = &#34;failed: 0&#34;
+
+        def f(i):
+            prog.update()
+            try:
+                if self.timeout is not None:  # pragma: no cover
+                    with timeout(self.timeout):
+                        self._download(i)
+                else:
+                    self._download(i)
+            except TimeoutException:  # pragma: no cover
+                logging.warning(f&#39;timed out {i}&#39;)
+            except KeyboardInterrupt:  # pragma: no cover
+                raise
+            except Exception as e:  # pragma: no cover
+                if self.raises:
+                    raise e
+                warnings.warn(str(e))
+                self.failed += 1
+                prog.prefix = f&#34;failed: {self.failed} [{e}]&#34;
+
+        if self.n_workers == 0:
+            self._sequential_go(f)
+            return
+
+        self._parallel_go(f)
+
+    def _parallel_go(self, f):
+        pool = ThreadPool(self.n_workers)
+        try:
+            pool.map(f, range(len(self.uris)))
+        except KeyboardInterrupt:  # pragma: no cover
+            logging.warning(&#34;--keyboard interrupt--&#34;)
+            pool.terminate()
+            pool.join()
+            sys.exit(1)
+
+        pool.close()
+        pool.join()
+
+    def _sequential_go(self, f):
+        for i in range(len(self.uris)):
+            f(i)
+
+
+class Downloader(BaseDownloader):
+    &#34;&#34;&#34;
+
+    :param uris: list of uris/ file names to fetch
+    :param update_one: function to call to insert data into table
+    :param ids: list of ids of rows/ documents to update
+    :param keys: list of keys in rows/ documents to insert to
+    :param n_workers: number of multiprocessing workers
+    :param raises: raises error ``True``/``False``
+    :param headers: dictionary of request headers passed to``requests`` package
+    :param skip_existing: if ``True`` then don&#39;t bother getting already present data
+    :param timeout: set seconds until request times out
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        uris,
+        update_one=None,
+        ids=None,
+        keys=None,
+        n_workers=20,
+        headers=None,
+        skip_existing=True,
+        timeout=None,
+        raises=True,
+    ):
+        super().__init__(
+            uris, n_workers=n_workers, timeout=timeout, headers=headers, raises=raises
+        )
+        self.ids = ids
+        self.keys = keys
+        self.failed = 0
+        self.skip_existing = skip_existing
+        self.update_one = update_one
+        self.fetcher = Fetcher(headers=headers, n_workers=n_workers)
+
+        assert len(ids) == len(uris)
+
+    def _download(self, i):
+        uri = self.uris[i]
+        _id = self.ids[i]
+        content = self.fetcher(uri)
+        self.update_one(self.ids[i], self.keys[i], content)
+
+
+class InMemoryDownloader(BaseDownloader):
+    def __init__(self, *args, headers=None, n_workers=0, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.results = {}
+        self.fetcher = Fetcher(headers=headers, n_workers=n_workers)
+
+    def _download(self, i):
+        content = self.fetcher(self.uris[i])
+        self.results[i] = content
+
+
+def gather_uris(documents, gather_ids=True):
+    &#34;&#34;&#34;
+    Get the URLS out of all documents as denoted by ``{&#34;_content&#34;: ...}``
+
+    :param documents: list of dictionaries
+    &#34;&#34;&#34;
+    uris = []
+    mongo_keys = []
+    ids = []
+    for i, r in enumerate(documents):
+        sub_uris, sub_mongo_keys = _gather_uris_for_document(r)
+        if gather_ids:
+            ids.extend([r[&#39;_id&#39;] for _ in sub_uris])
+        else:
+            ids.append(i)
+        uris.extend(sub_uris)
+        mongo_keys.extend(sub_mongo_keys)
+    return uris, mongo_keys, ids
+
+
+def _gather_uris_for_document(r):
+    &#39;&#39;&#39;
+    &gt;&gt;&gt; _gather_uris_for_document({&#39;a&#39;: {&#39;_content&#39;: {&#39;uri&#39;: &#39;test&#39;}}})
+    ([&#39;test&#39;], [&#39;a&#39;])
+    &gt;&gt;&gt; d = {&#39;b&#39;: {&#39;a&#39;: {&#39;_content&#39;: {&#39;uri&#39;: &#39;test&#39;}}}}
+    &gt;&gt;&gt; _gather_uris_for_document(d)
+    ([&#39;test&#39;], [&#39;b.a&#39;])
+    &gt;&gt;&gt; d = {&#39;b&#39;: {&#39;a&#39;: {&#39;_content&#39;: {&#39;uri&#39;: &#39;test&#39;, &#39;bytes&#39;: b&#39;abc&#39;}}}}
+    &gt;&gt;&gt; _gather_uris_for_document(d)
+    ([], [])
+    &#39;&#39;&#39;
+    uris = []
+    keys = []
+    for k in r:
+        if isinstance(r[k], dict) and &#39;_content&#39; in r[k]:
+            if &#39;uri&#39; in r[k][&#39;_content&#39;] and &#39;bytes&#39; not in r[k][&#39;_content&#39;]:
+                keys.append(k)
+                uris.append(r[k][&#39;_content&#39;][&#39;uri&#39;])
+        elif isinstance(r[k], dict) and &#39;_content&#39; not in r[k]:
+            sub_uris, sub_keys = _gather_uris_for_document(r[k])
+            uris.extend(sub_uris)
+            keys.extend([f&#39;{k}.{key}&#39; for key in sub_keys])
+    return uris, keys</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="superduperdb.fetchers.downloads.gather_uris"><code class="name flex">
+<span>def <span class="ident">gather_uris</span></span>(<span>documents, gather_ids=True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get the URLS out of all documents as denoted by <code>{"_content": ...}</code></p>
+<p>:param documents: list of dictionaries</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def gather_uris(documents, gather_ids=True):
+    &#34;&#34;&#34;
+    Get the URLS out of all documents as denoted by ``{&#34;_content&#34;: ...}``
+
+    :param documents: list of dictionaries
+    &#34;&#34;&#34;
+    uris = []
+    mongo_keys = []
+    ids = []
+    for i, r in enumerate(documents):
+        sub_uris, sub_mongo_keys = _gather_uris_for_document(r)
+        if gather_ids:
+            ids.extend([r[&#39;_id&#39;] for _ in sub_uris])
+        else:
+            ids.append(i)
+        uris.extend(sub_uris)
+        mongo_keys.extend(sub_mongo_keys)
+    return uris, mongo_keys, ids</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.fetchers.downloads.timeout"><code class="name flex">
+<span>def <span class="ident">timeout</span></span>(<span>seconds)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@contextmanager
+def timeout(seconds):  # pragma: no cover
+    old_handler = signal.signal(signal.SIGALRM, timeout_handler)
+    signal.alarm(seconds)
+    try:
+        yield
+    finally:
+        signal.alarm(0)
+        signal.signal(signal.SIGALRM, old_handler)</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.fetchers.downloads.timeout_handler"><code class="name flex">
+<span>def <span class="ident">timeout_handler</span></span>(<span>signum, frame)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def timeout_handler(signum, frame):  # pragma: no cover
+    raise TimeoutException()</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="superduperdb.fetchers.downloads.BaseDownloader"><code class="flex name class">
+<span>class <span class="ident">BaseDownloader</span></span>
+<span>(</span><span>uris, n_workers=0, timeout=None, headers=None, raises=True)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class BaseDownloader:
+    def __init__(self, uris, n_workers=0, timeout=None, headers=None, raises=True):
+        self.timeout = timeout
+        self.n_workers = n_workers
+        self.uris = uris
+        self.headers = headers or {}
+        self.raises = raises
+
+    def go(self):
+        &#34;&#34;&#34;
+        Download all files
+        Uses a :py:class:`multiprocessing.pool.ThreadPool` to parallelize
+                          connections.
+        :param test: If *True* perform a test run.
+        &#34;&#34;&#34;
+        logging.info(f&#39;number of workers {self.n_workers}&#39;)
+        prog = progressbar(total=len(self.uris))
+        prog.prefix = &#39;downloading from uris&#39;
+        self.failed = 0
+        prog.prefx = &#34;failed: 0&#34;
+
+        def f(i):
+            prog.update()
+            try:
+                if self.timeout is not None:  # pragma: no cover
+                    with timeout(self.timeout):
+                        self._download(i)
+                else:
+                    self._download(i)
+            except TimeoutException:  # pragma: no cover
+                logging.warning(f&#39;timed out {i}&#39;)
+            except KeyboardInterrupt:  # pragma: no cover
+                raise
+            except Exception as e:  # pragma: no cover
+                if self.raises:
+                    raise e
+                warnings.warn(str(e))
+                self.failed += 1
+                prog.prefix = f&#34;failed: {self.failed} [{e}]&#34;
+
+        if self.n_workers == 0:
+            self._sequential_go(f)
+            return
+
+        self._parallel_go(f)
+
+    def _parallel_go(self, f):
+        pool = ThreadPool(self.n_workers)
+        try:
+            pool.map(f, range(len(self.uris)))
+        except KeyboardInterrupt:  # pragma: no cover
+            logging.warning(&#34;--keyboard interrupt--&#34;)
+            pool.terminate()
+            pool.join()
+            sys.exit(1)
+
+        pool.close()
+        pool.join()
+
+    def _sequential_go(self, f):
+        for i in range(len(self.uris)):
+            f(i)</code></pre>
+</details>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="superduperdb.fetchers.downloads.Downloader" href="#superduperdb.fetchers.downloads.Downloader">Downloader</a></li>
+<li><a title="superduperdb.fetchers.downloads.InMemoryDownloader" href="#superduperdb.fetchers.downloads.InMemoryDownloader">InMemoryDownloader</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="superduperdb.fetchers.downloads.BaseDownloader.go"><code class="name flex">
+<span>def <span class="ident">go</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Download all files
+Uses a :py:class:<code>multiprocessing.pool.ThreadPool</code> to parallelize
+connections.
+:param test: If <em>True</em> perform a test run.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def go(self):
+    &#34;&#34;&#34;
+    Download all files
+    Uses a :py:class:`multiprocessing.pool.ThreadPool` to parallelize
+                      connections.
+    :param test: If *True* perform a test run.
+    &#34;&#34;&#34;
+    logging.info(f&#39;number of workers {self.n_workers}&#39;)
+    prog = progressbar(total=len(self.uris))
+    prog.prefix = &#39;downloading from uris&#39;
+    self.failed = 0
+    prog.prefx = &#34;failed: 0&#34;
+
+    def f(i):
+        prog.update()
+        try:
+            if self.timeout is not None:  # pragma: no cover
+                with timeout(self.timeout):
+                    self._download(i)
+            else:
+                self._download(i)
+        except TimeoutException:  # pragma: no cover
+            logging.warning(f&#39;timed out {i}&#39;)
+        except KeyboardInterrupt:  # pragma: no cover
+            raise
+        except Exception as e:  # pragma: no cover
+            if self.raises:
+                raise e
+            warnings.warn(str(e))
+            self.failed += 1
+            prog.prefix = f&#34;failed: {self.failed} [{e}]&#34;
+
+    if self.n_workers == 0:
+        self._sequential_go(f)
+        return
+
+    self._parallel_go(f)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="superduperdb.fetchers.downloads.Downloader"><code class="flex name class">
+<span>class <span class="ident">Downloader</span></span>
+<span>(</span><span>uris, update_one=None, ids=None, keys=None, n_workers=20, headers=None, skip_existing=True, timeout=None, raises=True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>:param uris: list of uris/ file names to fetch
+:param update_one: function to call to insert data into table
+:param ids: list of ids of rows/ documents to update
+:param keys: list of keys in rows/ documents to insert to
+:param n_workers: number of multiprocessing workers
+:param raises: raises error <code>True</code>/<code>False</code>
+:param headers: dictionary of request headers passed to<code>requests</code> package
+:param skip_existing: if <code>True</code> then don't bother getting already present data
+:param timeout: set seconds until request times out</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Downloader(BaseDownloader):
+    &#34;&#34;&#34;
+
+    :param uris: list of uris/ file names to fetch
+    :param update_one: function to call to insert data into table
+    :param ids: list of ids of rows/ documents to update
+    :param keys: list of keys in rows/ documents to insert to
+    :param n_workers: number of multiprocessing workers
+    :param raises: raises error ``True``/``False``
+    :param headers: dictionary of request headers passed to``requests`` package
+    :param skip_existing: if ``True`` then don&#39;t bother getting already present data
+    :param timeout: set seconds until request times out
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        uris,
+        update_one=None,
+        ids=None,
+        keys=None,
+        n_workers=20,
+        headers=None,
+        skip_existing=True,
+        timeout=None,
+        raises=True,
+    ):
+        super().__init__(
+            uris, n_workers=n_workers, timeout=timeout, headers=headers, raises=raises
+        )
+        self.ids = ids
+        self.keys = keys
+        self.failed = 0
+        self.skip_existing = skip_existing
+        self.update_one = update_one
+        self.fetcher = Fetcher(headers=headers, n_workers=n_workers)
+
+        assert len(ids) == len(uris)
+
+    def _download(self, i):
+        uri = self.uris[i]
+        _id = self.ids[i]
+        content = self.fetcher(uri)
+        self.update_one(self.ids[i], self.keys[i], content)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="superduperdb.fetchers.downloads.BaseDownloader" href="#superduperdb.fetchers.downloads.BaseDownloader">BaseDownloader</a></li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="superduperdb.fetchers.downloads.BaseDownloader" href="#superduperdb.fetchers.downloads.BaseDownloader">BaseDownloader</a></b></code>:
+<ul class="hlist">
+<li><code><a title="superduperdb.fetchers.downloads.BaseDownloader.go" href="#superduperdb.fetchers.downloads.BaseDownloader.go">go</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="superduperdb.fetchers.downloads.Fetcher"><code class="flex name class">
+<span>class <span class="ident">Fetcher</span></span>
+<span>(</span><span>headers=None, n_workers=0)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Fetcher:
+    def __init__(self, headers=None, n_workers=0):
+        session = boto3.Session()
+        self.headers = headers
+        self.s3_client = session.client(&#34;s3&#34;)
+        self.request_session = requests.Session()
+        self.request_adapter = requests.adapters.HTTPAdapter(
+            max_retries=3,
+            pool_connections=n_workers if n_workers else 1,
+            pool_maxsize=n_workers * 10,
+        )
+        self.request_session.mount(&#34;http://&#34;, self.request_adapter)
+        self.request_session.mount(&#34;https://&#34;, self.request_adapter)
+
+    def _download_s3_object(self, uri):
+        f = BytesIO()
+        path = uri.split(&#39;s3://&#39;)[-1]
+        bucket_name = path.split(&#39;/&#39;)[0]
+        file = &#39;/&#39;.join(path.split(&#39;/&#39;)[1:])
+        self.s3_client.download_fileobj(bucket_name, file, f)
+        return f.getvalue()
+
+    def _download_file(self, path):
+        path = re.split(&#39;^file://&#39;, path)[-1]
+        with open(path, &#39;rb&#39;) as f:
+            return f.read()
+
+    def _download_from_uri(self, uri):
+        return self.request_session.get(uri, headers=self.headers).content
+
+    def __call__(self, uri):
+        if uri.startswith(&#39;file://&#39;):
+            return self._download_file(uri)
+        elif uri.startswith(&#39;s3://&#39;):
+            return self._download_s3_object(uri)
+        elif uri.startswith(&#39;http://&#39;) or uri.startswith(&#39;https://&#39;):
+            return self._download_from_uri(uri)
+        else:
+            raise NotImplementedError(f&#39;unknown type of URI &#34;{uri}&#34;&#39;)</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.fetchers.downloads.InMemoryDownloader"><code class="flex name class">
+<span>class <span class="ident">InMemoryDownloader</span></span>
+<span>(</span><span>*args, headers=None, n_workers=0, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class InMemoryDownloader(BaseDownloader):
+    def __init__(self, *args, headers=None, n_workers=0, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.results = {}
+        self.fetcher = Fetcher(headers=headers, n_workers=n_workers)
+
+    def _download(self, i):
+        content = self.fetcher(self.uris[i])
+        self.results[i] = content</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="superduperdb.fetchers.downloads.BaseDownloader" href="#superduperdb.fetchers.downloads.BaseDownloader">BaseDownloader</a></li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="superduperdb.fetchers.downloads.BaseDownloader" href="#superduperdb.fetchers.downloads.BaseDownloader">BaseDownloader</a></b></code>:
+<ul class="hlist">
+<li><code><a title="superduperdb.fetchers.downloads.BaseDownloader.go" href="#superduperdb.fetchers.downloads.BaseDownloader.go">go</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="superduperdb.fetchers.downloads.TimeoutException"><code class="flex name class">
+<span>class <span class="ident">TimeoutException</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Common base class for all non-exit exceptions.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class TimeoutException(Exception):
+    ...</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="superduperdb.fetchers" href="index.html">superduperdb.fetchers</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="superduperdb.fetchers.downloads.gather_uris" href="#superduperdb.fetchers.downloads.gather_uris">gather_uris</a></code></li>
+<li><code><a title="superduperdb.fetchers.downloads.timeout" href="#superduperdb.fetchers.downloads.timeout">timeout</a></code></li>
+<li><code><a title="superduperdb.fetchers.downloads.timeout_handler" href="#superduperdb.fetchers.downloads.timeout_handler">timeout_handler</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="superduperdb.fetchers.downloads.BaseDownloader" href="#superduperdb.fetchers.downloads.BaseDownloader">BaseDownloader</a></code></h4>
+<ul class="">
+<li><code><a title="superduperdb.fetchers.downloads.BaseDownloader.go" href="#superduperdb.fetchers.downloads.BaseDownloader.go">go</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="superduperdb.fetchers.downloads.Downloader" href="#superduperdb.fetchers.downloads.Downloader">Downloader</a></code></h4>
+</li>
+<li>
+<h4><code><a title="superduperdb.fetchers.downloads.Fetcher" href="#superduperdb.fetchers.downloads.Fetcher">Fetcher</a></code></h4>
+</li>
+<li>
+<h4><code><a title="superduperdb.fetchers.downloads.InMemoryDownloader" href="#superduperdb.fetchers.downloads.InMemoryDownloader">InMemoryDownloader</a></code></h4>
+</li>
+<li>
+<h4><code><a title="superduperdb.fetchers.downloads.TimeoutException" href="#superduperdb.fetchers.downloads.TimeoutException">TimeoutException</a></code></h4>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

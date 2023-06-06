@@ -1,0 +1,1024 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>superduperdb.datalayer.mongodb.query API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>superduperdb.datalayer.mongodb.query</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from dataclasses import dataclass, field
+from functools import cached_property
+from typing import Optional, Mapping, Any, List
+
+from superduperdb.datalayer.base import query
+from superduperdb.misc.serialization import convert_from_types_to_bytes
+
+
+@dataclass(frozen=True)
+class Select(query.Select):
+    collection: str
+    filter: Optional[Mapping[str, Any]] = None
+    projection: Optional[Mapping[str, Any]] = None
+    kwargs: Mapping[str, Any] = field(default_factory=dict)
+    one: bool = False
+
+    def add_fold(self, fold: str) -&gt; &#39;Select&#39;:
+        return Select(
+            collection=self.collection,
+            filter={&#39;_fold&#39;: fold, **(self.filter or {})},
+            projection=self.projection,
+            kwargs=self.kwargs,
+            one=self.one,
+        )
+
+    @cached_property
+    def table(self):
+        return self.collection
+
+    @cached_property
+    def is_trivial(self) -&gt; bool:
+        return not self.filter
+
+    @cached_property
+    def select_only_id(self) -&gt; &#39;Select&#39;:
+        return Select(
+            collection=self.collection, filter=self.filter, projection={&#39;_id&#39;: 1}
+        )
+
+    def select_using_ids(self, ids) -&gt; &#39;Select&#39;:
+        return Select(
+            collection=self.collection,
+            filter={&#39;_id&#39;: {&#39;$in&#39;: ids}, **(self.filter if self.filter else {})},
+            projection=self.projection,
+            kwargs=self.kwargs,
+        )
+
+    def update(self, to_update: dict) -&gt; &#39;Update&#39;:
+        return Update(
+            collection=self.collection,
+            filter=self.filter or {},
+            update=to_update,
+        )
+
+
+@dataclass(frozen=True)
+class Update(query.Update):
+    collection: str
+    filter: Mapping[str, Any]
+    update: Optional[Mapping[str, Any]] = None
+    one: bool = False
+    replacement: Optional[Mapping[str, Any]] = None
+
+    @cached_property
+    def table(self):
+        return self.collection
+
+    @cached_property
+    def select_ids(self) -&gt; Select:
+        return Select(
+            collection=self.collection,
+            filter=self.filter,
+            projection={&#39;_id&#39;: 1},
+        )
+
+    @cached_property
+    def select(self) -&gt; Select:
+        return Select(
+            collection=self.collection,
+            filter=self.filter,
+            projection={&#39;_id&#39;: 1},
+        )
+
+    def to_raw(self, types, type_lookup):
+        if self.replacement is None:
+            assert self.update is not None
+            return Update(
+                collection=self.collection,
+                filter=self.filter,
+                update=convert_from_types_to_bytes(self.update, types, type_lookup),
+            )
+        else:
+            return Update(
+                collection=self.collection,
+                filter=self.filter,
+                replacement=convert_from_types_to_bytes(
+                    self.replacement, types, type_lookup
+                ),
+            )
+
+
+@dataclass(frozen=True)
+class Delete(query.Delete):
+    collection: str
+    filter: Mapping[str, Any]
+    one: bool = False
+
+    @cached_property
+    def table(self):
+        return self.collection
+
+
+@dataclass(frozen=True)
+class Insert(query.Insert):
+    collection: str
+    documents: List[Any]
+    ordered: bool = True
+    bypass_document_validation: bool = False
+
+    @cached_property
+    def table(self):
+        return self.collection
+
+    def to_raw(self, types: dict, type_lookup: dict) -&gt; &#39;Insert&#39;:
+        return Insert(
+            collection=self.collection,
+            documents=self._to_raw_documents(types, type_lookup),
+            ordered=self.ordered,
+            bypass_document_validation=self.bypass_document_validation,
+        )
+
+    @cached_property
+    def select_table(self) -&gt; Select:
+        return Select(collection=self.collection, filter={})
+
+
+def set_one_key_in_document(table, id, key, value):
+    return Update(
+        collection=table,
+        filter={&#39;_id&#39;: id},
+        update={&#39;$set&#39;: {key: value}},
+        one=True,
+    )</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="superduperdb.datalayer.mongodb.query.set_one_key_in_document"><code class="name flex">
+<span>def <span class="ident">set_one_key_in_document</span></span>(<span>table, id, key, value)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_one_key_in_document(table, id, key, value):
+    return Update(
+        collection=table,
+        filter={&#39;_id&#39;: id},
+        update={&#39;$set&#39;: {key: value}},
+        one=True,
+    )</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="superduperdb.datalayer.mongodb.query.Delete"><code class="flex name class">
+<span>class <span class="ident">Delete</span></span>
+<span>(</span><span>collection: str, filter: Mapping[str, Any], one: bool = False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Delete(collection: str, filter: Mapping[str, Any], one: bool = False)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(frozen=True)
+class Delete(query.Delete):
+    collection: str
+    filter: Mapping[str, Any]
+    one: bool = False
+
+    @cached_property
+    def table(self):
+        return self.collection</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="superduperdb.datalayer.base.query.Delete" href="../base/query.html#superduperdb.datalayer.base.query.Delete">Delete</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="superduperdb.datalayer.mongodb.query.Delete.collection"><code class="name">var <span class="ident">collection</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="superduperdb.datalayer.mongodb.query.Delete.filter"><code class="name">var <span class="ident">filter</span> : Mapping[str, Any]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="superduperdb.datalayer.mongodb.query.Delete.one"><code class="name">var <span class="ident">one</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="superduperdb.datalayer.mongodb.query.Delete.table"><code class="name">var <span class="ident">table</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner=None):
+    if instance is None:
+        return self
+    if self.attrname is None:
+        raise TypeError(
+            &#34;Cannot use cached_property instance without calling __set_name__ on it.&#34;)
+    try:
+        cache = instance.__dict__
+    except AttributeError:  # not all objects have __dict__ (e.g. class defines slots)
+        msg = (
+            f&#34;No &#39;__dict__&#39; attribute on {type(instance).__name__!r} &#34;
+            f&#34;instance to cache {self.attrname!r} property.&#34;
+        )
+        raise TypeError(msg) from None
+    val = cache.get(self.attrname, _NOT_FOUND)
+    if val is _NOT_FOUND:
+        with self.lock:
+            # check if another thread filled cache while we awaited lock
+            val = cache.get(self.attrname, _NOT_FOUND)
+            if val is _NOT_FOUND:
+                val = self.func(instance)
+                try:
+                    cache[self.attrname] = val
+                except TypeError:
+                    msg = (
+                        f&#34;The &#39;__dict__&#39; attribute on {type(instance).__name__!r} instance &#34;
+                        f&#34;does not support item assignment for caching {self.attrname!r} property.&#34;
+                    )
+                    raise TypeError(msg) from None
+    return val</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="superduperdb.datalayer.mongodb.query.Insert"><code class="flex name class">
+<span>class <span class="ident">Insert</span></span>
+<span>(</span><span>collection: str, documents: List[Any], ordered: bool = True, bypass_document_validation: bool = False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Insert(collection: str, documents: List[Any], ordered: bool = True, bypass_document_validation: bool = False)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(frozen=True)
+class Insert(query.Insert):
+    collection: str
+    documents: List[Any]
+    ordered: bool = True
+    bypass_document_validation: bool = False
+
+    @cached_property
+    def table(self):
+        return self.collection
+
+    def to_raw(self, types: dict, type_lookup: dict) -&gt; &#39;Insert&#39;:
+        return Insert(
+            collection=self.collection,
+            documents=self._to_raw_documents(types, type_lookup),
+            ordered=self.ordered,
+            bypass_document_validation=self.bypass_document_validation,
+        )
+
+    @cached_property
+    def select_table(self) -&gt; Select:
+        return Select(collection=self.collection, filter={})</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="superduperdb.datalayer.base.query.Insert" href="../base/query.html#superduperdb.datalayer.base.query.Insert">Insert</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="superduperdb.datalayer.mongodb.query.Insert.bypass_document_validation"><code class="name">var <span class="ident">bypass_document_validation</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="superduperdb.datalayer.mongodb.query.Insert.collection"><code class="name">var <span class="ident">collection</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="superduperdb.datalayer.mongodb.query.Insert.documents"><code class="name">var <span class="ident">documents</span> : List[Any]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="superduperdb.datalayer.mongodb.query.Insert.ordered"><code class="name">var <span class="ident">ordered</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="superduperdb.datalayer.mongodb.query.Insert.select_table"><code class="name">var <span class="ident">select_table</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner=None):
+    if instance is None:
+        return self
+    if self.attrname is None:
+        raise TypeError(
+            &#34;Cannot use cached_property instance without calling __set_name__ on it.&#34;)
+    try:
+        cache = instance.__dict__
+    except AttributeError:  # not all objects have __dict__ (e.g. class defines slots)
+        msg = (
+            f&#34;No &#39;__dict__&#39; attribute on {type(instance).__name__!r} &#34;
+            f&#34;instance to cache {self.attrname!r} property.&#34;
+        )
+        raise TypeError(msg) from None
+    val = cache.get(self.attrname, _NOT_FOUND)
+    if val is _NOT_FOUND:
+        with self.lock:
+            # check if another thread filled cache while we awaited lock
+            val = cache.get(self.attrname, _NOT_FOUND)
+            if val is _NOT_FOUND:
+                val = self.func(instance)
+                try:
+                    cache[self.attrname] = val
+                except TypeError:
+                    msg = (
+                        f&#34;The &#39;__dict__&#39; attribute on {type(instance).__name__!r} instance &#34;
+                        f&#34;does not support item assignment for caching {self.attrname!r} property.&#34;
+                    )
+                    raise TypeError(msg) from None
+    return val</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.mongodb.query.Insert.table"><code class="name">var <span class="ident">table</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner=None):
+    if instance is None:
+        return self
+    if self.attrname is None:
+        raise TypeError(
+            &#34;Cannot use cached_property instance without calling __set_name__ on it.&#34;)
+    try:
+        cache = instance.__dict__
+    except AttributeError:  # not all objects have __dict__ (e.g. class defines slots)
+        msg = (
+            f&#34;No &#39;__dict__&#39; attribute on {type(instance).__name__!r} &#34;
+            f&#34;instance to cache {self.attrname!r} property.&#34;
+        )
+        raise TypeError(msg) from None
+    val = cache.get(self.attrname, _NOT_FOUND)
+    if val is _NOT_FOUND:
+        with self.lock:
+            # check if another thread filled cache while we awaited lock
+            val = cache.get(self.attrname, _NOT_FOUND)
+            if val is _NOT_FOUND:
+                val = self.func(instance)
+                try:
+                    cache[self.attrname] = val
+                except TypeError:
+                    msg = (
+                        f&#34;The &#39;__dict__&#39; attribute on {type(instance).__name__!r} instance &#34;
+                        f&#34;does not support item assignment for caching {self.attrname!r} property.&#34;
+                    )
+                    raise TypeError(msg) from None
+    return val</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="superduperdb.datalayer.mongodb.query.Insert.to_raw"><code class="name flex">
+<span>def <span class="ident">to_raw</span></span>(<span>self, types: dict, type_lookup: dict) ‑> <a title="superduperdb.datalayer.mongodb.query.Insert" href="#superduperdb.datalayer.mongodb.query.Insert">Insert</a></span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def to_raw(self, types: dict, type_lookup: dict) -&gt; &#39;Insert&#39;:
+    return Insert(
+        collection=self.collection,
+        documents=self._to_raw_documents(types, type_lookup),
+        ordered=self.ordered,
+        bypass_document_validation=self.bypass_document_validation,
+    )</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="superduperdb.datalayer.mongodb.query.Select"><code class="flex name class">
+<span>class <span class="ident">Select</span></span>
+<span>(</span><span>collection: str, filter: Optional[Mapping[str, Any]] = None, projection: Optional[Mapping[str, Any]] = None, kwargs: Mapping[str, Any] = &lt;factory&gt;, one: bool = False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Select(collection: str, filter: Optional[Mapping[str, Any]] = None, projection: Optional[Mapping[str, Any]] = None, kwargs: Mapping[str, Any] = <factory>, one: bool = False)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(frozen=True)
+class Select(query.Select):
+    collection: str
+    filter: Optional[Mapping[str, Any]] = None
+    projection: Optional[Mapping[str, Any]] = None
+    kwargs: Mapping[str, Any] = field(default_factory=dict)
+    one: bool = False
+
+    def add_fold(self, fold: str) -&gt; &#39;Select&#39;:
+        return Select(
+            collection=self.collection,
+            filter={&#39;_fold&#39;: fold, **(self.filter or {})},
+            projection=self.projection,
+            kwargs=self.kwargs,
+            one=self.one,
+        )
+
+    @cached_property
+    def table(self):
+        return self.collection
+
+    @cached_property
+    def is_trivial(self) -&gt; bool:
+        return not self.filter
+
+    @cached_property
+    def select_only_id(self) -&gt; &#39;Select&#39;:
+        return Select(
+            collection=self.collection, filter=self.filter, projection={&#39;_id&#39;: 1}
+        )
+
+    def select_using_ids(self, ids) -&gt; &#39;Select&#39;:
+        return Select(
+            collection=self.collection,
+            filter={&#39;_id&#39;: {&#39;$in&#39;: ids}, **(self.filter if self.filter else {})},
+            projection=self.projection,
+            kwargs=self.kwargs,
+        )
+
+    def update(self, to_update: dict) -&gt; &#39;Update&#39;:
+        return Update(
+            collection=self.collection,
+            filter=self.filter or {},
+            update=to_update,
+        )</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="superduperdb.datalayer.base.query.Select" href="../base/query.html#superduperdb.datalayer.base.query.Select">Select</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="superduperdb.datalayer.mongodb.query.Select.collection"><code class="name">var <span class="ident">collection</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="superduperdb.datalayer.mongodb.query.Select.filter"><code class="name">var <span class="ident">filter</span> : Optional[Mapping[str, Any]]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="superduperdb.datalayer.mongodb.query.Select.kwargs"><code class="name">var <span class="ident">kwargs</span> : Mapping[str, Any]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="superduperdb.datalayer.mongodb.query.Select.one"><code class="name">var <span class="ident">one</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="superduperdb.datalayer.mongodb.query.Select.projection"><code class="name">var <span class="ident">projection</span> : Optional[Mapping[str, Any]]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="superduperdb.datalayer.mongodb.query.Select.is_trivial"><code class="name">var <span class="ident">is_trivial</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner=None):
+    if instance is None:
+        return self
+    if self.attrname is None:
+        raise TypeError(
+            &#34;Cannot use cached_property instance without calling __set_name__ on it.&#34;)
+    try:
+        cache = instance.__dict__
+    except AttributeError:  # not all objects have __dict__ (e.g. class defines slots)
+        msg = (
+            f&#34;No &#39;__dict__&#39; attribute on {type(instance).__name__!r} &#34;
+            f&#34;instance to cache {self.attrname!r} property.&#34;
+        )
+        raise TypeError(msg) from None
+    val = cache.get(self.attrname, _NOT_FOUND)
+    if val is _NOT_FOUND:
+        with self.lock:
+            # check if another thread filled cache while we awaited lock
+            val = cache.get(self.attrname, _NOT_FOUND)
+            if val is _NOT_FOUND:
+                val = self.func(instance)
+                try:
+                    cache[self.attrname] = val
+                except TypeError:
+                    msg = (
+                        f&#34;The &#39;__dict__&#39; attribute on {type(instance).__name__!r} instance &#34;
+                        f&#34;does not support item assignment for caching {self.attrname!r} property.&#34;
+                    )
+                    raise TypeError(msg) from None
+    return val</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.mongodb.query.Select.select_only_id"><code class="name">var <span class="ident">select_only_id</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner=None):
+    if instance is None:
+        return self
+    if self.attrname is None:
+        raise TypeError(
+            &#34;Cannot use cached_property instance without calling __set_name__ on it.&#34;)
+    try:
+        cache = instance.__dict__
+    except AttributeError:  # not all objects have __dict__ (e.g. class defines slots)
+        msg = (
+            f&#34;No &#39;__dict__&#39; attribute on {type(instance).__name__!r} &#34;
+            f&#34;instance to cache {self.attrname!r} property.&#34;
+        )
+        raise TypeError(msg) from None
+    val = cache.get(self.attrname, _NOT_FOUND)
+    if val is _NOT_FOUND:
+        with self.lock:
+            # check if another thread filled cache while we awaited lock
+            val = cache.get(self.attrname, _NOT_FOUND)
+            if val is _NOT_FOUND:
+                val = self.func(instance)
+                try:
+                    cache[self.attrname] = val
+                except TypeError:
+                    msg = (
+                        f&#34;The &#39;__dict__&#39; attribute on {type(instance).__name__!r} instance &#34;
+                        f&#34;does not support item assignment for caching {self.attrname!r} property.&#34;
+                    )
+                    raise TypeError(msg) from None
+    return val</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.mongodb.query.Select.table"><code class="name">var <span class="ident">table</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner=None):
+    if instance is None:
+        return self
+    if self.attrname is None:
+        raise TypeError(
+            &#34;Cannot use cached_property instance without calling __set_name__ on it.&#34;)
+    try:
+        cache = instance.__dict__
+    except AttributeError:  # not all objects have __dict__ (e.g. class defines slots)
+        msg = (
+            f&#34;No &#39;__dict__&#39; attribute on {type(instance).__name__!r} &#34;
+            f&#34;instance to cache {self.attrname!r} property.&#34;
+        )
+        raise TypeError(msg) from None
+    val = cache.get(self.attrname, _NOT_FOUND)
+    if val is _NOT_FOUND:
+        with self.lock:
+            # check if another thread filled cache while we awaited lock
+            val = cache.get(self.attrname, _NOT_FOUND)
+            if val is _NOT_FOUND:
+                val = self.func(instance)
+                try:
+                    cache[self.attrname] = val
+                except TypeError:
+                    msg = (
+                        f&#34;The &#39;__dict__&#39; attribute on {type(instance).__name__!r} instance &#34;
+                        f&#34;does not support item assignment for caching {self.attrname!r} property.&#34;
+                    )
+                    raise TypeError(msg) from None
+    return val</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="superduperdb.datalayer.mongodb.query.Select.add_fold"><code class="name flex">
+<span>def <span class="ident">add_fold</span></span>(<span>self, fold: str) ‑> <a title="superduperdb.datalayer.mongodb.query.Select" href="#superduperdb.datalayer.mongodb.query.Select">Select</a></span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_fold(self, fold: str) -&gt; &#39;Select&#39;:
+    return Select(
+        collection=self.collection,
+        filter={&#39;_fold&#39;: fold, **(self.filter or {})},
+        projection=self.projection,
+        kwargs=self.kwargs,
+        one=self.one,
+    )</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.mongodb.query.Select.select_using_ids"><code class="name flex">
+<span>def <span class="ident">select_using_ids</span></span>(<span>self, ids) ‑> <a title="superduperdb.datalayer.mongodb.query.Select" href="#superduperdb.datalayer.mongodb.query.Select">Select</a></span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def select_using_ids(self, ids) -&gt; &#39;Select&#39;:
+    return Select(
+        collection=self.collection,
+        filter={&#39;_id&#39;: {&#39;$in&#39;: ids}, **(self.filter if self.filter else {})},
+        projection=self.projection,
+        kwargs=self.kwargs,
+    )</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.mongodb.query.Select.update"><code class="name flex">
+<span>def <span class="ident">update</span></span>(<span>self, to_update: dict) ‑> <a title="superduperdb.datalayer.mongodb.query.Update" href="#superduperdb.datalayer.mongodb.query.Update">Update</a></span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update(self, to_update: dict) -&gt; &#39;Update&#39;:
+    return Update(
+        collection=self.collection,
+        filter=self.filter or {},
+        update=to_update,
+    )</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="superduperdb.datalayer.mongodb.query.Update"><code class="flex name class">
+<span>class <span class="ident">Update</span></span>
+<span>(</span><span>collection: str, filter: Mapping[str, Any], update: Optional[Mapping[str, Any]] = None, one: bool = False, replacement: Optional[Mapping[str, Any]] = None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Update(collection: str, filter: Mapping[str, Any], update: Optional[Mapping[str, Any]] = None, one: bool = False, replacement: Optional[Mapping[str, Any]] = None)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(frozen=True)
+class Update(query.Update):
+    collection: str
+    filter: Mapping[str, Any]
+    update: Optional[Mapping[str, Any]] = None
+    one: bool = False
+    replacement: Optional[Mapping[str, Any]] = None
+
+    @cached_property
+    def table(self):
+        return self.collection
+
+    @cached_property
+    def select_ids(self) -&gt; Select:
+        return Select(
+            collection=self.collection,
+            filter=self.filter,
+            projection={&#39;_id&#39;: 1},
+        )
+
+    @cached_property
+    def select(self) -&gt; Select:
+        return Select(
+            collection=self.collection,
+            filter=self.filter,
+            projection={&#39;_id&#39;: 1},
+        )
+
+    def to_raw(self, types, type_lookup):
+        if self.replacement is None:
+            assert self.update is not None
+            return Update(
+                collection=self.collection,
+                filter=self.filter,
+                update=convert_from_types_to_bytes(self.update, types, type_lookup),
+            )
+        else:
+            return Update(
+                collection=self.collection,
+                filter=self.filter,
+                replacement=convert_from_types_to_bytes(
+                    self.replacement, types, type_lookup
+                ),
+            )</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="superduperdb.datalayer.base.query.Update" href="../base/query.html#superduperdb.datalayer.base.query.Update">Update</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="superduperdb.datalayer.mongodb.query.Update.collection"><code class="name">var <span class="ident">collection</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="superduperdb.datalayer.mongodb.query.Update.filter"><code class="name">var <span class="ident">filter</span> : Mapping[str, Any]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="superduperdb.datalayer.mongodb.query.Update.one"><code class="name">var <span class="ident">one</span> : bool</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="superduperdb.datalayer.mongodb.query.Update.replacement"><code class="name">var <span class="ident">replacement</span> : Optional[Mapping[str, Any]]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="superduperdb.datalayer.mongodb.query.Update.update"><code class="name">var <span class="ident">update</span> : Optional[Mapping[str, Any]]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="superduperdb.datalayer.mongodb.query.Update.select"><code class="name">var <span class="ident">select</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner=None):
+    if instance is None:
+        return self
+    if self.attrname is None:
+        raise TypeError(
+            &#34;Cannot use cached_property instance without calling __set_name__ on it.&#34;)
+    try:
+        cache = instance.__dict__
+    except AttributeError:  # not all objects have __dict__ (e.g. class defines slots)
+        msg = (
+            f&#34;No &#39;__dict__&#39; attribute on {type(instance).__name__!r} &#34;
+            f&#34;instance to cache {self.attrname!r} property.&#34;
+        )
+        raise TypeError(msg) from None
+    val = cache.get(self.attrname, _NOT_FOUND)
+    if val is _NOT_FOUND:
+        with self.lock:
+            # check if another thread filled cache while we awaited lock
+            val = cache.get(self.attrname, _NOT_FOUND)
+            if val is _NOT_FOUND:
+                val = self.func(instance)
+                try:
+                    cache[self.attrname] = val
+                except TypeError:
+                    msg = (
+                        f&#34;The &#39;__dict__&#39; attribute on {type(instance).__name__!r} instance &#34;
+                        f&#34;does not support item assignment for caching {self.attrname!r} property.&#34;
+                    )
+                    raise TypeError(msg) from None
+    return val</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.mongodb.query.Update.select_ids"><code class="name">var <span class="ident">select_ids</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner=None):
+    if instance is None:
+        return self
+    if self.attrname is None:
+        raise TypeError(
+            &#34;Cannot use cached_property instance without calling __set_name__ on it.&#34;)
+    try:
+        cache = instance.__dict__
+    except AttributeError:  # not all objects have __dict__ (e.g. class defines slots)
+        msg = (
+            f&#34;No &#39;__dict__&#39; attribute on {type(instance).__name__!r} &#34;
+            f&#34;instance to cache {self.attrname!r} property.&#34;
+        )
+        raise TypeError(msg) from None
+    val = cache.get(self.attrname, _NOT_FOUND)
+    if val is _NOT_FOUND:
+        with self.lock:
+            # check if another thread filled cache while we awaited lock
+            val = cache.get(self.attrname, _NOT_FOUND)
+            if val is _NOT_FOUND:
+                val = self.func(instance)
+                try:
+                    cache[self.attrname] = val
+                except TypeError:
+                    msg = (
+                        f&#34;The &#39;__dict__&#39; attribute on {type(instance).__name__!r} instance &#34;
+                        f&#34;does not support item assignment for caching {self.attrname!r} property.&#34;
+                    )
+                    raise TypeError(msg) from None
+    return val</code></pre>
+</details>
+</dd>
+<dt id="superduperdb.datalayer.mongodb.query.Update.table"><code class="name">var <span class="ident">table</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner=None):
+    if instance is None:
+        return self
+    if self.attrname is None:
+        raise TypeError(
+            &#34;Cannot use cached_property instance without calling __set_name__ on it.&#34;)
+    try:
+        cache = instance.__dict__
+    except AttributeError:  # not all objects have __dict__ (e.g. class defines slots)
+        msg = (
+            f&#34;No &#39;__dict__&#39; attribute on {type(instance).__name__!r} &#34;
+            f&#34;instance to cache {self.attrname!r} property.&#34;
+        )
+        raise TypeError(msg) from None
+    val = cache.get(self.attrname, _NOT_FOUND)
+    if val is _NOT_FOUND:
+        with self.lock:
+            # check if another thread filled cache while we awaited lock
+            val = cache.get(self.attrname, _NOT_FOUND)
+            if val is _NOT_FOUND:
+                val = self.func(instance)
+                try:
+                    cache[self.attrname] = val
+                except TypeError:
+                    msg = (
+                        f&#34;The &#39;__dict__&#39; attribute on {type(instance).__name__!r} instance &#34;
+                        f&#34;does not support item assignment for caching {self.attrname!r} property.&#34;
+                    )
+                    raise TypeError(msg) from None
+    return val</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="superduperdb.datalayer.mongodb.query.Update.to_raw"><code class="name flex">
+<span>def <span class="ident">to_raw</span></span>(<span>self, types, type_lookup)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def to_raw(self, types, type_lookup):
+    if self.replacement is None:
+        assert self.update is not None
+        return Update(
+            collection=self.collection,
+            filter=self.filter,
+            update=convert_from_types_to_bytes(self.update, types, type_lookup),
+        )
+    else:
+        return Update(
+            collection=self.collection,
+            filter=self.filter,
+            replacement=convert_from_types_to_bytes(
+                self.replacement, types, type_lookup
+            ),
+        )</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="superduperdb.datalayer.mongodb" href="index.html">superduperdb.datalayer.mongodb</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="superduperdb.datalayer.mongodb.query.set_one_key_in_document" href="#superduperdb.datalayer.mongodb.query.set_one_key_in_document">set_one_key_in_document</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="superduperdb.datalayer.mongodb.query.Delete" href="#superduperdb.datalayer.mongodb.query.Delete">Delete</a></code></h4>
+<ul class="">
+<li><code><a title="superduperdb.datalayer.mongodb.query.Delete.collection" href="#superduperdb.datalayer.mongodb.query.Delete.collection">collection</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Delete.filter" href="#superduperdb.datalayer.mongodb.query.Delete.filter">filter</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Delete.one" href="#superduperdb.datalayer.mongodb.query.Delete.one">one</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Delete.table" href="#superduperdb.datalayer.mongodb.query.Delete.table">table</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="superduperdb.datalayer.mongodb.query.Insert" href="#superduperdb.datalayer.mongodb.query.Insert">Insert</a></code></h4>
+<ul class="">
+<li><code><a title="superduperdb.datalayer.mongodb.query.Insert.bypass_document_validation" href="#superduperdb.datalayer.mongodb.query.Insert.bypass_document_validation">bypass_document_validation</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Insert.collection" href="#superduperdb.datalayer.mongodb.query.Insert.collection">collection</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Insert.documents" href="#superduperdb.datalayer.mongodb.query.Insert.documents">documents</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Insert.ordered" href="#superduperdb.datalayer.mongodb.query.Insert.ordered">ordered</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Insert.select_table" href="#superduperdb.datalayer.mongodb.query.Insert.select_table">select_table</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Insert.table" href="#superduperdb.datalayer.mongodb.query.Insert.table">table</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Insert.to_raw" href="#superduperdb.datalayer.mongodb.query.Insert.to_raw">to_raw</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="superduperdb.datalayer.mongodb.query.Select" href="#superduperdb.datalayer.mongodb.query.Select">Select</a></code></h4>
+<ul class="two-column">
+<li><code><a title="superduperdb.datalayer.mongodb.query.Select.add_fold" href="#superduperdb.datalayer.mongodb.query.Select.add_fold">add_fold</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Select.collection" href="#superduperdb.datalayer.mongodb.query.Select.collection">collection</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Select.filter" href="#superduperdb.datalayer.mongodb.query.Select.filter">filter</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Select.is_trivial" href="#superduperdb.datalayer.mongodb.query.Select.is_trivial">is_trivial</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Select.kwargs" href="#superduperdb.datalayer.mongodb.query.Select.kwargs">kwargs</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Select.one" href="#superduperdb.datalayer.mongodb.query.Select.one">one</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Select.projection" href="#superduperdb.datalayer.mongodb.query.Select.projection">projection</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Select.select_only_id" href="#superduperdb.datalayer.mongodb.query.Select.select_only_id">select_only_id</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Select.select_using_ids" href="#superduperdb.datalayer.mongodb.query.Select.select_using_ids">select_using_ids</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Select.table" href="#superduperdb.datalayer.mongodb.query.Select.table">table</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Select.update" href="#superduperdb.datalayer.mongodb.query.Select.update">update</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="superduperdb.datalayer.mongodb.query.Update" href="#superduperdb.datalayer.mongodb.query.Update">Update</a></code></h4>
+<ul class="two-column">
+<li><code><a title="superduperdb.datalayer.mongodb.query.Update.collection" href="#superduperdb.datalayer.mongodb.query.Update.collection">collection</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Update.filter" href="#superduperdb.datalayer.mongodb.query.Update.filter">filter</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Update.one" href="#superduperdb.datalayer.mongodb.query.Update.one">one</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Update.replacement" href="#superduperdb.datalayer.mongodb.query.Update.replacement">replacement</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Update.select" href="#superduperdb.datalayer.mongodb.query.Update.select">select</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Update.select_ids" href="#superduperdb.datalayer.mongodb.query.Update.select_ids">select_ids</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Update.table" href="#superduperdb.datalayer.mongodb.query.Update.table">table</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Update.to_raw" href="#superduperdb.datalayer.mongodb.query.Update.to_raw">to_raw</a></code></li>
+<li><code><a title="superduperdb.datalayer.mongodb.query.Update.update" href="#superduperdb.datalayer.mongodb.query.Update.update">update</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
