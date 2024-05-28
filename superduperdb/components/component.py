@@ -115,19 +115,20 @@ class Component(Leaf):
         """Get dependencies on the component."""
         return ()
 
-    def init(self):
+    def init(self, db=None):
         """Method to help initiate component field dependencies."""
-        self.unpack()
+        self.unpack(db=db)
 
-    def unpack(self):
+    def unpack(self, db=None):
         """Method to unpack the component.
 
         This method is used to initialize all the fields of the component and leaf
         """
 
         def _init(item):
+            nonlocal db
             if isinstance(item, Component):
-                item.init()
+                item.init(db=db)
                 return item
 
             if isinstance(item, dict):
@@ -137,7 +138,7 @@ class Component(Leaf):
                 return [_init(i) for i in item]
 
             if isinstance(item, Leaf):
-                item.init()
+                item.init(db=db)
                 return item.unpack()
 
             return item
