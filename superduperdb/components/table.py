@@ -1,4 +1,3 @@
-import dataclasses as dc
 import typing as t
 
 from superduperdb.backends.ibis.field_types import dtype
@@ -11,7 +10,6 @@ if t.TYPE_CHECKING:
 DEFAULT_PRIMARY_ID = 'id'
 
 
-@dc.dataclass(kw_only=True)
 class Table(Component):
     """
     A component that represents a table in a database.

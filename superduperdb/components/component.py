@@ -85,7 +85,6 @@ ComponentTuple = namedtuple('ComponentTuple', ['type_id', 'identifier', 'version
 ComponentTuple.__doc__ = 'noqa'
 
 
-@dc.dataclass(kw_only=True)
 class Component(Leaf):
     """Base class for all components in SuperDuperDB.
 
@@ -381,7 +380,9 @@ class Component(Leaf):
         return super().__setattr__(k, v)
 
     def info(self):
+        """Get information about the component."""
         from superduperdb.misc.special_dicts import display_component
+
         display_component(self)
 
 

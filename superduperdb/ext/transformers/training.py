@@ -39,7 +39,6 @@ if t.TYPE_CHECKING:
     from superduperdb.ext.transformers.model import LLM
 
 
-@dc.dataclass(kw_only=True)
 class Checkpoint(Component):
     """Checkpoint component for saving the model checkpoint.
 
@@ -200,7 +199,6 @@ class LLMCallback(TrainerCallback):
         assert self.llm is not None
 
 
-@dc.dataclass(kw_only=True)
 class LLMTrainer(TrainingArguments, SuperDuperTrainer):
     """LLM Training Arguments # noqa.
 

@@ -1,4 +1,3 @@
-import dataclasses as dc
 import typing as t
 from functools import cached_property
 
@@ -20,7 +19,6 @@ class _Native:
         self.identifier = x
 
 
-@dc.dataclass(kw_only=True)
 class Schema(Component):
     """A component carrying the `DataType` of columns.
 

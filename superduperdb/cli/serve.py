@@ -5,7 +5,12 @@ from . import command
 
 
 @command(help='Start local cluster: server, ray and change data capture')
-def local_cluster(action: str, notebook_token: t.Optional[str] = None, attach: bool = True, cdc: bool = False):
+def local_cluster(
+    action: str,
+    notebook_token: t.Optional[str] = None,
+    attach: bool = True,
+    cdc: bool = False,
+):
     """Start local cluster: server, ray and change data capture.
 
     :param action: Action to perform (up, down, attach).
@@ -35,6 +40,7 @@ def vector_search():
 def cdc():
     """Start standalone change data capture."""
     from superduperdb.cdc.app import app
+
     app.start()
 
 

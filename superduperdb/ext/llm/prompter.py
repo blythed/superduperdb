@@ -51,7 +51,6 @@ PROMPT_INTRODUCTION = (
 )
 
 
-@dc.dataclass(kw_only=True)
 class RetrievalPrompt(QueryModel):
     """Retrieve a prompt based on data recalled from the database.
 

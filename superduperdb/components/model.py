@@ -7,7 +7,7 @@ import multiprocessing
 import os
 import re
 import typing as t
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 
 import requests
 import tqdm
@@ -203,7 +203,6 @@ class CallableInputs(Inputs):
         self.params = params
 
 
-@dc.dataclass(kw_only=True)
 class Trainer(Component):
     """Trainer component to train a model.
 
@@ -253,7 +252,6 @@ class Trainer(Component):
         pass
 
 
-@dc.dataclass(kw_only=True)
 class Validation(Component):
     """component which represents Validation definition.
 
@@ -472,7 +470,6 @@ class Mapping:
         return args, kwargs
 
 
-@dc.dataclass(kw_only=True)
 class Model(Component):
     """Base class for components which can predict.
 
@@ -1045,7 +1042,6 @@ class IndexableNode:
         return _Node(item)
 
 
-@dc.dataclass(kw_only=True)
 class _ObjectModel(Model):
     """Base class for components which can predict based on a Python object.
 
@@ -1116,7 +1112,6 @@ class _ObjectModel(Model):
         return outputs
 
 
-@dc.dataclass(kw_only=True)
 class ObjectModel(_ObjectModel):
     """Model component which wraps a Model to become serializable.
 
@@ -1133,7 +1128,6 @@ class ObjectModel(_ObjectModel):
     )
 
 
-@dc.dataclass(kw_only=True)
 class CodeModel(_ObjectModel):
     """Model component which stores a code object.
 
@@ -1143,7 +1137,6 @@ class CodeModel(_ObjectModel):
     object: Code
 
 
-@dc.dataclass(kw_only=True)
 class APIBaseModel(Model):
     """APIBaseModel component which is used to make the type of API request.
 
@@ -1180,7 +1173,6 @@ class APIBaseModel(Model):
         return results
 
 
-@dc.dataclass(kw_only=True)
 class APIModel(APIBaseModel):
     """APIModel component which is used to make the type of API request.
 
@@ -1228,7 +1220,6 @@ class APIModel(APIBaseModel):
         return out
 
 
-@dc.dataclass(kw_only=True)
 class QueryModel(Model):
     """QueryModel component.
 
@@ -1298,7 +1289,6 @@ class QueryModel(Model):
             raise NotImplementedError
 
 
-@dc.dataclass(kw_only=True)
 class SequentialModel(Model):
     """Sequential model component which wraps a model to become serializable.
 

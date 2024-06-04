@@ -3,7 +3,6 @@ import importlib
 import inspect
 import typing as t
 import uuid
-from abc import ABC
 
 from superduperdb.misc.annotations import extract_parameters, replace_parameters
 from superduperdb.misc.serialization import asdict
@@ -45,17 +44,45 @@ def _import_item(cls, module, dict, db: t.Optional['Datalayer'] = None):
         raise e
 
 
-class MergeDocstringsMeta(type):
+class LeafMeta(type):
     """Metaclass that merges docstrings # noqa."""
 
     def __new__(mcs, name, bases, namespace):
-        cls = super().__new__(mcs, name, bases, namespace)
+        """Create a new class with merged docstrings # noqa."""
+        # Prepare namespace by extracting annotations and handling fields
+        annotations = namespace.get('__annotations__', {})
+        for k, v in list(namespace.items()):
+            if isinstance(v, (type, dc.InitVar)):
+                annotations[k] = v
+            if isinstance(v, dc.Field):
+                annotations[
+                    k
+                ] = v.type  # Ensure field types are recorded in annotations
+
+        # Update namespace with proper annotations
+        namespace['__annotations__'] = annotations
+
+        # Determine if any bases are dataclasses and
+        # apply the appropriate dataclass decorator
+        if bases and any(dc.is_dataclass(b) for b in bases):
+            # Derived classes: kw_only=True
+            cls = dc.dataclass(kw_only=True, repr=not name.endswith('Query'))(
+                super().__new__(mcs, name, bases, namespace)
+            )
+        else:
+            # Base class: kw_only=False
+            cls = dc.dataclass(kw_only=False)(
+                super().__new__(mcs, name, bases, namespace)
+            )
+
+        # Merge docstrings from parent classes
         parent_doc = next(
-            (parent.__doc__ for parent in inspect.getmro(cls)[1:] if parent.__doc__), None
+            (parent.__doc__ for parent in inspect.getmro(cls)[1:] if parent.__doc__),
+            None,
         )
         if parent_doc:
             parent_params = extract_parameters(parent_doc)
-            child_doc = cls.__doc__ or """"""
+            child_doc = cls.__doc__ or ''
             child_params = extract_parameters(child_doc)
             for k in child_params:
                 parent_params[k] = child_params[k]
@@ -68,9 +95,7 @@ class MergeDocstringsMeta(type):
         return cls
 
 
-
-@dc.dataclass
-class Leaf(metaclass=MergeDocstringsMeta):
+class Leaf(metaclass=LeafMeta):
     """Base class for all leaf classes.
 
     :param identifier: Identifier of the leaf.
@@ -89,7 +114,12 @@ class Leaf(metaclass=MergeDocstringsMeta):
 
     @property
     def leaves(self):
-        return {f.name: getattr(self, f.name) for f in dc.fields(self) if isinstance(getattr(self, f.name), Leaf)}
+        """Get all leaves in the object."""
+        return {
+            f.name: getattr(self, f.name)
+            for f in dc.fields(self)
+            if isinstance(getattr(self, f.name), Leaf)
+        }
 
     @property
     def _id(self):

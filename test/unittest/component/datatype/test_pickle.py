@@ -1,4 +1,3 @@
-import dataclasses as dc
 import typing as t
 from test.db_config import DBConfig
 
@@ -17,7 +16,6 @@ from superduperdb.components.schema import Schema
 from superduperdb.components.table import Table
 
 
-@dc.dataclass(kw_only=True)
 class SpecialComponent(Component):
     type_id: t.ClassVar[str] = "special"
     my_data: str | None = None

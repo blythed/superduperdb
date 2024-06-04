@@ -1,4 +1,3 @@
-import dataclasses as dc
 import typing as t
 
 import tqdm
@@ -10,7 +9,6 @@ from superduperdb.components.vector_index import sqlvector, vector
 from superduperdb.ext.jina.client import JinaAPIClient
 
 
-@dc.dataclass(kw_only=True)
 class Jina(APIBaseModel):
     """Cohere predictor.
 
@@ -25,7 +23,6 @@ class Jina(APIBaseModel):
         self.client = JinaAPIClient(model_name=self.identifier, api_key=self.api_key)
 
 
-@dc.dataclass(kw_only=True)
 class JinaEmbedding(Jina):
     """Jina embedding predictor.
 

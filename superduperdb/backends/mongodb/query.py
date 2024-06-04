@@ -107,7 +107,6 @@ class ChangeStream:
         return collection.watch(**self.kwargs)
 
 
-@dc.dataclass(kw_only=True, repr=False)
 class MongoQuery(Query):
     """A query class for MongoDB.
 
@@ -640,6 +639,10 @@ class MongoQuery(Query):
                         '_source': ObjectId(id),
                     }
                 )
+
+            from superduperdb.base.datalayer import Datalayer
+
+            assert isinstance(self.db, Datalayer)
             return self.db[f'_outputs.{predict_id}'].insert_many(documents)
 
 
@@ -686,7 +689,6 @@ def ReplaceOne(**kwargs):
     return BulkOp(identifier='ReplaceOne', kwargs=kwargs)
 
 
-@dc.dataclass(kw_only=True)
 class BulkOp(Leaf):
     """A bulk operation for MongoDB.
 

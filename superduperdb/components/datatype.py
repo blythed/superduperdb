@@ -177,7 +177,6 @@ class DataTypeFactory:
         raise NotImplementedError
 
 
-@dc.dataclass(kw_only=True)
 class DataType(Component):
     """A data type component that defines how data is encoded and decoded.
 
@@ -348,7 +347,6 @@ def _find_descendants(cls):
     return descendants
 
 
-@dc.dataclass(kw_only=True)
 class _BaseEncodable(Leaf):
     """Data variable wrapping encode-able item.
 
@@ -460,7 +458,6 @@ class Empty:
         return '<EMPTY>'
 
 
-@dc.dataclass
 class Encodable(_BaseEncodable):
     """Class for encoding non-Python datatypes to the database.
 
@@ -547,7 +544,6 @@ class Encodable(_BaseEncodable):
         return datatype
 
 
-@dc.dataclass
 class Native(_BaseEncodable):
     """Class for representing native data supported by the underlying database.
 
@@ -573,7 +569,6 @@ class Native(_BaseEncodable):
         return f'{self.leaf_type}/{self.sha1}'
 
 
-@dc.dataclass
 class Artifact(_BaseEncodable):
     """Class for representing data to be saved on disk or in the artifact-store.
 
@@ -671,7 +666,6 @@ class Artifact(_BaseEncodable):
         return self.x
 
 
-@dc.dataclass
 class LazyArtifact(Artifact):
     """Data to be saved and loaded only when needed."""
 
@@ -679,7 +673,6 @@ class LazyArtifact(Artifact):
     lazy: t.ClassVar[bool] = True
 
 
-@dc.dataclass
 class File(_BaseEncodable):
     """Data to be saved on disk and passed as a file reference.
 

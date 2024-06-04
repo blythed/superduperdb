@@ -127,7 +127,7 @@ class IndexableNode:
             listener_lookup[node.model.identifier] = Listener(
                 model=node.model,
                 select=select,
-                key=key,  # type: ignore[arg-type]
+                key=key,
                 identifier=node.identifier,
             )
         return Stack(
@@ -156,7 +156,6 @@ class OutputWrapper:
             raise TypeError(f'Unsupported type for __getitem__: {type(item)}')
 
 
-@dc.dataclass(kw_only=True)
 class Input(Model):
     """Root model of a graph.
 
@@ -190,7 +189,6 @@ class Input(Model):
         return [self.predict(dataset[i]) for i in range(len(dataset))]
 
 
-@dc.dataclass(kw_only=True)
 class DocumentInput(Model):
     """Document Input node of the graph.
 
@@ -220,7 +218,6 @@ class DocumentInput(Model):
         return [self.predict(dataset[i]) for i in range(len(dataset))]
 
 
-@dc.dataclass(kw_only=True)
 class Graph(Model):
     """Represents a directed acyclic graph composed of interconnected model nodes.
 

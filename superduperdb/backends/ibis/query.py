@@ -15,7 +15,6 @@ from superduperdb.backends.base.query import (
 from superduperdb.base.cursor import SuperDuperCursor
 from superduperdb.base.exceptions import DatabackendException
 from superduperdb.components.schema import Schema
-from superduperdb.misc.annotations import merge_docstrings
 from superduperdb.misc.special_dicts import SuperDuperFlatEncode
 
 if t.TYPE_CHECKING:
@@ -90,7 +89,6 @@ def _model_update_impl(
     return db[f'_outputs.{predict_id}'].insert(documents)
 
 
-@dc.dataclass(kw_only=True, repr=False)
 class IbisQuery(Query):
     """A query that can be executed on an Ibis database."""
 
@@ -422,6 +420,9 @@ class IbisQuery(Query):
 
         :param predict_id: The predict id.
         """
+        from superduperdb.base.datalayer import Datalayer
+
+        assert isinstance(self.db, Datalayer)
         output_table = self.db[f'_outputs.{predict_id}']
         output_table = output_table.relabel({'output': '_outputs.' + predict_id})
         return self.anti_join(

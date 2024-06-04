@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import dataclasses as dc
 import typing as t
 from functools import cached_property
 
@@ -19,7 +18,6 @@ from superduperdb.components.datatype import (
 )
 
 
-@dc.dataclass(kw_only=True)
 class Dataset(Component):
     """A dataset is an immutable collection of documents.
 

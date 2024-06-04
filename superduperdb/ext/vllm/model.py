@@ -34,7 +34,6 @@ VLLM_INFERENCE_PARAMETERS_LIST = [
 ]
 
 
-@dc.dataclass
 class VllmAPI(BaseLLMAPI):
     """Wrapper for requesting the vLLM API service.
 
@@ -91,7 +90,6 @@ class _VllmCore:
         return texts_outputs
 
 
-@dc.dataclass(kw_only=True)
 class VllmModel(BaseLLM):
     """
     Load a large language model from VLLM.

@@ -49,7 +49,6 @@ class _TrainerWithSaving(NativeTrainer):
             self.custom_saver()
 
 
-@dc.dataclass(kw_only=True)
 class TransformersTrainer(TrainingArguments, Trainer):
     """Trainer for transformers models # noqa.
 
@@ -165,7 +164,6 @@ class TransformersTrainer(TrainingArguments, Trainer):
         trainer.train()
 
 
-@dc.dataclass(kw_only=True)
 class TextClassificationPipeline(Model, _Fittable, _DeviceManaged):
     """A wrapper for ``transformers.Pipeline``.
 
@@ -232,7 +230,6 @@ class TextClassificationPipeline(Model, _Fittable, _DeviceManaged):
         return self.pipeline(text)
 
 
-@dc.dataclass(kw_only=True)
 class LLM(BaseLLM, _Fittable):
     """
     LLM model based on `transformers` library.
@@ -417,7 +414,9 @@ class LLM(BaseLLM, _Fittable):
         return results[0]
 
     @ensure_initialized
-    def predict_batches(self, dataset: t.Union[t.List, QueryDataset], **kwargs) -> t.List:
+    def predict_batches(
+        self, dataset: t.Union[t.List, QueryDataset], **kwargs
+    ) -> t.List:
         """Generate text from a list of prompts.
 
         :param dataset: a list of prompts

@@ -1,4 +1,3 @@
-import abc
 import concurrent.futures
 import dataclasses as dc
 import inspect
@@ -19,7 +18,6 @@ if t.TYPE_CHECKING:
 getLogger("httpx").setLevel(WARNING)
 
 
-@dc.dataclass(kw_only=True)
 class BaseLLM(Model):
     """Base class for LLM models.
 
@@ -80,7 +78,9 @@ class BaseLLM(Model):
         return self._generate(x, **kwargs)
 
     @ensure_initialized
-    def predict_batches(self, dataset: t.Union[t.List, QueryDataset], **kwargs) -> t.Sequence:
+    def predict_batches(
+        self, dataset: t.Union[t.List, QueryDataset], **kwargs
+    ) -> t.Sequence:
         """Generate text from a dataset.
 
         :param dataset: The dataset to generate text from.
@@ -112,7 +112,6 @@ class BaseLLM(Model):
         return Prompter(self.prompt, self.prompt_func)
 
 
-@dc.dataclass
 class BaseLLMAPI(BaseLLM):
     """Base class for LLM models with an API.
 

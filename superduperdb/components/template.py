@@ -9,7 +9,6 @@ from superduperdb.components.datatype import DataType, dill_lazy
 from .component import Component, ensure_initialized
 
 
-@dc.dataclass(kw_only=True)
 class Template(Component):
     """
     Application template component.

@@ -1,4 +1,3 @@
-import dataclasses as dc
 import inspect
 
 from superduperdb.base.leaf import Leaf
@@ -9,7 +8,6 @@ template = """from superduperdb import code
 {definition}"""
 
 
-@dc.dataclass(kw_only=True)
 class Code(Leaf):
     """A class to store remote code.
 

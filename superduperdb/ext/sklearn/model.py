@@ -19,7 +19,6 @@ from superduperdb.components.model import (
 from superduperdb.jobs.job import Job
 
 
-@dc.dataclass(kw_only=True)
 class SklearnTrainer(Trainer):
     """A trainer for `sklearn` models.
 
@@ -88,7 +87,6 @@ class SklearnTrainer(Trainer):
         db.replace(model, upsert=True)
 
 
-@dc.dataclass(kw_only=True)
 class Estimator(Model, _Fittable):
     """Estimator model.
 

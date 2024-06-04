@@ -41,7 +41,6 @@ def _available_models(skwargs):
     return tuple([r.id for r in SyncOpenAI(**kwargs).models.list().data])
 
 
-@dc.dataclass(kw_only=True)
 class _OpenAI(APIBaseModel):
     """Base class for OpenAI models.
 
@@ -95,7 +94,6 @@ class _OpenAI(APIBaseModel):
         return out
 
 
-@dc.dataclass(kw_only=True)
 class OpenAIEmbedding(_OpenAI):
     """OpenAI embedding predictor.
 
@@ -153,7 +151,6 @@ class OpenAIEmbedding(_OpenAI):
         return [r.embedding for r in out.data]
 
 
-@dc.dataclass(kw_only=True)
 class OpenAIChatCompletion(_OpenAI):
     """OpenAI chat completion predictor.
 
@@ -219,7 +216,6 @@ class OpenAIChatCompletion(_OpenAI):
         return out
 
 
-@dc.dataclass(kw_only=True)
 class OpenAIImageCreation(_OpenAI):
     """OpenAI image creation predictor.
 
@@ -291,7 +287,6 @@ class OpenAIImageCreation(_OpenAI):
         return out
 
 
-@dc.dataclass(kw_only=True)
 class OpenAIImageEdit(_OpenAI):
     """OpenAI image edit predictor.
 
@@ -383,7 +378,6 @@ class OpenAIImageEdit(_OpenAI):
         return out
 
 
-@dc.dataclass(kw_only=True)
 class OpenAIAudioTranscription(_OpenAI):
     """OpenAI audio transcription predictor.
 
@@ -436,7 +430,6 @@ class OpenAIAudioTranscription(_OpenAI):
         return [resp.text for resp in resps]
 
 
-@dc.dataclass(kw_only=True)
 class OpenAIAudioTranslation(_OpenAI):
     """OpenAI audio translation predictor.
 

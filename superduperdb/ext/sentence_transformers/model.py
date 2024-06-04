@@ -1,4 +1,3 @@
-import dataclasses as dc
 import typing as t
 
 from sentence_transformers import SentenceTransformer as _SentenceTransformer
@@ -14,7 +13,6 @@ DEFAULT_PREDICT_KWARGS = {
 }
 
 
-@dc.dataclass(kw_only=True)
 class SentenceTransformer(Model, _DeviceManaged):
     """A model for sentence embeddings using `sentence-transformers`.
 

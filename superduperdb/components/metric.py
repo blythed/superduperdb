@@ -1,10 +1,8 @@
-import dataclasses as dc
 import typing as t
 
 from superduperdb.components.component import Component
 
 
-@dc.dataclass(kw_only=True)
 class Metric(Component):
     """Metric base object used to evaluate performance on a dataset.
 

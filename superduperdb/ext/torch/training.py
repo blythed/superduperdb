@@ -12,7 +12,6 @@ from superduperdb.components.model import Trainer
 from superduperdb.ext.torch.model import TorchModel
 
 
-@dc.dataclass(kw_only=True)
 class TorchTrainer(Trainer):
     """
     Configuration for the PyTorch trainer.

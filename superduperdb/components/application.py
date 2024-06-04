@@ -1,10 +1,8 @@
-import dataclasses as dc
 import typing as t
 
 from superduperdb.components.component import Component
 
 
-@dc.dataclass(kw_only=True)
 class Application(Component):
     """
     Application built from template.

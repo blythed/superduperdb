@@ -21,7 +21,6 @@ if t.TYPE_CHECKING:
 SELECT_TEMPLATE = {'documents': [], 'query': '<collection_name>.find()'}
 
 
-@dc.dataclass(kw_only=True)
 class Listener(Component):
     """Listener component.
 
