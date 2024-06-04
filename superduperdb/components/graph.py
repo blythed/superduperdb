@@ -7,7 +7,6 @@ from superduperdb import Schema
 from superduperdb.backends.base.query import Query
 from superduperdb.backends.query_dataset import QueryDataset
 from superduperdb.components.model import Model, Signature, ensure_initialized
-from superduperdb.misc.annotations import merge_docstrings
 
 
 def input_node(*args):
@@ -157,7 +156,6 @@ class OutputWrapper:
             raise TypeError(f'Unsupported type for __getitem__: {type(item)}')
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class Input(Model):
     """Root model of a graph.
@@ -176,7 +174,7 @@ class Input(Model):
         if isinstance(self.spec, str):
             self.signature = 'singleton'
 
-    def predict_one(self, *args):
+    def predict(self, *args):
         """Single prediction."""
         if self.signature == 'singleton':
             return args[0]
@@ -189,10 +187,9 @@ class Input(Model):
 
         :param dataset: Series of datapoints
         """
-        return [self.predict_one(dataset[i]) for i in range(len(dataset))]
+        return [self.predict(dataset[i]) for i in range(len(dataset))]
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class DocumentInput(Model):
     """Document Input node of the graph.
@@ -208,7 +205,7 @@ class DocumentInput(Model):
     def __post_init__(self, db, artifacts):
         super().__post_init__(db, artifacts)
 
-    def predict_one(self, r):
+    def predict(self, r):
         """Single prediction.
 
         :param r: Model input
@@ -220,10 +217,9 @@ class DocumentInput(Model):
 
         :param dataset: Series of datapoints
         """
-        return [self.predict_one(dataset[i]) for i in range(len(dataset))]
+        return [self.predict(dataset[i]) for i in range(len(dataset))]
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class Graph(Model):
     """Represents a directed acyclic graph composed of interconnected model nodes.
@@ -248,7 +244,7 @@ class Graph(Model):
     >>   identifier='simple-graph', input=model1, outputs=[model2], signature='*args'
     >> )
     >> g.connect(model1, model2)
-    >> assert g.predict_one(1) == [(4, 2)]
+    >> assert g.predict(1) == [(4, 2)]
 
     """
 
@@ -472,7 +468,7 @@ class Graph(Model):
                 args, kwargs = self._fetch_input(
                     args, kwargs, edges=edges, outputs=outputs
                 )
-                cache[node] = self.nodes[node].predict_one(*args, **kwargs)
+                cache[node] = self.nodes[node].predict(*args, **kwargs)
             else:
                 dataset = self._fetch_inputs(
                     args[0], edges=edges, outputs=outputs, node=node
@@ -482,7 +478,7 @@ class Graph(Model):
         return cache[node]
 
     @ensure_initialized
-    def predict_one(self, *args, **kwargs):
+    def predict(self, *args, **kwargs):
         """Predict on single data point.
 
         Single data point prediction passes the args and kwargs to the defined node flow

@@ -17,10 +17,8 @@ from superduperdb.components.datatype import (
     pickle_decode,
     pickle_encode,
 )
-from superduperdb.misc.annotations import merge_docstrings
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class Dataset(Component):
     """A dataset is an immutable collection of documents.

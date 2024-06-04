@@ -90,7 +90,6 @@ def _model_update_impl(
     return db[f'_outputs.{predict_id}'].insert(documents)
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True, repr=False)
 class IbisQuery(Query):
     """A query that can be executed on an Ibis database."""

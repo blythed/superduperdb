@@ -1,12 +1,9 @@
 import dataclasses as dc
 import typing as t
 
-from superduperdb.misc.annotations import merge_docstrings
-
 from .component import Component
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class Stack(Component):
     """

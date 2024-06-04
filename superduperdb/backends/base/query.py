@@ -8,7 +8,6 @@ from functools import wraps
 
 from superduperdb.base.document import Document
 from superduperdb.base.leaf import Leaf
-from superduperdb.misc.annotations import merge_docstrings
 from superduperdb.misc.hash import hash_string
 
 if t.TYPE_CHECKING:
@@ -42,9 +41,8 @@ def applies_to(*flavours):
     return decorator
 
 
-@merge_docstrings
 @dc.dataclass
-class _BaseQuery(Leaf, ABC):
+class _BaseQuery(Leaf):
     ...
 
 
@@ -73,7 +71,6 @@ class TraceMixin:
         )
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True, repr=False)
 class Query(_BaseQuery, TraceMixin):
     """A query object.
@@ -572,7 +569,6 @@ def parse_query(
     return query[-1]
 
 
-@merge_docstrings
 @dc.dataclass
 class Model(Leaf, TraceMixin):
     """

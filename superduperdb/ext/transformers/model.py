@@ -35,7 +35,6 @@ from superduperdb.components.model import (
 from superduperdb.ext.llm.model import BaseLLM
 from superduperdb.ext.transformers.training import Checkpoint
 from superduperdb.jobs.job import Job
-from superduperdb.misc.annotations import merge_docstrings
 
 
 class _TrainerWithSaving(NativeTrainer):
@@ -50,7 +49,6 @@ class _TrainerWithSaving(NativeTrainer):
             self.custom_saver()
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class TransformersTrainer(TrainingArguments, Trainer):
     """Trainer for transformers models # noqa.
@@ -167,7 +165,6 @@ class TransformersTrainer(TrainingArguments, Trainer):
         trainer.train()
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class TextClassificationPipeline(Model, _Fittable, _DeviceManaged):
     """A wrapper for ``transformers.Pipeline``.
@@ -219,7 +216,7 @@ class TextClassificationPipeline(Model, _Fittable, _DeviceManaged):
             self._build_pipeline()
         super().__post_init__(db, artifacts)
 
-    def predict_one(self, text: str):
+    def predict(self, text: str):
         """Predict the class of a single text.
 
         :param text: a text
@@ -235,7 +232,6 @@ class TextClassificationPipeline(Model, _Fittable, _DeviceManaged):
         return self.pipeline(text)
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class LLM(BaseLLM, _Fittable):
     """
@@ -409,7 +405,7 @@ class LLM(BaseLLM, _Fittable):
         self.pipeline = self.init_pipeline(real_adapter_id)
 
     @ensure_initialized
-    def predict_one(self, X, **kwargs):
+    def predict(self, X, **kwargs):
         """Generate text from a single prompt.
 
         :param X: a prompt

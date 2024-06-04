@@ -14,7 +14,6 @@ import yaml
 from superduperdb import logging
 from superduperdb.base.leaf import Leaf
 from superduperdb.jobs.job import ComponentJob, Job
-from superduperdb.misc.annotations import merge_docstrings
 
 if t.TYPE_CHECKING:
     from superduperdb import Document
@@ -86,7 +85,6 @@ ComponentTuple = namedtuple('ComponentTuple', ['type_id', 'identifier', 'version
 ComponentTuple.__doc__ = 'noqa'
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class Component(Leaf):
     """Base class for all components in SuperDuperDB.

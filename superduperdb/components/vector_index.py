@@ -12,17 +12,16 @@ from superduperdb.components.listener import Listener
 from superduperdb.components.model import Mapping, ModelInputType
 from superduperdb.ext.utils import str_shape
 from superduperdb.jobs.job import FunctionJob
-from superduperdb.misc.annotations import component, merge_docstrings
 from superduperdb.misc.special_dicts import MongoStyleDict
 from superduperdb.vector_search.base import VectorIndexMeasureType
 from superduperdb.vector_search.update_tasks import copy_vectors
+from superduperdb.misc.annotations import component
 
 KeyType = t.Union[str, t.List, t.Dict]
 if t.TYPE_CHECKING:
     from superduperdb.jobs.job import Job
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class VectorIndex(Component):
     """
@@ -117,7 +116,7 @@ class VectorIndex(Component):
         data = Mapping(key, model.signature)(document)
         args, kwargs = model.handle_input_type(data, model.signature)
         return (
-            model.predict_one(*args, **kwargs),
+            model.predict(*args, **kwargs),
             model.identifier,
             key,
         )

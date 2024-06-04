@@ -5,7 +5,6 @@ import requests
 
 from superduperdb import logging
 from superduperdb.ext.llm.model import BaseLLM, BaseLLMAPI
-from superduperdb.misc.annotations import merge_docstrings
 
 __all__ = ["VllmAPI", "VllmModel"]
 
@@ -35,7 +34,6 @@ VLLM_INFERENCE_PARAMETERS_LIST = [
 ]
 
 
-@merge_docstrings
 @dc.dataclass
 class VllmAPI(BaseLLMAPI):
     """Wrapper for requesting the vLLM API service.
@@ -93,7 +91,6 @@ class _VllmCore:
         return texts_outputs
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class VllmModel(BaseLLM):
     """

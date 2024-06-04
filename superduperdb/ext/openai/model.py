@@ -21,7 +21,6 @@ from superduperdb.backends.query_dataset import QueryDataset
 from superduperdb.base.datalayer import Datalayer
 from superduperdb.components.model import APIBaseModel, Inputs
 from superduperdb.components.vector_index import sqlvector, vector
-from superduperdb.misc.annotations import merge_docstrings
 from superduperdb.misc.compat import cache
 from superduperdb.misc.retry import Retry
 
@@ -42,7 +41,6 @@ def _available_models(skwargs):
     return tuple([r.id for r in SyncOpenAI(**kwargs).models.list().data])
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class _OpenAI(APIBaseModel):
     """Base class for OpenAI models.
@@ -97,7 +95,6 @@ class _OpenAI(APIBaseModel):
         return out
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class OpenAIEmbedding(_OpenAI):
     """OpenAI embedding predictor.
@@ -138,7 +135,7 @@ class OpenAIEmbedding(_OpenAI):
             self.datatype = vector(shape=self.shape)
 
     @retry
-    def predict_one(self, X: str):
+    def predict(self, X: str):
         """Generates embeddings from text.
 
         :param X: The text to generate embeddings for.
@@ -156,7 +153,6 @@ class OpenAIEmbedding(_OpenAI):
         return [r.embedding for r in out.data]
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class OpenAIChatCompletion(_OpenAI):
     """OpenAI chat completion predictor.
@@ -190,7 +186,7 @@ class OpenAIChatCompletion(_OpenAI):
             self.datatype = dtype('str')
 
     @retry
-    def predict_one(self, X: str, context: t.Optional[str] = None, **kwargs):
+    def predict(self, X: str, context: t.Optional[str] = None, **kwargs):
         """Generates text completions from prompts.
 
         :param X: The prompt.
@@ -219,11 +215,10 @@ class OpenAIChatCompletion(_OpenAI):
             args, kwargs = self.handle_input_type(
                 data=dataset[i], signature=self.signature
             )
-            out.append(self.predict_one(*args, **kwargs))
+            out.append(self.predict(*args, **kwargs))
         return out
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class OpenAIImageCreation(_OpenAI):
     """OpenAI image creation predictor.
@@ -257,7 +252,7 @@ class OpenAIImageCreation(_OpenAI):
         return prompt + X
 
     @retry
-    def predict_one(self, X: str):
+    def predict(self, X: str):
         """Generates images from text prompts.
 
         :param X: The text prompt.
@@ -292,11 +287,10 @@ class OpenAIImageCreation(_OpenAI):
             args, kwargs = self.handle_input_type(
                 data=dataset[i], signature=self.signature
             )
-            out.append(self.predict_one(*args, **kwargs))
+            out.append(self.predict(*args, **kwargs))
         return out
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class OpenAIImageEdit(_OpenAI):
     """OpenAI image edit predictor.
@@ -329,7 +323,7 @@ class OpenAIImageEdit(_OpenAI):
             self.datatype = dtype('bytes')
 
     @retry
-    def predict_one(
+    def predict(
         self,
         image: t.BinaryIO,
         mask: t.Optional[t.BinaryIO] = None,
@@ -385,11 +379,10 @@ class OpenAIImageEdit(_OpenAI):
             args, kwargs = self.handle_input_type(
                 data=dataset[i], signature=self.signature
             )
-            out.append(self.predict_one(*args, **kwargs))
+            out.append(self.predict(*args, **kwargs))
         return out
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class OpenAIAudioTranscription(_OpenAI):
     """OpenAI audio transcription predictor.
@@ -416,7 +409,7 @@ class OpenAIAudioTranscription(_OpenAI):
             self.datatype = dtype('str')
 
     @retry
-    def predict_one(self, file: t.BinaryIO, context: t.Optional[t.List[str]] = None):
+    def predict(self, file: t.BinaryIO, context: t.Optional[t.List[str]] = None):
         """Converts a file-like Audio recording to text.
 
         :param file: The file-like Audio recording to transcribe.
@@ -443,7 +436,6 @@ class OpenAIAudioTranscription(_OpenAI):
         return [resp.text for resp in resps]
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class OpenAIAudioTranslation(_OpenAI):
     """OpenAI audio translation predictor.
@@ -471,7 +463,7 @@ class OpenAIAudioTranslation(_OpenAI):
             self.datatype = dtype('str')
 
     @retry
-    def predict_one(
+    def predict(
         self,
         file: t.BinaryIO,
         context: t.Optional[t.List[str]] = None,

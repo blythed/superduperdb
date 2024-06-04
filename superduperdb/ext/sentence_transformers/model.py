@@ -8,14 +8,12 @@ from superduperdb.base.enums import DBType
 from superduperdb.components.component import ensure_initialized
 from superduperdb.components.datatype import DataType, dill_lazy
 from superduperdb.components.model import Model, Signature, _DeviceManaged
-from superduperdb.misc.annotations import merge_docstrings
 
 DEFAULT_PREDICT_KWARGS = {
     'show_progress_bar': True,
 }
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class SentenceTransformer(Model, _DeviceManaged):
     """A model for sentence embeddings using `sentence-transformers`.
@@ -52,7 +50,7 @@ class SentenceTransformer(Model, _DeviceManaged):
             self._default_model = True
 
         if self.datatype is None:
-            sample = self.predict_one('Test')
+            sample = self.predict('Test')
             self.shape = (len(sample),)
 
     def dict(self):
@@ -76,7 +74,7 @@ class SentenceTransformer(Model, _DeviceManaged):
         self.object._target_device = device
 
     @ensure_initialized
-    def predict_one(self, X, *args, **kwargs):
+    def predict(self, X, *args, **kwargs):
         """Predict on a single input.
 
         :param X: The input to predict on.

@@ -5,6 +5,7 @@ import typing as t
 import uuid
 from abc import ABC
 
+from superduperdb.misc.annotations import extract_parameters, replace_parameters
 from superduperdb.misc.serialization import asdict
 from superduperdb.misc.special_dicts import SuperDuperFlatEncode
 
@@ -44,8 +45,32 @@ def _import_item(cls, module, dict, db: t.Optional['Datalayer'] = None):
         raise e
 
 
+class MergeDocstringsMeta(type):
+    """Metaclass that merges docstrings # noqa."""
+
+    def __new__(mcs, name, bases, namespace):
+        cls = super().__new__(mcs, name, bases, namespace)
+        parent_doc = next(
+            (parent.__doc__ for parent in inspect.getmro(cls)[1:] if parent.__doc__), None
+        )
+        if parent_doc:
+            parent_params = extract_parameters(parent_doc)
+            child_doc = cls.__doc__ or """"""
+            child_params = extract_parameters(child_doc)
+            for k in child_params:
+                parent_params[k] = child_params[k]
+            placeholder_doc = replace_parameters(child_doc)
+            param_string = ''
+            for k, v in parent_params.items():
+                v = '\n    '.join(v)
+                param_string += f':param {k}: {v}\n'
+            cls.__doc__ = placeholder_doc.replace('!!!', param_string)
+        return cls
+
+
+
 @dc.dataclass
-class Leaf(ABC):
+class Leaf(metaclass=MergeDocstringsMeta):
     """Base class for all leaf classes.
 
     :param identifier: Identifier of the leaf.

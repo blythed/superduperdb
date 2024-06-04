@@ -8,10 +8,8 @@ from superduperdb.backends.query_dataset import QueryDataset
 from superduperdb.components.model import APIBaseModel
 from superduperdb.components.vector_index import sqlvector, vector
 from superduperdb.ext.jina.client import JinaAPIClient
-from superduperdb.misc.annotations import merge_docstrings
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class Jina(APIBaseModel):
     """Cohere predictor.
@@ -27,7 +25,6 @@ class Jina(APIBaseModel):
         self.client = JinaAPIClient(model_name=self.identifier, api_key=self.api_key)
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class JinaEmbedding(Jina):
     """Jina embedding predictor.
@@ -61,7 +58,7 @@ class JinaEmbedding(Jina):
         elif self.datatype is None:
             self.datatype = vector(shape=self.shape)
 
-    def predict_one(self, X: str):
+    def predict(self, X: str):
         """Predict the embedding of a single text.
 
         :param X: The text to predict the embedding of.

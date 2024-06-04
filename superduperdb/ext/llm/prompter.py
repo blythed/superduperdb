@@ -4,7 +4,6 @@ import typing as t
 
 from superduperdb.components.model import QueryModel
 from superduperdb.ext.utils import format_prompt
-from superduperdb.misc.annotations import merge_docstrings
 
 
 @dc.dataclass
@@ -52,7 +51,6 @@ PROMPT_INTRODUCTION = (
 )
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class RetrievalPrompt(QueryModel):
     """Retrieve a prompt based on data recalled from the database.
@@ -80,12 +78,12 @@ class RetrievalPrompt(QueryModel):
         """The inputs of the model."""
         return super().inputs
 
-    def predict_one(self, prompt):
+    def predict(self, prompt):
         """Predict the answer to the question based on the prompt.
 
         :param prompt: The prompt to answer the question.
         """
-        out = super().predict_one(prompt=prompt)
+        out = super().predict(prompt=prompt)
         prompt = (
             self.prompt_explanation
             + self.join

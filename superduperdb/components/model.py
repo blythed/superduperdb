@@ -26,7 +26,6 @@ from superduperdb.components.datatype import DataType, dill_lazy
 from superduperdb.components.metric import Metric
 from superduperdb.components.schema import Schema
 from superduperdb.jobs.job import ComponentJob, Job
-from superduperdb.misc.annotations import merge_docstrings
 
 if t.TYPE_CHECKING:
     from superduperdb.base.datalayer import Datalayer
@@ -204,7 +203,6 @@ class CallableInputs(Inputs):
         self.params = params
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class Trainer(Component):
     """Trainer component to train a model.
@@ -255,7 +253,6 @@ class Trainer(Component):
         pass
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class Validation(Component):
     """component which represents Validation definition.
@@ -475,7 +472,6 @@ class Mapping:
         return args, kwargs
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class Model(Component):
     """Base class for components which can predict.
@@ -512,10 +508,10 @@ class Model(Component):
     @property
     def inputs(self) -> Inputs:
         """Instance of `Inputs` to represent model params."""
-        return Inputs(list(inspect.signature(self.predict_one).parameters.keys()))
+        return Inputs(list(inspect.signature(self.predict).parameters.keys()))
 
     @abstractmethod
-    def predict_one(self, *args, **kwargs) -> int:
+    def predict(self, *args, **kwargs) -> int:
         """Predict on a single data point.
 
         Execute a single prediction on a data point
@@ -1049,9 +1045,8 @@ class IndexableNode:
         return _Node(item)
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
-class _ObjectModel(Model, ABC):
+class _ObjectModel(Model):
     """Base class for components which can predict based on a Python object.
 
     :param num_workers: Number of workers to use for parallel processing
@@ -1091,7 +1086,7 @@ class _ObjectModel(Model, ABC):
         return self.object(*args, **kwargs)
 
     @ensure_initialized
-    def predict_one(self, *args, **kwargs):
+    def predict(self, *args, **kwargs):
         """Predict on a single data point.
 
         Method to execute ``Object`` on args and kwargs.
@@ -1121,7 +1116,6 @@ class _ObjectModel(Model, ABC):
         return outputs
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class ObjectModel(_ObjectModel):
     """Model component which wraps a Model to become serializable.
@@ -1129,7 +1123,7 @@ class ObjectModel(_ObjectModel):
     Example:
     -------
     >>> m = ObjectModel('test', lambda x: x + 2)
-    >>> m.predict_one(2)
+    >>> m.predict(2)
     4
 
     """
@@ -1139,7 +1133,6 @@ class ObjectModel(_ObjectModel):
     )
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class CodeModel(_ObjectModel):
     """Model component which stores a code object.
@@ -1150,7 +1143,6 @@ class CodeModel(_ObjectModel):
     object: Code
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class APIBaseModel(Model):
     """APIBaseModel component which is used to make the type of API request.
@@ -1181,14 +1173,13 @@ class APIBaseModel(Model):
         ) as executor:
             results = list(
                 executor.map(
-                    lambda x: self.predict_one(x, *args, **kwargs),
+                    lambda x: self.predict(x, *args, **kwargs),
                     dataset,  # type: ignore[arg-type]
                 )
             )
         return results
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class APIModel(APIBaseModel):
     """APIModel component which is used to make the type of API request.
@@ -1221,7 +1212,7 @@ class APIModel(APIBaseModel):
         """
         return self.url.format(**params, **{k: os.environ[k] for k in self.envs})
 
-    def predict_one(self, *args, **kwargs):
+    def predict(self, *args, **kwargs):
         """Predict on a single data point.
 
         Method to requests to `url` on args and kwargs.
@@ -1237,7 +1228,6 @@ class APIModel(APIBaseModel):
         return out
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class QueryModel(Model):
     """QueryModel component.
@@ -1274,7 +1264,7 @@ class QueryModel(Model):
         return Inputs([x.value for x in self.select.variables])
 
     @ensure_initialized
-    def predict_one(self, *args, **kwargs):
+    def predict(self, *args, **kwargs):
         """Predict on a single data point.
 
         Method to perform a single prediction on args and kwargs.
@@ -1299,16 +1289,15 @@ class QueryModel(Model):
         """
         if isinstance(dataset[0], tuple):
             return [
-                self.predict_one(*dataset[i][0], **dataset[i][1])
+                self.predict(*dataset[i][0], **dataset[i][1])
                 for i in range(len(dataset))
             ]
         elif isinstance(dataset[0], dict):
-            return [self.predict_one(**dataset[i]) for i in range(len(dataset))]
+            return [self.predict(**dataset[i]) for i in range(len(dataset))]
         else:
             raise NotImplementedError
 
 
-@merge_docstrings
 @dc.dataclass(kw_only=True)
 class SequentialModel(Model):
     """Sequential model component which wraps a model to become serializable.
@@ -1339,7 +1328,7 @@ class SequentialModel(Model):
             p.post_create(db)
         self.on_load(db)
 
-    def predict_one(self, *args, **kwargs):
+    def predict(self, *args, **kwargs):
         """Predict on a single data point.
 
         Method to do single prediction on args and kwargs.
