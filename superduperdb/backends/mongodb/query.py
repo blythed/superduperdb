@@ -129,6 +129,7 @@ class MongoQuery(Query):
         'update_one': '^.*\.update_one\(.*\)$',
         'delete_many': '^.*\.delete_many\(.*\)$',
         'delete_one': '^.*\.delete_one\(.*\)$',
+        'other': '^.*$',
     }
 
     methods_mapping: t.ClassVar[t.Dict[str, str]] = {
@@ -175,6 +176,7 @@ class MongoQuery(Query):
                 'insert_many': 'insert',
                 'insert_one': 'insert',
                 'outputs': 'outputs',
+                'other': 'other',
             },
         )[self.flavour]
 

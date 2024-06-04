@@ -310,12 +310,7 @@ class Datalayer:
             return self._update(query, *args, **kwargs)
         if query.type == 'predict':
             return self._predict(query, *args, **kwargs)
-
-        raise TypeError(
-            f'Wrong type of {query}; '
-            f'Expected object of type "delete", "insert", "select", "update"'
-            f'Got {type(query)};'
-        )
+        return query.do_execute(self)
 
     def _predict(self, prediction: t.Any) -> PredictResult:
         return prediction.do_execute(self)
