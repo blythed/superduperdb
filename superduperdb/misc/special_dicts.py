@@ -9,6 +9,7 @@ from rich.tree import Tree
 from rich.text import Text
 from rich.columns import Columns
 
+
 class IndexableDict(OrderedDict):
     """IndexableDict.
 
@@ -47,7 +48,8 @@ class IndexableDict(OrderedDict):
         except IndexError:
             raise IndexError(f"Index {index} is out of range.")
 
-def highlight_references(yaml_str, pattern=r'(\?[\w/<>:.-]+|\&[\w/<>:.-]+)'):
+
+def _highlight_references(yaml_str, pattern=r'(\?[\w/<>:.-]+|\&[\w/<>:.-]+)'):
     highlighted_text = Text()
     for line in yaml_str.split('\n'):
         matches = re.finditer(pattern, line)
@@ -76,7 +78,7 @@ def highlight_references(yaml_str, pattern=r'(\?[\w/<>:.-]+|\&[\w/<>:.-]+)'):
     return highlighted_text
 
 
-def format_base_section(base_section):
+def _format_base_section(base_section):
     blocks = base_section.split('/')
     component_type = blocks[1]
     component_identifier = blocks[-1]
@@ -84,7 +86,9 @@ def format_base_section(base_section):
 
     yaml_str= yaml.dump(base)
     return yaml_str
-def print_serialized_object(serialized_object):
+
+
+def _print_serialized_object(serialized_object):
     console = Console()
 
     # Extract sections of the serialized object
@@ -93,16 +97,16 @@ def print_serialized_object(serialized_object):
     blobs_section = serialized_object.get('_blobs', {})
 
     # Format base section with additional component info
-    base_yaml= format_base_section(base_section)
+    base_yaml= _format_base_section(base_section)
 
     # Convert sections to YAML strings
     leaves_yaml = yaml.dump(leaves_section)
     blobs_yaml = yaml.dump(blobs_section)
 
     # Highlight references
-    base_text = highlight_references(base_yaml)
-    leaves_text = highlight_references(leaves_yaml)
-    blobs_text = highlight_references(blobs_yaml)
+    base_text = _highlight_references(base_yaml)
+    leaves_text = _highlight_references(leaves_yaml)
+    blobs_text = _highlight_references(blobs_yaml)
 
     # Create panels for different sections
     base_panel = Panel(base_text, title="Base Component", border_style="green")
@@ -113,9 +117,10 @@ def print_serialized_object(serialized_object):
     console.print(base_panel)
     console.print(leaves_panel)
     console.print(blobs_panel)
-    console.print(legend_panel())
+    console.print(_legend_panel())
 
-def legend_panel():
+
+def _legend_panel():
     legend_content = """
     [bold underline green]Legend[/]\n
     [bold blue]_path[/]: This indicates the module path within SuperDuperDB.\n
@@ -211,7 +216,7 @@ class SuperDuperFlatEncode(t.Dict[str, t.Any]):
             return out
 
     def show(self):
-        print_serialized_object(self)
+        _print_serialized_object(self)
 
 
 class MongoStyleDict(t.Dict[str, t.Any]):
@@ -351,7 +356,12 @@ def _component_metadata(obj):
 
 
 
-def display_component(obj):
+def display_component(component):
+    """
+    Display a `superduperdb.components.Component` in a tree format. 
+
+    :param component: `superduperdb.components.Component`
+    """
     from superduperdb.base.leaf import Leaf
     console = Console()
 
@@ -365,17 +375,17 @@ def display_component(obj):
         base_component = "\n".join(base_component)
         return base_component
 
-    base_component = _component_info(obj)
-    base_component_metadata = _component_metadata(obj)
+    base_component = _component_info(component)
+    base_component_metadata = _component_metadata(component)
 
     properties_panel = Panel(
     base_component,
-    title=obj.identifier,
+    title=component.identifier,
     border_style="bold green"
 )
 
-    tree = Tree(Text(f'Component Map: {obj.identifier}', style="bold green"), guide_style="bold green")
-    _childrens(tree, obj)
+    tree = Tree(Text(f'Component Map: {component.identifier}', style="bold green"), guide_style="bold green")
+    _childrens(tree, component)
 
     additional_info_panel = Panel(
             base_component_metadata,

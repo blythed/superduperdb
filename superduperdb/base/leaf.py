@@ -63,6 +63,10 @@ class Leaf(ABC):
         self.db: 'Datalayer' = db
 
     @property
+    def leaves(self):
+        return {f.name: getattr(self, f.name) for f in dc.fields(self) if isinstance(getattr(self, f.name), Leaf)}
+
+    @property
     def _id(self):
         return f'{self.__class__.__name__.lower()}/{self.uuid}'
 

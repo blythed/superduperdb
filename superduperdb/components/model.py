@@ -527,7 +527,7 @@ class Model(Component):
         pass
 
     @abstractmethod
-    def predict(self, dataset: t.Union[t.List, QueryDataset]) -> t.List:
+    def predict_batches(self, dataset: t.Union[t.List, QueryDataset]) -> t.List:
         """Execute on a series of data points defined in the dataset.
 
         :param dataset: Series of data points to predict on.
@@ -770,7 +770,7 @@ class Model(Component):
             in_memory=in_memory,
         )
 
-        outputs = self.predict(dataset)
+        outputs = self.predict_batches(dataset)
         self._infer_auto_schema(outputs, predict_id)
         outputs = self.encode_outputs(outputs)
         logging.info(f'Adding {len(outputs)} model outputs to `db`')
@@ -967,7 +967,7 @@ class Model(Component):
         mapping1 = Mapping(key[0], self.signature)
         mapping2 = Mapping(key[1], 'singleton')
         inputs = [mapping1(r) for r in dataset.data]
-        predictions = self.predict(inputs)
+        predictions = self.predict_batches(inputs)
         targets = [mapping2(r) for r in dataset.data]
         results = {}
         for m in metrics:
@@ -1103,7 +1103,7 @@ class _ObjectModel(Model, ABC):
         return self.object(*args, **kwargs)
 
     @ensure_initialized
-    def predict(self, dataset: t.Union[t.List, QueryDataset]) -> t.List:
+    def predict_batches(self, dataset: t.Union[t.List, QueryDataset]) -> t.List:
         """Run the predict on series of Model inputs (dataset).
 
         :param dataset: series of data points.
@@ -1137,11 +1137,6 @@ class ObjectModel(_ObjectModel):
     _artifacts: t.ClassVar[t.Sequence[t.Tuple[str, 'DataType']]] = (
         ('object', dill_lazy),
     )
-    @property
-    def leaves(self):
-        if self.datatype:
-            return {"datatype": self.datatype}
-        return {}
 
 
 @merge_docstrings
@@ -1297,7 +1292,7 @@ class QueryModel(Model):
             return self.postprocess(out)
         return out
 
-    def predict(self, dataset: t.Union[t.List, QueryDataset]) -> t.List:
+    def predict_batches(self, dataset: t.Union[t.List, QueryDataset]) -> t.List:
         """Execute on a series of data points defined in the dataset.
 
         :param dataset: Series of data points to predict on.
@@ -1353,9 +1348,9 @@ class SequentialModel(Model):
         :param args: Positional arguments to predict on.
         :param kwargs: Keyword arguments to predict on.
         """
-        return self.predict([(args, kwargs)])[0]
+        return self.predict_batches([(args, kwargs)])[0]
 
-    def predict(self, dataset: t.Union[t.List, QueryDataset]) -> t.List:
+    def predict_batches(self, dataset: t.Union[t.List, QueryDataset]) -> t.List:
         """Execute on series of data point defined in dataset.
 
         :param dataset: Series of data point to predict on.
@@ -1363,7 +1358,7 @@ class SequentialModel(Model):
         for i, p in enumerate(self.models):
             assert isinstance(p, Model), f'Expected `Model`, got {type(p)}'
             if i == 0:
-                out = p.predict(dataset)
+                out = p.predict_batches(dataset)
             else:
-                out = p.predict(out)
+                out = p.predict_batches(out)
         return out

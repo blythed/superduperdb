@@ -111,10 +111,6 @@ class Component(Leaf):
             '.', '-'
         )
 
-    @property
-    def leaves(self):
-        return {}
-
     def __post_init__(self, db, artifacts):
         super().__post_init__(db)
 
