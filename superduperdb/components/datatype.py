@@ -23,6 +23,7 @@ from superduperdb.components.component import Component, ensure_initialized
 from superduperdb.misc.annotations import component
 from superduperdb.misc.hash import random_sha1
 from superduperdb.misc.special_dicts import SuperDuperFlatEncode
+from superduperdb.misc.reference import parse_reference
 
 Decode = t.Callable[[bytes], t.Any]
 Encode = t.Callable[[t.Any], bytes]
@@ -217,16 +218,21 @@ class DataType(Component):
             self.encodable_cls = _ENCODABLES[self.encodable]
         else:
             import importlib
+
             self.encodable_cls = importlib.import_module(
                 '.'.join(self.encodable.split('.')[:-1])
             ).__dict__[self.encodable.split('.')[-1]]
-        
+
         self.bytes_encoding = self.bytes_encoding or CFG.bytes_encoding
         self.register_datatype(self)
 
     @property
     def artifact(self):
         return self.encodable_cls.artifact
+
+    @property
+    def file(self):
+        return self.encodable_cls.file
 
     def dict(self):
         """Get the dictionary representation of the object."""
@@ -254,7 +260,7 @@ class DataType(Component):
         """
         info = info or {}
         data = self.encoder(item, info) if self.encoder else item
-        sha1 = _BaseEncodable.get_hash(data)
+        sha1 = self.encodable_cls.get_hash(data)
         data = self.bytes_encoding_after_encode(data)
         return data, sha1
 
@@ -379,9 +385,11 @@ class _BaseEncodable(Leaf):
 
     identifier: str = ''
     datatype: DataType
-    uri: t.Optional[str] = None # URI of the content to be deprecated
+    uri: t.Optional[str] = None  # URI of the content to be deprecated
     x: t.Optional[t.Any] = None
     lazy: t.ClassVar[bool] = False
+    artifact: t.ClassVar[bool] = False
+    file: t.ClassVar[bool] = False
 
     def __post_init__(self, db):
         """Post-initialization hook.
@@ -419,6 +427,10 @@ class _BaseEncodable(Leaf):
             raise ValueError(f'Unsupported data type: {type(data)}')
         return hashlib.sha1(bytes_).hexdigest()
 
+    @staticmethod
+    def build_reference(identifier, source_data):
+        raise NotImplementedError
+
 
 class Empty:
     """Sentinel class # noqa."""
@@ -436,6 +448,7 @@ class Blob(Leaf):
     :param identifier: The identifier of the blob.
     :param bytes: The bytes of the blob.
     """
+
     identifier: str
     bytes: bytes
 
@@ -534,6 +547,17 @@ class Artifact(_BaseEncodable):
         super().__post_init__(db)
         self._blob = blob
 
+        # If we get the blob for builds, we use blob directly
+        if isinstance(self.x, bytes) and blob is None:
+            self.x = self.datatype.decoder(self.x)
+
+        # If we get the reference witch is in the database,
+        # we use identifier to get the blob from the artifact store
+        elif reference := parse_reference(self.x):
+            assert reference.is_in_database, 'Artifact must be in the database'
+            self.identifier = reference.path
+            self.x = Empty()
+
         if not self.lazy and isinstance(self.x, Empty):
             self.init()
 
@@ -575,6 +599,16 @@ class Artifact(_BaseEncodable):
         self.init()
         return self.x
 
+    @staticmethod
+    def build_reference(identifier, source_data):
+        """Build a reference to the blob.
+
+        :param identifier: The identifier of the blob.
+        :param source_data: The source data.
+        :return: The reference to the blob. '?:blob:{file_id}'
+        """
+        return f"?:blob:{identifier}"
+
 
 class LazyArtifact(Artifact):
     """Data to be saved and loaded only when needed."""
@@ -585,41 +619,62 @@ class LazyArtifact(Artifact):
 
 class FileItem(Leaf):
     """File item class.
-    
+
     :param identifier: The identifier of the file.
     :param path: The path of the file.
+    :param file_name: The name of the file.
     """
+
     identifier: str
     path: str
+    file_name: str
+
+    @property
+    def reference(self):
+        """Get the reference to the file."""
+        file_name = self.file_name.replace('.', '__')
+        return f'{file_name}:{self.identifier}'
 
 
 class File(_BaseEncodable):
     """Data to be saved on disk and passed as a file reference.
 
     :param x: path to the file
-    :param file: file reference, format `&:file:{file_name}/{file_id}
     """
 
     lazy: t.ClassVar[bool] = False
     leaf_type: t.ClassVar[str] = 'file'
+    artifact: t.ClassVar[bool] = True
 
     x: t.Any = Empty()
-    file: dc.InitVar[t.Optional[bytearray]] = None
 
-    def __post_init__(self, db, file=None):
+    def __post_init__(self, db):
         super().__post_init__(db)
-        self._file = file
+
+        self._file_name = None
+        # If we get the file for builds, we use the path directly
+        if isinstance(self.x, FileItem):
+            self.x = self.x.path
+
+        # If we get the file reference witch is in the database,
+        # we use identifier to get the file from the artifact store
+        elif isinstance(self.x, str) and self.x.startswith('&:file:'):
+            _file_name, self.identifier = self.x.replace('&:file:', '').split(':')
+            self._file_name = _file_name.replace('__', '.')
+            self.x = Empty()
+
+        if isinstance(self.x, str):
+            self._file_name = os.path.basename(self.x.rstrip('/'))
 
         if not self.lazy and isinstance(self.x, Empty):
             self.init()
 
-    @property
-    def file_name(self):
-        return os.path.basename(self.x.rstrip('/'))
-
     def dict(self):
+        self.identifier = self.identifier or random_sha1()
         r = super().dict()
-        r['x'] = FileItem(identifier=self.identifier, path=self.x)
+        r['x'] = FileItem(
+            identifier=self.identifier, path=self.x, file_name=self._file_name
+        )
         return r
 
     def init(self, db=None):
@@ -628,27 +683,25 @@ class File(_BaseEncodable):
         if not isinstance(self.x, Empty):
             return
 
-        if self._file is not None:
-            # parse the file reference
-            if self._file.startswith('&:file:'):
-                file = self._file.replace('&:file:', '')
-                *_, file_name, file_id = file.split(':')
-                file_name = file_name.replace('__', '.')
-                self.file_id = file_id
-                self.file_name = file_name
-            else:
-                # Get the real path and return
-                self.x = self._file
-                return
-
-        file_path = self.db.artifact_store.get_file(self.file_id)
-        file_path = os.path.join(file_path, self.file_name)
+        file_path = self.db.artifact_store.get_file(self.identifier)
+        file_path = os.path.join(file_path, self._file_name)
         self.x = file_path
 
     def unpack(self):
         """Unpack and get the original data."""
         self.init()
         return self.x
+
+    @staticmethod
+    def build_reference(identifier, source_data):
+        """Build a reference to the file.
+
+        :param identifier: The identifier of the file.
+        :param source_data: The source data.
+        :return: The reference to the file. '?:file:{file_name}/{file_id}'
+        """
+        file_name = os.path.basename(source_data.rstrip('/')).replace('.', '__')
+        return f"?:file:{file_name}:{identifier}"
 
 
 class LazyFile(File):

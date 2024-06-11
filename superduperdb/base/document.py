@@ -82,21 +82,14 @@ class Document(MongoStyleDict):
         schema = get_schema(self.db, schema) if schema else None
         out = dict(self)
         if schema is not None:
-            for k in schema.fields:
-                if not isinstance(schema.fields[k], DataType):
-                    continue
-
-                bytes, identifier = schema.fields[k].encode_data_with_identifier(out[k])
-                if schema.fields[k].artifact:
-                    out[k] = '&:blob:' + identifier
-                    blobs[identifier] = bytes
-                else:
-                    out[k] = bytes
-
-            out['_schema'] = schema.identifier
+            out = schema.encode_data(out, builds, blobs, files)
 
         out = _deep_flat_encode(
-            out, builds=builds, blobs=blobs, files=files, leaves_to_keep=leaves_to_keep,
+            out,
+            builds=builds,
+            blobs=blobs,
+            files=files,
+            leaves_to_keep=leaves_to_keep,
         )
         # TODO - don't need to save in one document
         # can return encoded, builds, files, blobs
@@ -108,7 +101,7 @@ class Document(MongoStyleDict):
     def decode(
         cls,
         r,
-        schema: t.Optional['Schema'] = None, 
+        schema: t.Optional['Schema'] = None,
         db: t.Optional['Datalayer'] = None,
         getters: t.Optional[t.Dict[str, t.Callable]] = None,
     ):
@@ -125,26 +118,28 @@ class Document(MongoStyleDict):
             schema.init()
             r = schema.decode_data(r)
 
-        builds = r.get('_leaves', {})   
+        builds = r.get('_leaves', {})
 
         # Important: Leaf.identifier is used as the key, but must be set if not present.
         for k in builds:
-            if isinstance(builds[k], dict) and ('_path' in builds[k] or '_object' in builds[k]):
+            if isinstance(builds[k], dict) and (
+                '_path' in builds[k] or '_object' in builds[k]
+            ):
                 if 'identifier' not in builds[k]:
                     builds[k]['identifier'] = k
 
         if db is not None:
-            getters={
+            getters = {
                 'component': lambda x: _get_component(db, x),
-                'blob': lambda x: _get_artifact(db, x),
-                **(getters or {})
+                # 'blob': lambda x: _get_artifact(db, x), All the Artifact Encodable can download the bytes in their own way
+                **(getters or {}),
             }
-        elif r.get('_blobs'):
-            getters={
-                'blob': lambda x: r['_blobs'][x],
-                **(getters or {})
-            }
-        
+        if r.get('_blobs') or r.get('_files'):
+            getters = {
+                'blob': lambda x: r['_blobs'][x], 
+                'file': lambda x: r['_files'][x.split(':')[-1]],
+                **(getters or {})}
+
         r = _deep_flat_decode(
             {k: v for k, v in r.items() if k not in ('_leaves', '_blobs', '_files')},
             builds=builds,
@@ -261,11 +256,10 @@ def _unpack(item: t.Any, db=None, leaves_to_keep: t.Sequence = ()) -> t.Any:
 def _deep_flat_encode(
     r,
     builds,
-    blobs, 
+    blobs,
     files,
     leaves_to_keep: t.Sequence[Leaf] = (),
 ):
-
     if isinstance(r, dict):
         tmp = {}
         for k in list(r):
@@ -303,10 +297,13 @@ def _deep_flat_encode(
 
     if isinstance(r, Blob):
         blobs[r.identifier] = r.bytes
-        return '&:blob:' + r.identifier
+        return '?:blob:' + r.identifier
+
+    if isinstance(r, FileItem):
+        files[r.identifier] = r.path
+        return '?:file:' + r.reference
 
     if isinstance(r, Leaf):
-
         if isinstance(r, leaves_to_keep):
             builds[r.identifier] = r
             return '?' + r.identifier
@@ -319,22 +316,27 @@ def _deep_flat_encode(
             files=files,
             leaves_to_keep=leaves_to_keep,
         )
-        for k in r:
-            if isinstance(r[k], Blob):
-                blobs[r[k].identifier] = r[k].bytes
-                r[k] = '&:blob:' + r[k].identifier
-
-            if isinstance(r[k], FileItem):
-                files[r[k].identifier] = r[k].path
+        # for k in r:
+        #     if isinstance(r[k], Blob):
+        #         blobs[r[k].identifier] = r[k].bytes
+        #         r[k] = '?:blob:' + r[k].identifier
+        #
+        #     if isinstance(r[k], FileItem):
+        #         files[r[k].identifier] = r[k].path
 
         identifier = r.pop('identifier')
         builds[identifier] = r
         return f'?{identifier}'
-    
+
     return r
 
 
 def _get_leaf_from_cache(k, builds, getters, db: t.Optional['Datalayer'] = None):
+    if reference := parse_reference(f'?{k}'):
+        if reference.name in getters:
+            return getters[reference.name](reference.path)
+    
+
     if isinstance(builds[k], Leaf):
         leaf = builds[k]
         if not leaf.db:
@@ -348,7 +350,9 @@ def _get_leaf_from_cache(k, builds, getters, db: t.Optional['Datalayer'] = None)
     return leaf
 
 
-def _deep_flat_decode(r, builds, getters: t.Optional[None], db: t.Optional['Datalayer'] = None):
+def _deep_flat_decode(
+    r, builds, getters: t.Optional[None], db: t.Optional['Datalayer'] = None
+):
     if isinstance(r, Leaf):
         return r
     if isinstance(r, (list, tuple)):
@@ -366,7 +370,9 @@ def _deep_flat_decode(r, builds, getters: t.Optional[None], db: t.Optional['Data
     if isinstance(r, dict) and '_object' in r:
         dict_ = {k: v for k, v in r.items() if k != '_object'}
         dict_ = _deep_flat_decode(dict_, builds, getters=getters, db=db)
-        object = _deep_flat_decode(builds[r['_object'][1:]], builds, getters=getters, db=db)
+        object = _deep_flat_decode(
+            builds[r['_object'][1:]], builds, getters=getters, db=db
+        )
         instance = _import_item(object=object.unpack(), dict=dict_, db=db)
         return instance
     if isinstance(r, dict):
@@ -379,7 +385,9 @@ def _deep_flat_decode(r, builds, getters: t.Optional[None], db: t.Optional['Data
     if isinstance(r, str) and r.startswith('&'):
         assert getters is not None
         reference = parse_reference(r)
-        return getters[reference.name](reference.path)
+        if reference.name in getters:
+            return getters[reference.name](reference.path)
+        return r
     return r
 
 
